@@ -1,5 +1,5 @@
-# سامانه Courses 
-[Documentation](https://docs.google.com/document/d/1pE2PqIAwha1YQk13pP6KJ27zEJPt4VJAlMoNKAJKDus/edit?usp=sharing)
+# Fariborz Game Store V2 
+[Documentation](https://docs.google.com/document/d/1OahsSH1X6MmyersdhQ8q5-EWvrjDK_4ZxnWIyzjKmF4/edit?usp=sharing)
 
 <ul>
 <li>
