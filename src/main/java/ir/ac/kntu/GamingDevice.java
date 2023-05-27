@@ -6,6 +6,27 @@ public class GamingDevice {
     private String Name;
     private double price;
 
+    private String BreifExplanation;
+
+    public GamingDevice(int numberOfComponents, double price, String breifExplanation) {
+        this.numberOfComponents = numberOfComponents;
+
+        Name = this.getClass().toString();
+
+        this.price = price;
+        BreifExplanation = breifExplanation;
+    }
+
+    //public GamingDevice(int numberOfComponents,String name,double p)
+
+    public String getBreifExplanation() {
+        return BreifExplanation;
+    }
+
+    public void setBreifExplanation(String breifExplanation) {
+        BreifExplanation = breifExplanation;
+    }
+
     public double getPrice() {
         return price;
     }
@@ -23,10 +44,6 @@ public class GamingDevice {
 
     }
 
-    public GamingDevice(int numberOfComponents, double price) {
-        this.setNumberOfComponents(numberOfComponents);
-        this.setPrice(price);
-    }
 
     public int getNumberOfComponents() {
         return numberOfComponents;

@@ -18,6 +18,31 @@ public class User {
     private int timeSpent=0;
 
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void addScore(){
+        this.score+=1;
+        //ezafe shodan emtiaz user be ezaie har 5 s.
+    }
+
+    public int totalTimeSpent(){
+        return (this.score*5+this.timeSpent);
+        //modat zaman koli ke user dar barname boode.
+    }
+    public int getTimeSpent() {
+        return timeSpent;
+    }
+
+    public void setTimeSpent(int timeSpent) {
+        this.timeSpent = timeSpent;
+    }
+
     public Request getRequests() {
         return request;
     }

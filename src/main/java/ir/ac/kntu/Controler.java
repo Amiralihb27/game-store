@@ -13,10 +13,11 @@ public class Controler extends GamingDevice {
         this.pariredDevice = pariredDevice;
     }
 
-    public Controler(int numberOfComponents, double price, Type type, ArrayList<GamingDevice> pariredDevice) {
-        super(numberOfComponents, price);
+    public Controler(int numberOfComponents, double price, Type type
+            , String explenation) {
+        super(numberOfComponents, price,explenation );
         this.type = type;
-        this.pariredDevice = pariredDevice;
+        //this.pariredDevice = pariredDevice;
     }
 
     public Type getType() {

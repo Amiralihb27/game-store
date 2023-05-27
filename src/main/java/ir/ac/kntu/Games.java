@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 public class Games {
     private String name;
-
+    private Level level=Level.LEVEL_1;
     private String story;
-
     private String genre;
-
     private ArrayList<String> reviews = new ArrayList<>();
 
     private double rating;
@@ -65,6 +63,23 @@ public class Games {
         this.name = name;
         this.story = story;
         this.genre = genre;
+
+    }
+
+    public Games(String name, String story, String genre, Level level) {
+
+        this.name = name;
+        this.story = story;
+        this.genre = genre;
+        this.level = level;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
     }
 
     public double getPrice() {
