@@ -3,28 +3,31 @@ package ir.ac.kntu;
 public class GamingDevice {
 
     private int numberOfComponents;
-    private String Name;
+
+
+    private String name;
+
     private double price;
 
-    private String BreifExplanation;
+    private String breifExplanation;
 
     public GamingDevice(int numberOfComponents, double price, String breifExplanation) {
         this.numberOfComponents = numberOfComponents;
 
-        Name = this.getClass().toString();
+        name = this.getClass().toString();
 
         this.price = price;
-        BreifExplanation = breifExplanation;
+        breifExplanation = breifExplanation;
     }
 
     //public GamingDevice(int numberOfComponents,String name,double p)
 
     public String getBreifExplanation() {
-        return BreifExplanation;
+        return breifExplanation;
     }
 
     public void setBreifExplanation(String breifExplanation) {
-        BreifExplanation = breifExplanation;
+        this.breifExplanation = breifExplanation;
     }
 
     public double getPrice() {
@@ -50,11 +53,11 @@ public class GamingDevice {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        name = name;
     }
 
     public void setNumberOfComponents(int numberOfComponents) {

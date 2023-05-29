@@ -16,8 +16,6 @@ public class Main {
                 "09114562727", "amiramir75@gmail.com");
         Profile info4 = new Profile("kimia", "miaKimio827",
                 "09114772755", "kimia@gmail.com");
-
-        //Store store = new Store();
         Games zed = new Games("zed", "its about zed", "action");
         zed.addReview("good game!");
         zed.addReview("good !");

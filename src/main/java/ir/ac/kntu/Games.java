@@ -4,9 +4,13 @@ import java.util.ArrayList;
 
 public class Games {
     private String name;
+
     private Level level=Level.LEVEL_1;
+
     private String story;
+
     private String genre;
+
     private ArrayList<String> reviews = new ArrayList<>();
 
     private double rating;

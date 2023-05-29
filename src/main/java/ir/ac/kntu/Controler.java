@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Controler extends GamingDevice {
 
     private Type type;
+
     private ArrayList<GamingDevice> pariredDevice = new ArrayList<>();
 
 
@@ -13,9 +14,9 @@ public class Controler extends GamingDevice {
         this.pariredDevice = pariredDevice;
     }
 
-    public Controler(int numberOfComponents, double price, Type type
-            , String explenation) {
-        super(numberOfComponents, price,explenation );
+    public Controler(int numberOfComponents, double price, Type type,
+                     String explenation) {
+        super(numberOfComponents, price, explenation);
         this.type = type;
         //this.pariredDevice = pariredDevice;
     }

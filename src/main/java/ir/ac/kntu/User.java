@@ -13,9 +13,9 @@ public class User {
 
     private ArrayList<String> friendList;
 
-    private int score=0;
+    private int score = 0;
 
-    private int timeSpent=0;
+    private int timeSpent = 0;
 
 
     public int getScore() {
@@ -26,21 +26,26 @@ public class User {
         this.score = score;
     }
 
-    public void addScore(){
-        this.score+=1;
+    public void addScore() {
+        this.score += 1;
         //ezafe shodan emtiaz user be ezaie har 5 s.
     }
 
-    public int totalTimeSpent(){
-        return (this.score*5+this.timeSpent);
+    public int totalTimeSpent() {
+        return (this.score * 5 + this.timeSpent);
         //modat zaman koli ke user dar barname boode.
     }
+
     public int getTimeSpent() {
         return timeSpent;
     }
 
     public void setTimeSpent(int timeSpent) {
         this.timeSpent = timeSpent;
+    }
+
+    public void addTime(int duration) {
+        this.timeSpent += duration;
     }
 
     public Request getRequests() {
@@ -61,9 +66,9 @@ public class User {
         this.friendList = friendList;
     }
 
-    public int friendsIndex(String userName){
-        for(int i=0;i<friendList.size();i++){
-            if(this.friendList.get(i).equals(userName)){
+    public int friendsIndex(String userName) {
+        for (int i = 0; i < friendList.size(); i++) {
+            if (this.friendList.get(i).equals(userName)) {
                 return i;
             }
         }
@@ -95,8 +100,8 @@ public class User {
     public User(String username, String password, String phonenumber, String email) {
         this.profile = new Profile(username, password, phonenumber, email);
         friendList = new ArrayList<>();
-        request=new Request();
-        library=new Library();
+        request = new Request();
+        library = new Library();
     }
 
     public boolean isFriend(String userName) {
@@ -124,8 +129,8 @@ public class User {
     public User(Profile profile) {
         this.profile = profile;
         friendList = new ArrayList<>();
-        library=new Library();
-        request=new Request();
+        library = new Library();
+        request = new Request();
     }
 
     public boolean checkUserName(String userName) {

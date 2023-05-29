@@ -1,5 +1,6 @@
 package ir.ac.kntu;
 
+import java.time.Instant;
 import java.util.ArrayList;
 
 public class SignInMenu {
@@ -18,14 +19,15 @@ public class SignInMenu {
             passInput = ScannerWrapper.getString();
             int index = AllUsers.existance(input, passInput);
             if (index != -1) {
-                long startTime = System.nanoTime();
+                Instant start = Instant.now();
                 userInterface(input, users.get(index));
-                long endTime   = System.nanoTime();
-               int totalTime=TimeCalculator.timeDifference(startTime,endTime);
-               //System.out.println(totalTime);
-               users.get(index).setTimeSpent(totalTime);
-               ScoreCalculator.usersScore(users.get(index));
-              // System.out.println(users.get(index).getScore());
+                Instant end = Instant.now();
+                int totalTime = TimeCalculator.timeDifference(start, end);
+                System.out.println(totalTime);
+                users.get(index).addTime(totalTime);
+                ScoreCalculator.usersScore(users.get(index));
+                System.out.println(users.get(index).getTimeSpent());
+                System.out.println(users.get(index).getScore());
                 break;
             }
             System.out.println("there is no such username or password!Try again!");

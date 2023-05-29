@@ -1,22 +1,24 @@
 package ir.ac.kntu;
 
 public class Monitor extends GamingDevice {
-    private int FPS;
+    private int fPS;
+
     private int size;
+
     private int responseTime;
 
-    public Monitor(int FPS, int size, int responseTime) {
-        this.FPS = FPS;
+    public Monitor(int fPS, int size, int responseTime) {
+        this.fPS = fPS;
         this.size = size;
         this.responseTime = responseTime;
     }
 
     public int getFPS() {
-        return FPS;
+        return fPS;
     }
 
-    public void setFPS(int FPS) {
-        this.FPS = FPS;
+    public void setFPS(int fPS) {
+        this.fPS = fPS;
     }
 
     public int getSize() {
@@ -36,16 +38,16 @@ public class Monitor extends GamingDevice {
     }
 
     @Override
-    public void sell(){
+    public void sell() {
 
     }
 
     @Override
     public String toString() {
         return "Monitor{" +
-                "FPS=" + FPS +
-                ", size=" + size +" inches"+
-                ", responseTime=" + responseTime +" s"+
+                "FPS=" + fPS +
+                ", size=" + size + " inches" +
+                ", responseTime=" + responseTime + " s" +
                 '}';
     }
 }
