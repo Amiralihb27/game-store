@@ -13,10 +13,49 @@ public class User {
 
     private ArrayList<String> friendList;
 
+    private Level level = Level.LEVEL_1;
+
+    private int discount = 0;
+
     private int score = 0;
 
     private int timeSpent = 0;
 
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
+    public Request getRequest() {
+        return request;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel() {
+        if (this.score >= 0 && this.score < 20) {
+            this.level = Level.LEVEL_1;
+            setDiscount(0);
+        } else if (this.score >= 20 && this.score < 50) {
+            this.level = Level.LEVEL_2;
+            setDiscount(10);
+        } else if (this.score >= 50 && this.score < 100) {
+            this.level = Level.LEVEL_3;
+            setDiscount(20);
+        } else if (this.score >= 100) {
+            this.level = Level.LEVEL_4;
+            setDiscount(30);
+        }
+    }
 
     public int getScore() {
         return score;
@@ -24,10 +63,12 @@ public class User {
 
     public void setScore(int score) {
         this.score = score;
+        setLevel();
     }
 
     public void addScore() {
         this.score += 1;
+        setLevel();
         //ezafe shodan emtiaz user be ezaie har 5 s.
     }
 

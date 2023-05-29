@@ -5,7 +5,9 @@ import java.util.ArrayList;
 public class Games {
     private String name;
 
-    private Level level=Level.LEVEL_1;
+    private Level level = Level.LEVEL_1;
+
+    private Version version;
 
     private String story;
 
@@ -18,6 +20,15 @@ public class Games {
     private double price;
 
     private int numberOfRates;
+
+
+    public Version getVersion() {
+        return version;
+    }
+
+    public void setVersion(Version version) {
+        this.version = version;
+    }
 
     public String getName() {
         return name;

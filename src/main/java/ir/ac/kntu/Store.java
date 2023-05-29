@@ -49,7 +49,8 @@ public class Store {
         while (true) {
             int input = sc.nextInt();
             if (input == 1) {
-                if (user.getProfile().getWalletCash() >= game.getPrice()) {
+                if (user.getProfile().getWalletCash() >= game.getPrice() * (100 + user.getDiscount()) / 100
+                        && user.getLevel() == game.getLevel()) {
                     double amount = user.getProfile().getWalletCash();
                     if (user.getLibrary() == null) {
                         Library library = new Library();
@@ -75,7 +76,7 @@ public class Store {
     }
 
 
-    public static void chooseSorted(ArrayList<Games> sortedGames,User user) {
+    public static void chooseSorted(ArrayList<Games> sortedGames, User user) {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("Enter the related number to see each game's information");
@@ -83,7 +84,7 @@ public class Store {
             int input = sc.nextInt();
             if (input >= 1 && input <= sortedGames.size()) {
                 System.out.println(sortedGames.get(input - 1).toString());
-                buy(user,sc,sortedGames.get(input - 1));
+                buy(user, sc, sortedGames.get(input - 1));
                 break;
             } else if (input == -1) {
                 break;
@@ -93,7 +94,7 @@ public class Store {
         }
     }
 
-    public static void searchByName(String name,User user) {
+    public static void searchByName(String name, User user) {
         int index = 1;
         ArrayList<Games> sortedGames = new ArrayList<>();
         for (int i = 0; i < games.size(); i++) {
@@ -101,29 +102,29 @@ public class Store {
                 System.out.println(index + ":" + games.get(i).getName());
                 index++;
                 sortedGames.add(games.get(i));
-            } else if (i == games.size() - 1 && sortedGames.size()<1) {
+            } else if (i == games.size() - 1 && sortedGames.size() < 1) {
                 System.out.println("No games found with that name!");
             }
         }
         if (sortedGames.size() >= 1) {
-            chooseSorted(sortedGames,user);
+            chooseSorted(sortedGames, user);
         }
 
 
     }
 
-    public static void searchByPrice(double min, double max,User user) {
+    public static void searchByPrice(double min, double max, User user) {
 
-        int foundedGames=0;
+        int foundedGames = 0;
         for (int i = 0; i < games.size(); i++) {
             if (games.get(i).getPrice() <= max && games.get(i).getPrice() >= min) {
-                System.out.println((i+1)+"_"+games.get(i).getName());
+                System.out.println((i + 1) + "_" + games.get(i).getName());
                 foundedGames++;
             }
         }
-        if (foundedGames>=1){
+        if (foundedGames >= 1) {
             chooseGame(user);
-        }else{
+        } else {
             System.out.println("No games found.");
         }
 

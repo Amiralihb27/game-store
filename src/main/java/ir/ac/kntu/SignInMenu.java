@@ -150,7 +150,8 @@ public class SignInMenu {
             System.out.println("which part do you wana see?");
             System.out.println("1_Users Games");
             System.out.println("2_Community");
-            System.out.println("3_get back");
+            System.out.println("3_FeedBack");
+            System.out.println("4_get back");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
                /* Library newLibrary = new Library();
@@ -164,7 +165,9 @@ public class SignInMenu {
                     user.setLibrary(newLibrary)
                 }*/
                 user.getLibrary().community();
-            } else if (input == 3) {
+            } else if (input==3) {
+                user.getLibrary().chooseToAddFeedBack();
+            } else if (input == 4) {
                 break;
             } else {
                 System.out.println("Wong input!try again");
