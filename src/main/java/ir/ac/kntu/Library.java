@@ -38,11 +38,15 @@ public class Library {
 
         for (int i = 0; i < gameStuffs.size(); i++) {
             System.out.println((i + 1) + ":" + this.gameStuffs.get(i).getName() + "----");
-            // this.gameStuffs.get(i).getVersion() + " version");
+            if (this.gameStuffs.get(i).getClass().getSimpleName().equals("Games")) {
+                Games games = (Games) gameStuffs.get(i);
+                System.out.println((games.getVersion() + " version"));
+            }
+
         }
     }
 
-    public ArrayList<Games> extractVideoGames() {
+   /* public ArrayList<Games> extractVideoGames() {
 
         ArrayList<Games> videoGame = new ArrayList<>();
         for (int i = 0; i < gameStuffs.size(); i++) {
@@ -51,17 +55,19 @@ public class Library {
             }
         }
         return videoGame;
-    }
+    }*/
 
     public ArrayList<Games> listOfOriginal() {
         ArrayList<Games> originals = new ArrayList<>();
-        ArrayList<Games> videoGame = extractVideoGames();
+        GameList gameList = new GameList();
+        ArrayList<GameStuff> videoGame = gameList.extractVideoGames(gameStuffs);
         int index = 0;
         for (int i = 0; i < videoGame.size(); i++) {
-            if (videoGame.get(i).getVersion().equals(Version.ORIGINAL)) {
+            Games eachGame = (Games) videoGame.get(i);
+            if (eachGame.getVersion().equals(Version.ORIGINAL)) {
                 System.out.println((index + 1) + ":" + videoGame.get(i).getName() + "----" +
-                        videoGame.get(i).getVersion() + " version");
-                originals.add(videoGame.get(i));
+                        eachGame.getVersion() + " version");
+                originals.add(eachGame);
             }
         }
         return originals;
@@ -99,11 +105,11 @@ public class Library {
     }
 
     public void community() {
-        ArrayList<Games> newGames = listOfOriginal();
+        GameList gameList = new GameList();
+        ArrayList<Games> newGames = gameList.listOfOriginal(gameStuffs);
         if (newGames.size() > 0) {
             // listOfGames();
-            GameList gameList=new GameList();
-            gameList.showList(gameStuffs);
+            //gameList.showList((newGames);
             while (true) {
                 System.out.println("Enter the related number to see each game's review");
                 System.out.println("or you can just skip this by entering -1'.");
@@ -133,6 +139,7 @@ public class Library {
         while (true) {
             if (input == 1) {
                 String review = ScannerWrapper.getString();
+                gameStuff.addReview(review);
                 isVideoGame(gameStuff);
 
                 break;

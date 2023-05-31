@@ -68,6 +68,15 @@ public class GameChanges {
         return -1;
     }
 
+    public static boolean isInLibrary(ArrayList<GameStuff> games, GameStuff gameStuff){
+        for (int i = 0; i < games.size(); i++) {
+            if (gameStuff.equals(games.get(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void toChange(ArrayList<GameStuff> games, ArrayList<String> uniqueNum) {
 
         String input;

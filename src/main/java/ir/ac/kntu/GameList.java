@@ -1,6 +1,7 @@
 package ir.ac.kntu;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GameList {
 
@@ -33,7 +34,7 @@ public class GameList {
         System.out.println();
     }
 
-    public ArrayList<GameStuff> videoGames(ArrayList<GameStuff> gameStuffs) {
+    public ArrayList<GameStuff> extractVideoGames(ArrayList<GameStuff> gameStuffs) {
         ArrayList<GameStuff> games = new ArrayList<>();
         for (int i = 0; i < gameStuffs.size(); i++) {
             if (gameStuffs.get(i).getClass().getSimpleName().equals("Games")) {
@@ -43,7 +44,22 @@ public class GameList {
         return games;
     }
 
-    public ArrayList<GameStuff> devices(ArrayList<GameStuff> gameStuffs) {
+    public ArrayList<Games> listOfOriginal(ArrayList<GameStuff> gameStuffs) {
+        ArrayList<Games> originals = new ArrayList<>();
+        ArrayList<GameStuff> videoGame = extractVideoGames(gameStuffs);
+        int index = 0;
+        for (int i = 0; i < videoGame.size(); i++) {
+            Games eachGame = (Games) videoGame.get(i);
+            if (eachGame.getVersion().equals(Version.ORIGINAL)) {
+                System.out.println((index + 1) + ":" + videoGame.get(i).getName() + "----" +
+                        eachGame.getVersion() + " version");
+                originals.add(eachGame);
+            }
+        }
+        return originals;
+    }
+
+    public ArrayList<GameStuff> extractDevices(ArrayList<GameStuff> gameStuffs) {
         ArrayList<GameStuff> device = new ArrayList<>();
         for (int i = 0; i < gameStuffs.size(); i++) {
             if (gameStuffs.get(i).getClass().getSimpleName().equals("Games")) {
@@ -51,5 +67,34 @@ public class GameList {
             }
         }
         return device;
+    }
+
+    public ArrayList<GameStuff> extractDifferentDevices(ArrayList<GameStuff> gameStuffs, String className) {
+        ArrayList<GameStuff> device = new ArrayList<>();
+        for (int i = 0; i < gameStuffs.size(); i++) {
+            if (gameStuffs.get(i).getClass().getSimpleName().equals("className")) {
+                device.add(gameStuffs.get(i));
+            }
+        }
+        return device;
+    }
+
+    public void printGameingStuffInformation(GameStuff gameStuff) {
+        String consoleOutPut;
+        Scanner enter = new Scanner(System.in);
+        String input=gameStuff.toString();
+        while (input.length() > 20) {
+            consoleOutPut = input.substring(0, 20);
+            String output = enter.nextLine();
+            if(output.equalsIgnoreCase("exit")){
+                System.exit(0);
+            } else if (output.equalsIgnoreCase("get back")) {
+                break;
+            }
+            System.out.println(consoleOutPut);
+            input = input.substring(20);
+        }
+        System.out.println("");
+        System.out.println(input);
     }
 }

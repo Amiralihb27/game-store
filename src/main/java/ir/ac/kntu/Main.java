@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         StartingMenu a = new StartingMenu();
         ScannerWrapper scanner = new ScannerWrapper();
         Profile info1 = new Profile("amirali", "Amirali8227",
@@ -27,6 +26,7 @@ public class Main {
         zed.rate(7.25);
         zed.setPrice(10);
         Games witcher = new Games("witcher", "its about geralt of rivia", "RPG");
+        witcher.setVersion(Version.BETA);
         witcher.setRating(10);
         witcher.setPrice(12.2);
         witcher.addReview("Awli");

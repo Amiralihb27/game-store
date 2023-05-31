@@ -50,6 +50,7 @@ public class Games extends GameStuff {
         super.setName(name);
         super.setExplenation(story);
         this.genre = genre;
+        this.version=Version.ORIGINAL;
 
     }
 
