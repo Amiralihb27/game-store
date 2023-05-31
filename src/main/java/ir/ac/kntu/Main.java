@@ -34,7 +34,7 @@ public class Main {
         game3.setPrice(5);
         game3.setRating(9.8);
         game3.addReview("Binazir");
-        ArrayList<Games> games = new ArrayList<>();
+        ArrayList<GameStuff> games = new ArrayList<>();
         games.add(zed);
         games.add(witcher);
         games.add(game3);

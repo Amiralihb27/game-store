@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class GameChanges {
 
-    public static void showOptions(ArrayList<Games> games) {
+    public static void showOptions(ArrayList<GameStuff> games) {
         while (true) {
             System.out.println("Which part do you wana go?");
             System.out.println("1_Add games");
@@ -26,7 +26,7 @@ public class GameChanges {
 
     }
 
-    public static void change(ArrayList<Games> games) {
+    public static void change(ArrayList<GameStuff> games) {
         //sc.nextLine();
         while (true) {
 
@@ -59,7 +59,7 @@ public class GameChanges {
 
     }
 
-    public static int doesExist(ArrayList<Games> games, String name) {
+    public static int doesExist(ArrayList<GameStuff> games, String name) {
         for (int i = 0; i < games.size(); i++) {
             if (name.equals(games.get(i).getName())) {
                 return i;
@@ -68,7 +68,7 @@ public class GameChanges {
         return -1;
     }
 
-    public static void toChange(ArrayList<Games> games, ArrayList<String> uniqueNum) {
+    public static void toChange(ArrayList<GameStuff> games, ArrayList<String> uniqueNum) {
 
         String input;
         while (true) {
@@ -94,7 +94,7 @@ public class GameChanges {
         return false;
     }
 
-    public static void edit(Games game) {
+    public static void edit(GameStuff game) {
         while(true){
             System.out.println("You can get back by entering exit.");
             System.out.println("Enter the new name of game:");
@@ -102,33 +102,37 @@ public class GameChanges {
             if(name.equalsIgnoreCase("exit")){
                 break;
             }
-            System.out.println("Enter the story of game:");
-            String story = ScannerWrapper.getString();
-            System.out.println("Enter the genere of new game:");
-            String genere = ScannerWrapper.getString();
-            System.out.println("Enter the one review for new game:");
-            String review = ScannerWrapper.getString();
-            game.setNumberOfRates(0);
-            System.out.println("Enter the  new rating of the  game:");
-            double rating = ScannerWrapper.getDouble();
-            System.out.println("Enter the new price of game:");
-            double price = ScannerWrapper.getDouble();
-            game.setPrice(price);
-            game.setGenre(genere);
-            game.setName(name);
-            game.setStory(story);
-            game.setRating(rating);
-            ArrayList<String> reviews = new ArrayList<>();
-            reviews.add(review);
-            game.setReviews(reviews);
-            System.out.println("The game edited succesfully!");
-            break;
+            if(game.getClass().getSimpleName().equals("Games")){
+                Games newGame=(Games) game;
+                System.out.println("Enter the story of game:");
+                String story = ScannerWrapper.getString();
+                System.out.println("Enter the genere of new game:");
+                String genere = ScannerWrapper.getString();
+                System.out.println("Enter the one review for new game:");
+                String review = ScannerWrapper.getString();
+                newGame.setNumberOfRates(0);
+                System.out.println("Enter the  new rating of the  game:");
+                double rating = ScannerWrapper.getDouble();
+                System.out.println("Enter the new price of game:");
+                double price = ScannerWrapper.getDouble();
+                newGame.setPrice(price);
+                newGame.setGenre(genere);
+                newGame.setName(name);
+                newGame.setExplenation(story);
+                newGame.setRating(rating);
+                ArrayList<String> reviews = new ArrayList<>();
+                reviews.add(review);
+                newGame.setReviews(reviews);
+                System.out.println("The game edited succesfully!");
+                break;
+            }
+
         }
 
 
     }
 
-    public static void addGame(ArrayList<Games> games) {
+    public static void addGame(ArrayList<GameStuff> games) {
         //sc.nextLine();
         while(true){
             System.out.println("You can get back by entering exit.");
@@ -158,7 +162,7 @@ public class GameChanges {
 
     }
 
-    public static void deletGame(ArrayList<Games> games) {
+    public static void deletGame(ArrayList<GameStuff> games) {
         //sc.nextLine();
         while (true) {
             System.out.println("You can get back to previous action by entering exit.");
@@ -188,7 +192,7 @@ public class GameChanges {
 
     }
 
-    public static void toDelete(int index, ArrayList<Games> games) {
+    public static void toDelete(int index, ArrayList<GameStuff> games) {
 
         while (true) {
             if (index <= games.size() && index > 0) {

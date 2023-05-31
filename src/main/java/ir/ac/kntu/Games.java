@@ -2,22 +2,16 @@ package ir.ac.kntu;
 
 import java.util.ArrayList;
 
-public class Games {
-    private String name;
+public class Games extends GameStuff {
+
 
     private Level level = Level.LEVEL_1;
 
     private Version version;
 
-    private String story;
-
     private String genre;
 
-    private ArrayList<String> reviews = new ArrayList<>();
-
     private double rating;
-
-    private double price;
 
     private int numberOfRates;
 
@@ -30,21 +24,6 @@ public class Games {
         this.version = version;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getStory() {
-        return story;
-    }
-
-    public void setStory(String story) {
-        this.story = story;
-    }
 
     public String getGenre() {
         return genre;
@@ -54,13 +33,6 @@ public class Games {
         this.genre = genre;
     }
 
-    public ArrayList<String> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(ArrayList<String> reviews) {
-        this.reviews = reviews;
-    }
 
     public double getRating() {
         return rating;
@@ -75,16 +47,16 @@ public class Games {
 
     public Games(String name, String story, String genre) {
 
-        this.name = name;
-        this.story = story;
+        super.setName(name);
+        super.setExplenation(story);
         this.genre = genre;
 
     }
 
     public Games(String name, String story, String genre, Level level) {
 
-        this.name = name;
-        this.story = story;
+        super.setName(name);
+        super.setExplenation(story);
         this.genre = genre;
         this.level = level;
     }
@@ -97,14 +69,6 @@ public class Games {
         this.level = level;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public int getNumberOfRates() {
         return numberOfRates;
     }
@@ -113,9 +77,6 @@ public class Games {
         this.numberOfRates = numberOfRates;
     }
 
-    public void addReview(String review) {
-        this.reviews.add(review);
-    }
 
     public void rate(double score) {
         //TODO
@@ -126,15 +87,12 @@ public class Games {
 
     @Override
     public String toString() {
-        return "Game{" +
-                "name='" + name + '\'' +
-                ", story='" + story + '\'' +
-                ", price='" + price + '\'' +
+        return "Games{" + super.toString() +
+                "level=" + level +
+                ", version=" + version +
                 ", genre='" + genre + '\'' +
                 ", rating=" + rating +
-                ", reviews=" + reviews +
                 ", numberOfRates=" + numberOfRates +
                 '}';
-
     }
 }

@@ -17,7 +17,7 @@ public class Admin {
     }
 
     public void gameChanges() {
-        ArrayList<Games> games = Store.getGames();
+        ArrayList<GameStuff> games = Store.getGames();
         GameChanges.showOptions(games);
 
     }

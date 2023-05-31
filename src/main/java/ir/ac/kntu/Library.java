@@ -4,26 +4,26 @@ import java.util.ArrayList;
 //import java.util.Scanner;
 
 public class Library {
-    private ArrayList<Games> games = new ArrayList<>();
+    private ArrayList<GameStuff> gameStuffs = new ArrayList<>();
 
-    public void setGames(ArrayList<Games> games) {
-        this.games = games;
+    public void setGames(ArrayList<GameStuff> games) {
+        this.gameStuffs = games;
     }
 
-    public ArrayList<Games> getGames() {
-        return games;
+    public ArrayList<GameStuff> getGames() {
+        return gameStuffs;
     }
 
     public void library(Library library) {
-        this.games = library.getGames();
+        this.gameStuffs = library.getGames();
     }
 
-    public void addGame(Games games) {
-        this.games.add(games);
+    public void addGame(GameStuff games) {
+        this.gameStuffs.add(games);
     }
 
     public void showGames() {
-        if (games.size() > 0) {
+        if (gameStuffs.size() > 0) {
             listOfGames();
             gamesInformation();
         } else {
@@ -36,26 +36,38 @@ public class Library {
 
     public void listOfGames() {
 
-        for (int i = 0; i < games.size(); i++) {
-            System.out.println((i + 1) + ":" + this.games.get(i).getName() + "----" +
-                    this.games.get(i).getVersion() + " version");
+        for (int i = 0; i < gameStuffs.size(); i++) {
+            System.out.println((i + 1) + ":" + this.gameStuffs.get(i).getName() + "----");
+            // this.gameStuffs.get(i).getVersion() + " version");
         }
+    }
+
+    public ArrayList<Games> extractVideoGames() {
+
+        ArrayList<Games> videoGame = new ArrayList<>();
+        for (int i = 0; i < gameStuffs.size(); i++) {
+            if (gameStuffs.getClass().getSimpleName().equals("Games")) {
+                videoGame.add((Games) gameStuffs.get(i));
+            }
+        }
+        return videoGame;
     }
 
     public ArrayList<Games> listOfOriginal() {
         ArrayList<Games> originals = new ArrayList<>();
+        ArrayList<Games> videoGame = extractVideoGames();
         int index = 0;
-        for (int i = 0; i < games.size(); i++) {
-            if (games.get(i).getVersion().equals(Version.ORIGINAL)) {
-                System.out.println((index + 1) + ":" + this.games.get(i).getName() + "----" +
-                        this.games.get(i).getVersion() + " version");
-                originals.add(this.games.get(i));
+        for (int i = 0; i < videoGame.size(); i++) {
+            if (videoGame.get(i).getVersion().equals(Version.ORIGINAL)) {
+                System.out.println((index + 1) + ":" + videoGame.get(i).getName() + "----" +
+                        videoGame.get(i).getVersion() + " version");
+                originals.add(videoGame.get(i));
             }
         }
         return originals;
     }
 
-    public ArrayList<Games> listOfBeta() {
+   /* public ArrayList<Games> listOfBeta() {
         ArrayList<Games> beta = new ArrayList<>();
         int index = 0;
         for (int i = 0; i < games.size(); i++) {
@@ -66,15 +78,15 @@ public class Library {
             }
         }
         return beta;
-    }
+    }*/
 
     public void gamesInformation() {
         while (true) {
             System.out.println("Enter the related number to see each game's information");
             System.out.println("or you can just skip this by entering -1'.");
             int input = ScannerWrapper.getInt();
-            if (input >= 1 && input <= games.size()) {
-                System.out.println(games.get(input - 1).toString());
+            if (input >= 1 && input <= gameStuffs.size()) {
+                System.out.println(gameStuffs.get(input - 1).toString());
                 System.out.println("***************************");
                 community();
                 break;
@@ -90,16 +102,14 @@ public class Library {
         ArrayList<Games> newGames = listOfOriginal();
         if (newGames.size() > 0) {
             // listOfGames();
+            GameList gameList=new GameList();
+            gameList.showList(gameStuffs);
             while (true) {
                 System.out.println("Enter the related number to see each game's review");
                 System.out.println("or you can just skip this by entering -1'.");
                 int input = ScannerWrapper.getInt();
                 if (input >= 1 && input <= newGames.size()) {
-                    if (newGames.get(input - 1).getReviews() == null) {
-                        System.out.println("there is no review about this game!");
-                    } else {
-                        System.out.println(newGames.get(input - 1).getReviews());
-                    }
+                    newGames.get(input - 1).community();
                     addReview(newGames.get(input - 1));
                     break;
                 } else if (input == -1) {
@@ -109,12 +119,12 @@ public class Library {
                 }
             }
         } else {
-            System.out.println("You dont have any games in your library");
+            System.out.println("You dont have any original games in your library");
             System.out.println("**************************************************");
         }
     }
 
-    public void addReview(Games game) {
+    public void addReview(GameStuff gameStuff) {
         System.out.println("would you like to add a review?");
         System.out.println("1_Yes");
         System.out.println("2_No");
@@ -123,16 +133,22 @@ public class Library {
         while (true) {
             if (input == 1) {
                 String review = ScannerWrapper.getString();
-                game.addReview(review);
-                addRating(game);
+                isVideoGame(gameStuff);
+
                 break;
             } else if (input == 2) {
-                addRating(game);
+                isVideoGame(gameStuff);
                 break;
             } else {
                 System.out.println("Wrong input!Try again.");
             }
 
+        }
+    }
+
+    public void isVideoGame(GameStuff gameStuff) {
+        if (gameStuff.getClass().getSimpleName().equals("Games")) {
+            addRating((Games) gameStuff);
         }
     }
 
@@ -157,9 +173,9 @@ public class Library {
 
 
     //    public void
-    public void chooseToAddFeedBack() {
+    /*public void chooseToAddFeedBack() {
         if (games.size() > 0) {
-            listOfGames();
+            GameList.showList();
             while (true) {
                 System.out.println("Enter the related number to send feedback");
                 System.out.println("or you can just skip this by entering -1'.");
@@ -177,19 +193,10 @@ public class Library {
             System.out.println("You dont have any games in your library");
             System.out.println("**************************************************");
         }
-    }
+    }*/
 
     public void sendFeedBack(Games game) {
 //send to the owner
-    }
-
-    public void betaVersion() {
-        ArrayList<Games> sorted = new ArrayList<>();
-        for (Games game : games) {
-            if (game.getVersion().equals(Version.BETA)) {
-                sorted.add(game);
-            }
-        }
     }
 
 
