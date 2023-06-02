@@ -38,7 +38,8 @@ public class Main {
         games.add(zed);
         games.add(witcher);
         games.add(game3);
-        Store.setGames(games);
+        Store store=new Store();
+        store.setGames(games);
         ArrayList<User> users = new ArrayList<>();
         users.add(new User(info1));
         users.add(new User(info2));
@@ -47,6 +48,6 @@ public class Main {
         AllUsers.setUsers(users);
         users.get(1).getProfile().setWalletCash(50);
         //Admin ad = new Admin();
-        a.choose(users);
+        a.choose(users,store);
     }
 }

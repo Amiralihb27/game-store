@@ -142,7 +142,7 @@ public class Friends {
         }
     }
 
-    public void gift(User user) {
+    public void gift(User user,Store store) {
         if (user.getFriendList().size() >= 1 && user.getFriendList() != null) {
             while (true) {
                 System.out.println("You can get back by entering exit.");
@@ -152,7 +152,7 @@ public class Friends {
                     break;
 
                 } else if (user.isFriend(input)) {
-                    chooseToGift(user, input);
+                    chooseToGift(user, input,store);
                 } else {
                     System.out.println("There is no body with this username in your friendList.");
                 }
@@ -163,7 +163,7 @@ public class Friends {
         }
     }
 
-    public void chooseToGift(User user, String userName) {
+    public void chooseToGift(User user, String userName,Store store) {
         while (true) {
             System.out.println("You can get back by entering exit.");
             System.out.println("Enter the games name:");
@@ -171,7 +171,7 @@ public class Friends {
             if (gamesName.equalsIgnoreCase("exit")) {
                 break;
             }
-            ArrayList<GameStuff> games = Store.getGames();
+            ArrayList<GameStuff> games = store.getGames();
             int status = GameChanges.doesExist(games, gamesName);
             if (status != -1) {
                 if (user.getProfile().getWalletCash() >= games.get(status).getPrice()) {

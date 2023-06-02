@@ -47,15 +47,16 @@ public class GameList {
     public ArrayList<Games> listOfOriginal(ArrayList<GameStuff> gameStuffs) {
         ArrayList<Games> originals = new ArrayList<>();
         ArrayList<GameStuff> videoGame = extractVideoGames(gameStuffs);
+        ArrayList<GameStuff> newGameStuffs=new ArrayList<>();
         int index = 0;
         for (int i = 0; i < videoGame.size(); i++) {
             Games eachGame = (Games) videoGame.get(i);
             if (eachGame.getVersion().equals(Version.ORIGINAL)) {
-                System.out.println((index + 1) + ":" + videoGame.get(i).getName() + "----" +
-                        eachGame.getVersion() + " version");
+                newGameStuffs.add(videoGame.get(i));
                 originals.add(eachGame);
             }
         }
+        showList(newGameStuffs);
         return originals;
     }
 
@@ -83,8 +84,11 @@ public class GameList {
         String consoleOutPut;
         Scanner enter = new Scanner(System.in);
         String input=gameStuff.toString();
-        while (input.length() > 20) {
-            consoleOutPut = input.substring(0, 20);
+        System.out.println("You can get back to menu by entering get back or" +
+                " buy emtering the Enter you can see the next line");
+        while (input.length() > 40) {
+            int index=index(input);
+            consoleOutPut = input.substring(0, index+1);
             String output = enter.nextLine();
             if(output.equalsIgnoreCase("exit")){
                 System.exit(0);
@@ -92,9 +96,20 @@ public class GameList {
                 break;
             }
             System.out.println(consoleOutPut);
-            input = input.substring(20);
+            input = input.substring(index+1);
+            //System.out.println(input);
         }
         System.out.println("");
         System.out.println(input);
+    }
+
+    public int index(String input){
+        for(int i=0;i<input.length();i++){
+            if(input.charAt(i)=='='){
+                return i;
+            }
+        }
+
+        return 40;
     }
 }

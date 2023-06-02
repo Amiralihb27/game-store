@@ -24,8 +24,10 @@ public class Library {
 
     public void showGames() {
         if (gameStuffs.size() > 0) {
-            listOfGames();
-            gamesInformation();
+            GameList gameList=new GameList();
+            gameList.showList(gameStuffs);
+            // listOfGames();
+            gamesInformation(gameList);
         } else {
             System.out.println("You dont have any games in your library");
             System.out.println("**************************************************");
@@ -46,32 +48,8 @@ public class Library {
         }
     }
 
-   /* public ArrayList<Games> extractVideoGames() {
 
-        ArrayList<Games> videoGame = new ArrayList<>();
-        for (int i = 0; i < gameStuffs.size(); i++) {
-            if (gameStuffs.getClass().getSimpleName().equals("Games")) {
-                videoGame.add((Games) gameStuffs.get(i));
-            }
-        }
-        return videoGame;
-    }*/
 
-    public ArrayList<Games> listOfOriginal() {
-        ArrayList<Games> originals = new ArrayList<>();
-        GameList gameList = new GameList();
-        ArrayList<GameStuff> videoGame = gameList.extractVideoGames(gameStuffs);
-        int index = 0;
-        for (int i = 0; i < videoGame.size(); i++) {
-            Games eachGame = (Games) videoGame.get(i);
-            if (eachGame.getVersion().equals(Version.ORIGINAL)) {
-                System.out.println((index + 1) + ":" + videoGame.get(i).getName() + "----" +
-                        eachGame.getVersion() + " version");
-                originals.add(eachGame);
-            }
-        }
-        return originals;
-    }
 
    /* public ArrayList<Games> listOfBeta() {
         ArrayList<Games> beta = new ArrayList<>();
@@ -86,13 +64,14 @@ public class Library {
         return beta;
     }*/
 
-    public void gamesInformation() {
+    public void gamesInformation(GameList gameList) {
         while (true) {
             System.out.println("Enter the related number to see each game's information");
             System.out.println("or you can just skip this by entering -1'.");
             int input = ScannerWrapper.getInt();
             if (input >= 1 && input <= gameStuffs.size()) {
-                System.out.println(gameStuffs.get(input - 1).toString());
+               // System.out.println(gameStuffs.get(input - 1).toString());
+                gameList.printGameingStuffInformation(gameStuffs.get(input - 1));
                 System.out.println("***************************");
                 community();
                 break;

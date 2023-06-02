@@ -16,8 +16,8 @@ public class Admin {
         return passWord;
     }
 
-    public void gameChanges() {
-        ArrayList<GameStuff> games = Store.getGames();
+    public void gameChanges(Store store) {
+        ArrayList<GameStuff> games = store.getGames();
         GameChanges.showOptions(games);
 
     }

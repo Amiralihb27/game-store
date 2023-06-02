@@ -3,7 +3,7 @@ package ir.ac.kntu;
 public class FriendsMenu {
 
 
-    public static void showOptions(User user) {
+    public static void showOptions(User user,Store store) {
 
         Friends friends = new Friends();
         int input;
@@ -24,7 +24,7 @@ public class FriendsMenu {
                 friends.sendRequest(user);
 
             } else if (input == 4) {
-                friends.gift(user);
+                friends.gift(user,store);
             } else if (input == 5) {
                 if (user.getRequests() != null) {
                     user.getRequests().showRequest(user);

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class SignInMenu {
 
-    public static void signIn(ArrayList<User> users) {
+    public static void signIn(ArrayList<User> users,Store store) {
         while (true) {
             System.out.println("Sign in");
             System.out.println("You can get bac to previous action by entering exit.");
@@ -20,7 +20,7 @@ public class SignInMenu {
             int index = AllUsers.existance(input, passInput);
             if (index != -1) {
                 Instant start = Instant.now();
-                userInterface(input, users.get(index));
+                userInterface(input, users.get(index),store);
                 Instant end = Instant.now();
                 int totalTime = TimeCalculator.timeDifference(start, end);
                 System.out.println(totalTime);
@@ -34,7 +34,7 @@ public class SignInMenu {
         }
     }
 
-    public static void userInterface(String username, User user) {
+    public static void userInterface(String username, User user,Store store) {
         System.out.println("welcome " + username);
         while (true) {
             System.out.println("which part do you wana check? ");
@@ -44,13 +44,13 @@ public class SignInMenu {
                     profile(user);
                     break;
                 case 2:
-                    store(user);
+                    store(user,store);
                     break;
                 case 3:
                     library(user);
                     break;
                 case 4:
-                    FriendsMenu.showOptions(user);
+                    FriendsMenu.showOptions(user,store);
                 case 5:
                     break;
                 default:
@@ -97,7 +97,7 @@ public class SignInMenu {
 
     }
 
-    public static void store(User user) {
+    public static void store(User user,Store store) {
         while (true) {
             System.out.println("which part do you wana go?");
             System.out.println("1_showing the list of games");
@@ -107,20 +107,20 @@ public class SignInMenu {
             int input = ScannerWrapper.getInt();
             switch (input) {
                 case 1:
-                    Store.showList(user);
+                    store.showList(user);
                     break;
                 case 2:
                     System.out.println("enter the name");
                     // sc.nextLine();
                     String name = ScannerWrapper.getString();
-                    Store.searchByName(name, user);
+                    store.searchByName(name, user);
                     break;
                 case 3:
                     System.out.println("enter the min price");
                     double min = ScannerWrapper.getDouble();
                     System.out.println("enter the max price");
                     double max = ScannerWrapper.getDouble();
-                    Store.searchByPrice(min, max, user);
+                    store.searchByPrice(min, max, user);
                 case 4:
                     break;
                 default:
