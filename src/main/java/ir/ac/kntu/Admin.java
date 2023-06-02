@@ -3,23 +3,52 @@ package ir.ac.kntu;
 import java.util.ArrayList;
 //import java.util.Scanner;
 
-public class Admin {
-    private final String userName = "Amiralihb";
+public class Admin extends Employes {
 
-    private final String passWord = "Amir8227";
 
-    public String getUserName() {
-        return userName;
-    }
+    public Admin() {
 
-    public String getPassWord() {
-        return passWord;
     }
 
     public void gameChanges(Store store) {
         ArrayList<GameStuff> games = store.getGames();
-        GameChanges.showOptions(games);
+        GameChanges.showOptions(games, store);
 
+    }
+
+    public void crashReport(Store store, AllEmployes allEmployes) {
+        GameList gameList = new GameList();
+        ArrayList<GameStuff> newGameStuff = gameList.extractVideoGames(store.getGames());
+        gameList.showList(newGameStuff);
+        System.out.println("enter the relate number to report the crash!");
+        System.out.println("You can get back by entering exit!");
+        while (true) {
+            String input = ScannerWrapper.getString();
+            if (input.equalsIgnoreCase("exit")) {
+                break;
+            }
+            int index = Integer.parseInt(input) - 1;
+            if (index >= 0 && index < newGameStuff.size()) {
+
+                ArrayList<Developer> developers = allEmployes.extractDeveloper();
+                Developer employe = findTheLessBusyDeveloper(developers);
+                Inbox inbox = new Inbox(newGameStuff.get(index), 20);
+                employe.addInbox(inbox);
+            }
+        }
+    }
+
+    public Developer findTheLessBusyDeveloper(ArrayList<Developer> developers) {
+        int max = 1000;
+        Developer developer = new Developer();
+        for (int i = 0; i < developers.size() - 1; i++) {
+            if (developers.get(i).getScheduledEvents().size() < max) {
+                max = developers.get(i).getScheduledEvents().size();
+                developer = developers.get(i);
+            }
+
+        }
+        return developer;
     }
 
     public void usersInfo(ArrayList<User> users) {
@@ -176,7 +205,7 @@ public class Admin {
             System.out.println("You can get back by entering 'exit'.");
             System.out.println("Enter new username:");
             userInput = ScannerWrapper.getString();
-            if(userInput.equalsIgnoreCase("exit")){
+            if (userInput.equalsIgnoreCase("exit")) {
                 break;
             }
             if (AllUsers.findByName(userInput) != -1) {

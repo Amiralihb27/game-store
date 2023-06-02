@@ -47,7 +47,9 @@ public class Main {
         users.add(new User(info4));
         AllUsers.setUsers(users);
         users.get(1).getProfile().setWalletCash(50);
-        //Admin ad = new Admin();
-        a.choose(users,store);
+        Admin ad = new Admin();
+        AllEmployes allEmployes=new AllEmployes();
+        allEmployes.getAllEmployes().add(ad);
+        a.choose(users,store,allEmployes);
     }
 }

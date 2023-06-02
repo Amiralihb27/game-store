@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class GameChanges {
 
-    public static void showOptions(ArrayList<GameStuff> games) {
+    public static void showOptions(ArrayList<GameStuff> games,Store store) {
         while (true) {
             System.out.println("Which part do you wana go?");
             System.out.println("1_Add games");
@@ -14,12 +14,12 @@ public class GameChanges {
             System.out.println("4_get back");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
-                addGame(games);
+                addGame(games,store);
             } else if (input == 2) {
                 change(games);
             } else if (input == 3) {
-                deletGame(games);
-            } else {
+                deletGame(games,store);
+            }  else {
                 break;
             }
         }
@@ -51,7 +51,7 @@ public class GameChanges {
                 break;
 
             } else {
-                System.out.println("Wrong input!Try again.");
+                System.out.println("There is no game like this!try again.");
             }
 
         }
@@ -141,8 +141,8 @@ public class GameChanges {
 
     }
 
-    public static void addGame(ArrayList<GameStuff> games) {
-        //sc.nextLine();
+    public static void addGame(ArrayList<GameStuff> gameStuffs,Store store) {
+        //ArrayList<GameStuff> games=store.getGames();
         while(true){
             System.out.println("You can get back by entering exit.");
             System.out.println("Enter the  name of new game:");
@@ -164,14 +164,17 @@ public class GameChanges {
             game.setPrice(price);
             game.setRating(rating);
             game.addReview(review);
-            games.add(game);
+            store.addGames(game);
+            if(gameStuffs!=store.getGames()){
+                gameStuffs.add(game);
+            }
             System.out.println(game + " succesfully added!");
             break;
         }
 
     }
 
-    public static void deletGame(ArrayList<GameStuff> games) {
+    public static void deletGame(ArrayList<GameStuff> games,Store store) {
         //sc.nextLine();
         while (true) {
             System.out.println("You can get back to previous action by entering exit.");
@@ -194,19 +197,23 @@ public class GameChanges {
             } else {
                 System.out.println("Enter the related number:");
                 int index = ScannerWrapper.getInt();
-                toDelete(index, games);
+                toDelete(index, games,store);
                 break;
             }
         }
 
     }
 
-    public static void toDelete(int index, ArrayList<GameStuff> games) {
+    public static void toDelete(int index, ArrayList<GameStuff> games,Store store) {
 
         while (true) {
             if (index <= games.size() && index > 0) {
                 System.out.println(games.get(index - 1) + " deleted!");
-                games.remove(index - 1);
+                if(games!=store.getGames()){
+                    games.remove(store.getGames().get(index-1));
+                }
+                store.getGames().remove(index-1);
+
                 break;
             } else {
                 System.out.println("wrong input!try again.");

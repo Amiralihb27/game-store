@@ -1,16 +1,17 @@
 package ir.ac.kntu;
 
 public class Inbox {
-    private String message;
+    private GameStuff gameStuff;
 
     private double duration;
 
-    public String getMessage() {
-        return message;
+
+    public GameStuff getGameStuff() {
+        return gameStuff;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setGameStuff(GameStuff gameStuff) {
+        this.gameStuff = gameStuff;
     }
 
     public double getDuration() {
@@ -21,8 +22,8 @@ public class Inbox {
         this.duration = duration;
     }
 
-    public Inbox(String message, double duration) {
-        this.message = message;
+    public Inbox(GameStuff games, double duration) {
+        this.gameStuff = games;
         this.duration = duration;
     }
 
