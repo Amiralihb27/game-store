@@ -12,7 +12,7 @@ public class GameList {
         }
     }
 
-    public void showVideoGames(ArrayList<Games> videGames){
+    public void showVideoGames(ArrayList<Games> videGames) {
         for (int i = 0; i < videGames.size(); i++) {
             System.out.println((i + 1) + ":");
             gameList(videGames.get(i));
@@ -21,15 +21,16 @@ public class GameList {
 
     public void gameList(GameStuff gameStuff) {
         String[] temp = new String[2];
+        String className = gameStuff.getClass().getSimpleName();
+        if (className.equals("GamingDevice") || className.equals("Controler") || className.equals("Monitor")) {
+            temp[0] = "-";
+            temp[1] = "|";
+        } else {
+            temp[0] = "*";
+            temp[1] = "*";
+        }
         for (int i = 0; i < 3; i++) {
             if (i == 1) {
-                if (gameStuff.getClass().getSimpleName().equals("GamingDevice")) {
-                    temp[0] = "-";
-                    temp[1] = "|";
-                }else{
-                    temp[0] = "*";
-                    temp[1] = "*";
-                }
                 System.out.println(temp[1] + gameStuff.getName() + temp[1]);
             } else {
                 starPrinting(gameStuff, temp[0]);
@@ -57,8 +58,8 @@ public class GameList {
     public ArrayList<Games> listOfOriginal(ArrayList<GameStuff> gameStuffs) {
         ArrayList<Games> originals = new ArrayList<>();
         ArrayList<GameStuff> videoGame = extractVideoGames(gameStuffs);
-        ArrayList<GameStuff> newGameStuffs=new ArrayList<>();
-       // int index = 0;
+        ArrayList<GameStuff> newGameStuffs = new ArrayList<>();
+        // int index = 0;
         for (int i = 0; i < videoGame.size(); i++) {
             Games eachGame = (Games) videoGame.get(i);
             if (eachGame.getVersion().equals(Version.ORIGINAL)) {
@@ -73,8 +74,8 @@ public class GameList {
     public ArrayList<Games> listOfBeta(ArrayList<GameStuff> gameStuffs) {
         ArrayList<Games> betas = new ArrayList<>();
         ArrayList<GameStuff> videoGame = extractVideoGames(gameStuffs);
-        ArrayList<GameStuff> newGameStuffs=new ArrayList<>();
-       // int index = 0;
+        ArrayList<GameStuff> newGameStuffs = new ArrayList<>();
+        // int index = 0;
         for (int i = 0; i < videoGame.size(); i++) {
             Games eachGame = (Games) videoGame.get(i);
             if (eachGame.getVersion().equals(Version.BETA)) {
@@ -89,8 +90,9 @@ public class GameList {
     public ArrayList<GameStuff> extractDevices(ArrayList<GameStuff> gameStuffs) {
         ArrayList<GameStuff> device = new ArrayList<>();
         for (int i = 0; i < gameStuffs.size(); i++) {
-            if (gameStuffs.get(i).getClass().getSimpleName().equals("Games")) {
-                device.add((GamingDevice) gameStuffs.get(i));
+            String className = gameStuffs.get(i).getClass().getSimpleName();
+            if (className.equals("GamingDevice") || className.equals("Controler") || className.equals("Monitor")) {
+                device.add(gameStuffs.get(i));
             }
         }
         return device;
@@ -99,7 +101,7 @@ public class GameList {
     public ArrayList<GameStuff> extractDifferentDevices(ArrayList<GameStuff> gameStuffs, String className) {
         ArrayList<GameStuff> device = new ArrayList<>();
         for (int i = 0; i < gameStuffs.size(); i++) {
-            if (gameStuffs.get(i).getClass().getSimpleName().equals("className")) {
+            if (gameStuffs.get(i).getClass().getSimpleName().equals(className)) {
                 device.add(gameStuffs.get(i));
             }
         }
@@ -109,29 +111,29 @@ public class GameList {
     public void printGameingStuffInformation(GameStuff gameStuff) {
         String consoleOutPut;
         Scanner enter = new Scanner(System.in);
-        String input=gameStuff.toString();
+        String input = gameStuff.toString();
         System.out.println("You can get back to menu by entering get back or" +
                 " buy emtering the Enter you can see the next line");
         while (input.length() > 40) {
-            int index=index(input);
-            consoleOutPut = input.substring(0, index+1);
+            int index = index(input);
+            consoleOutPut = input.substring(0, index + 1);
             String output = enter.nextLine();
-            if(output.equalsIgnoreCase("exit")){
+            if (output.equalsIgnoreCase("exit")) {
                 System.exit(0);
             } else if (output.equalsIgnoreCase("get back")) {
                 break;
             }
             System.out.println(consoleOutPut);
-            input = input.substring(index+1);
+            input = input.substring(index + 1);
             //System.out.println(input);
         }
         System.out.println("");
         System.out.println(input);
     }
 
-    public int index(String input){
-        for(int i=0;i<input.length();i++){
-            if(input.charAt(i)=='='){
+    public int index(String input) {
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == '=') {
                 return i;
             }
         }

@@ -3,7 +3,7 @@ package ir.ac.kntu;
 import java.util.ArrayList;
 
 public class Seller extends Employes {
-    private ArrayList<GameStuff> gamingDevice;
+    private ArrayList<GameStuff> gamingDevice=new ArrayList<>();
 
 
     public Seller(Profile profile){

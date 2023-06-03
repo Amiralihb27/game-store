@@ -199,9 +199,12 @@ public class Store {
         }
     }*/
 
-    public  void searchByName(String name, User user) {
+    public  void searchByName( User user) {
         int index = 1;
         ArrayList<GameStuff> sortedGames = videoGameOrDevice();
+        System.out.println("enter the name");
+        // sc.nextLine();
+        String name = ScannerWrapper.getString();
         for (int i = 0; i < gameStuffs.size(); i++) {
             if (gameStuffs.get(i).getName().startsWith(name)) {
                 System.out.println(index + ":" + gameStuffs.get(i).getName());

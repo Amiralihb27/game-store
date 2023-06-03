@@ -110,10 +110,7 @@ public class SignInMenu {
                     store.showList(user);
                     break;
                 case 2:
-                    System.out.println("enter the name");
-                    // sc.nextLine();
-                    String name = ScannerWrapper.getString();
-                    store.searchByName(name, user);
+                    store.searchByName( user);
                     break;
                 case 3:
                     System.out.println("enter the min price");

@@ -60,7 +60,8 @@ public class StartingMenu {
                         break;
                     case "Seller":
                         Seller seller = (Seller) allEmployes.getAllEmployes().get(index);
-
+                        sellerOptions(seller, store, allEmployes);
+                        break;
                     default:
                         break;
 
@@ -146,7 +147,7 @@ public class StartingMenu {
             System.out.println("welcomme " + seller.getProfile().getUserName() + " the developer!");
             System.out.println("Which part do you wana go?");
             System.out.println("1_Profile");
-            System.out.println("2_Games");
+            System.out.println("2_Devices");
             System.out.println("3_getBack");
             System.out.println("4_Exit");
             int input = ScannerWrapper.getInt();
@@ -166,7 +167,7 @@ public class StartingMenu {
                     System.out.println("Wrong input!Try agian.");
                     break;
             }
-            if (input == 5) {
+            if (input == 3) {
                 break;
             }
         }

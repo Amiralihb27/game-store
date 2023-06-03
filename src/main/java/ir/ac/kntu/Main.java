@@ -24,10 +24,10 @@ public class Main {
         users.add(new User(info4));
         AllUsers.setUsers(users);
         users.get(1).getProfile().setWalletCash(50);
-        StoreCreation(users, a);
+        storeCreation(users, a);
     }
 
-    public static void StoreCreation(ArrayList<User> users, StartingMenu start) {
+    public static void storeCreation(ArrayList<User> users, StartingMenu start) {
         Games zed = new Games("zed", "its about zed", "action");
         zed.addReview("good game!");
         zed.addReview("good !");
@@ -98,7 +98,7 @@ public class Main {
         Developer developer1 = new Developer(info3);
         Developer developer2 = new Developer(info4);
         Seller seller1 = new Seller(info5);
-        Seller seller2 = new Seller(info5);
+        Seller seller2 = new Seller(info6);
         AllEmployes allEmployes = new AllEmployes();
         allEmployes.addEmploye(admin1);
         allEmployes.addEmploye(developer2);
