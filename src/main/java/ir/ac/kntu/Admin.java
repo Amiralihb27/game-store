@@ -1,5 +1,6 @@
 package ir.ac.kntu;
 
+import java.time.Instant;
 import java.util.ArrayList;
 //import java.util.Scanner;
 
@@ -8,6 +9,10 @@ public class Admin extends Employes {
 
     public Admin() {
 
+    }
+
+    public Admin(Profile profile) {
+        super(profile);
     }
 
     public void gameChanges(Store store) {
@@ -29,27 +34,15 @@ public class Admin extends Employes {
             }
             int index = Integer.parseInt(input) - 1;
             if (index >= 0 && index < newGameStuff.size()) {
-
+                store.getGames().remove(newGameStuff.get(index));
                 ArrayList<Developer> developers = allEmployes.extractDeveloper();
-                Developer employe = findTheLessBusyDeveloper(developers);
-                Inbox inbox = new Inbox(newGameStuff.get(index), 20);
-                employe.addInbox(inbox);
+                Developer employe = allEmployes.findTheLessBusyDeveloper(developers);
+                GameStuff gameForGettingFixed=newGameStuff.get(index);
+                allEmployes.sendTheReportMessage(allEmployes,gameForGettingFixed);
             }
         }
     }
 
-    public Developer findTheLessBusyDeveloper(ArrayList<Developer> developers) {
-        int max = 1000;
-        Developer developer = new Developer();
-        for (int i = 0; i < developers.size() - 1; i++) {
-            if (developers.get(i).getScheduledEvents().size() < max) {
-                max = developers.get(i).getScheduledEvents().size();
-                developer = developers.get(i);
-            }
-
-        }
-        return developer;
-    }
 
     public void usersInfo(ArrayList<User> users) {
         int index = searchUser(users);

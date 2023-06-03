@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class GameChanges {
 
-    public static void showOptions(ArrayList<GameStuff> games,Store store) {
+    public static void showOptions(ArrayList<GameStuff> games, Store store) {
         while (true) {
             System.out.println("Which part do you wana go?");
             System.out.println("1_Add games");
@@ -14,12 +14,12 @@ public class GameChanges {
             System.out.println("4_get back");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
-                addGame(games,store);
+                addGame(games, store);
             } else if (input == 2) {
                 change(games);
             } else if (input == 3) {
-                deletGame(games,store);
-            }  else {
+                deletGame(games, store);
+            } else {
                 break;
             }
         }
@@ -36,7 +36,7 @@ public class GameChanges {
             if (name.equalsIgnoreCase("exit")) {
                 break;
             }
-            if (doesExist(games, name)!=-1) {
+            if (doesExist(games, name) != -1) {
                 System.out.println("which game do you wana choose?");
                 ArrayList<String> uniqueNum = new ArrayList<>();
                 for (int i = 0; i < games.size(); i++) {
@@ -68,7 +68,7 @@ public class GameChanges {
         return -1;
     }
 
-    public static boolean isInLibrary(ArrayList<GameStuff> games, GameStuff gameStuff){
+    public static boolean isInLibrary(ArrayList<GameStuff> games, GameStuff gameStuff) {
         for (int i = 0; i < games.size(); i++) {
             if (gameStuff.equals(games.get(i))) {
                 return true;
@@ -104,15 +104,15 @@ public class GameChanges {
     }
 
     public static void edit(GameStuff game) {
-        while(true){
+        while (true) {
             System.out.println("You can get back by entering exit.");
             System.out.println("Enter the new name of game:");
             String name = ScannerWrapper.getString();
-            if(name.equalsIgnoreCase("exit")){
+            if (name.equalsIgnoreCase("exit")) {
                 break;
             }
-            if(game.getClass().getSimpleName().equals("Games")){
-                Games newGame=(Games) game;
+            if (game.getClass().getSimpleName().equals("Games")) {
+                Games newGame = (Games) game;
                 System.out.println("Enter the story of game:");
                 String story = ScannerWrapper.getString();
                 System.out.println("Enter the genere of new game:");
@@ -132,22 +132,20 @@ public class GameChanges {
                 ArrayList<String> reviews = new ArrayList<>();
                 reviews.add(review);
                 newGame.setReviews(reviews);
+                newGame=versionAndLevel(newGame);
                 System.out.println("The game edited succesfully!");
                 break;
             }
-
         }
-
-
     }
 
-    public static void addGame(ArrayList<GameStuff> gameStuffs,Store store) {
+    public static void addGame(ArrayList<GameStuff> gameStuffs, Store store) {
         //ArrayList<GameStuff> games=store.getGames();
-        while(true){
+        while (true) {
             System.out.println("You can get back by entering exit.");
             System.out.println("Enter the  name of new game:");
             String name = ScannerWrapper.getString();
-            if(name.equalsIgnoreCase("exit")){
+            if (name.equalsIgnoreCase("exit")) {
                 break;
             }
             System.out.println("Enter the story of game:");
@@ -164,8 +162,9 @@ public class GameChanges {
             game.setPrice(price);
             game.setRating(rating);
             game.addReview(review);
+            game=versionAndLevel(game);
             store.addGames(game);
-            if(gameStuffs!=store.getGames()){
+            if (gameStuffs != store.getGames()) {
                 gameStuffs.add(game);
             }
             System.out.println(game + " succesfully added!");
@@ -174,7 +173,16 @@ public class GameChanges {
 
     }
 
-    public static void deletGame(ArrayList<GameStuff> games,Store store) {
+    public static Games versionAndLevel(Games videoGame) {
+        System.out.println("Enter the number between 1_4 inorder to declare the game level");
+        int input = ScannerWrapper.getInt();
+        videoGame.setLevelPerNumber(input);
+        System.out.println("Enter 1 for Beta and 2 for Original.(declaring game version)");
+        videoGame.setVersionByNumber(input);
+        return videoGame;
+    }
+
+    public static void deletGame(ArrayList<GameStuff> games, Store store) {
         //sc.nextLine();
         while (true) {
             System.out.println("You can get back to previous action by entering exit.");
@@ -197,22 +205,24 @@ public class GameChanges {
             } else {
                 System.out.println("Enter the related number:");
                 int index = ScannerWrapper.getInt();
-                toDelete(index, games,store);
+                toDelete(index, games, store);
                 break;
             }
         }
 
     }
 
-    public static void toDelete(int index, ArrayList<GameStuff> games,Store store) {
+    public static void toDelete(int index, ArrayList<GameStuff> games, Store store) {
 
         while (true) {
             if (index <= games.size() && index > 0) {
                 System.out.println(games.get(index - 1) + " deleted!");
-                if(games!=store.getGames()){
-                    games.remove(store.getGames().get(index-1));
+                GameStuff shouldBeDeleted = games.get(index - 1);
+                if (games != store.getGames()) {
+                    games.remove(index - 1);
                 }
-                store.getGames().remove(index-1);
+                store.getGames().remove(shouldBeDeleted);
+
 
                 break;
             } else {

@@ -15,6 +15,8 @@ public class Games extends GameStuff {
 
     private int numberOfRates;
 
+    private ArrayList<String> feedBack=new ArrayList<>();
+
 
     public Version getVersion() {
         return version;
@@ -62,12 +64,36 @@ public class Games extends GameStuff {
         this.level = level;
     }
 
+    public ArrayList<String> getFeedBack() {
+        return feedBack;
+    }
+
     public Level getLevel() {
         return level;
     }
 
     public void setLevel(Level level) {
         this.level = level;
+    }
+
+    public void  setLevelPerNumber(int number){
+        if(number<1){
+            this.level=Level.LEVEL_1;
+        } else if (number>4) {
+            this.level=Level.LEVEL_4;
+        }else{
+            this.level=Level.values()[number-1];
+        }
+    }
+
+    public void setVersionByNumber(int number){
+        if(number<1){
+            this.version=Version.BETA;
+        } else if (number>2) {
+            this.version= Version.ORIGINAL;
+        }else{
+            this.version=Version.values()[number-1];
+        }
     }
 
     public int getNumberOfRates() {
@@ -84,6 +110,12 @@ public class Games extends GameStuff {
         setNumberOfRates(getNumberOfRates() + 1);
         this.rating = (this.getRating() * (getNumberOfRates() - 1) + score) / this.getNumberOfRates();
 
+    }
+
+    public void addFeedBack(String feedBack){
+        if(this.version.equals(Version.BETA)){
+            this.feedBack.add(feedBack);
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package ir.ac.kntu;
 
+import java.time.Instant;
 import java.util.ArrayList;
 
 public class AllEmployes {
@@ -15,7 +16,7 @@ public class AllEmployes {
     }
 
     public ArrayList<Employes> getAllEmployes() {
-        return new ArrayList<Employes>(allEmployes);
+        return (allEmployes);
     }
 
     public void addEmploye(Employes employes) {
@@ -41,5 +42,28 @@ public class AllEmployes {
             }
         }
         return developers;
+    }
+
+    public Developer findTheLessBusyDeveloper(ArrayList<Developer> developers) {
+        int max = 1000;
+        Developer developer = new Developer();
+        for (int i = 0; i < developers.size(); i++) {
+            if (developers.get(i).getScheduledEvents().size() < max) {
+                max = developers.get(i).getScheduledEvents().size();
+                developer = developers.get(i);
+            }
+
+        }
+        return developer;
+    }
+
+    public void sendTheReportMessage(AllEmployes allEmployes, GameStuff gameForGettingFixed) {
+        Instant start = Instant.now();
+        ArrayList<Developer> developers = allEmployes.extractDeveloper();
+        Developer employe = allEmployes.findTheLessBusyDeveloper(developers);
+        Inbox inbox = new Inbox(gameForGettingFixed, 20);
+        employe.addInbox(inbox);
+        System.out.println("The message has been sent to " + employe.getProfile().getUserName());
+        System.out.println("*************************************");
     }
 }

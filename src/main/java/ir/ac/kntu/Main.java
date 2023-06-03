@@ -2,6 +2,7 @@ package ir.ac.kntu;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
@@ -47,9 +48,29 @@ public class Main {
         users.add(new User(info4));
         AllUsers.setUsers(users);
         users.get(1).getProfile().setWalletCash(50);
-        Admin ad = new Admin();
+        createEmployes(users,store,a);
+    }
+
+    public static void createEmployes(ArrayList<User> users, Store store, StartingMenu start){
+        Profile info1 = new Profile("Amir", "Amir8227",
+                "0911112244", "amir82@gmail.com");
+        Profile info2 = new Profile("aliB", "Aliali8227",
+                "0911112245", "ali93@gmail.com");
+        Profile info3 = new Profile("amirA", "Amir08827",
+                "0911112247", "amiramir75@gmail.com");
+        Profile info4 = new Profile("miaplays", "miaKimio827",
+                "0917712244", "kimia@gmail.com");
+        Admin admin1 = new Admin(info1);
+        Admin admin2 =new Admin(info2);
+        Developer developer1=new Developer(info3);
+        Developer developer2=new Developer(info4);
+
         AllEmployes allEmployes=new AllEmployes();
-        allEmployes.getAllEmployes().add(ad);
-        a.choose(users,store,allEmployes);
+        allEmployes.addEmploye(admin1);
+        allEmployes.addEmploye(developer2);
+        allEmployes.addEmploye(developer1);
+        allEmployes.addEmploye(admin2);
+        start.choose(users,store,allEmployes);
+
     }
 }
