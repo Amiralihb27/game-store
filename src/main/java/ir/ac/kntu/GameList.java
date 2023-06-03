@@ -12,6 +12,13 @@ public class GameList {
         }
     }
 
+    public void showVideoGames(ArrayList<Games> videGames){
+        for (int i = 0; i < videGames.size(); i++) {
+            System.out.println((i + 1) + ":");
+            gameList(videGames.get(i));
+        }
+    }
+
     public void gameList(GameStuff gameStuff) {
         String[] temp = {"*", "*"};
         for (int i = 0; i < 3; i++) {
@@ -48,7 +55,7 @@ public class GameList {
         ArrayList<Games> originals = new ArrayList<>();
         ArrayList<GameStuff> videoGame = extractVideoGames(gameStuffs);
         ArrayList<GameStuff> newGameStuffs=new ArrayList<>();
-        int index = 0;
+       // int index = 0;
         for (int i = 0; i < videoGame.size(); i++) {
             Games eachGame = (Games) videoGame.get(i);
             if (eachGame.getVersion().equals(Version.ORIGINAL)) {
@@ -58,6 +65,22 @@ public class GameList {
         }
         showList(newGameStuffs);
         return originals;
+    }
+
+    public ArrayList<Games> listOfBeta(ArrayList<GameStuff> gameStuffs) {
+        ArrayList<Games> betas = new ArrayList<>();
+        ArrayList<GameStuff> videoGame = extractVideoGames(gameStuffs);
+        ArrayList<GameStuff> newGameStuffs=new ArrayList<>();
+       // int index = 0;
+        for (int i = 0; i < videoGame.size(); i++) {
+            Games eachGame = (Games) videoGame.get(i);
+            if (eachGame.getVersion().equals(Version.BETA)) {
+                newGameStuffs.add(videoGame.get(i));
+                betas.add(eachGame);
+            }
+        }
+        showVideoGames(betas);
+        return betas;
     }
 
     public ArrayList<GameStuff> extractDevices(ArrayList<GameStuff> gameStuffs) {

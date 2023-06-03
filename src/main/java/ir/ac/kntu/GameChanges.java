@@ -2,16 +2,19 @@ package ir.ac.kntu;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class GameChanges {
 
-    public static void showOptions(ArrayList<GameStuff> games, Store store) {
+    public static void showOptions(ArrayList<GameStuff> games, Store store, Employes employe, AllEmployes allEmployes) {
         while (true) {
             System.out.println("Which part do you wana go?");
             System.out.println("1_Add games");
             System.out.println("2_Edit game");
             System.out.println("3_Delet game");
-            System.out.println("4_get back");
+            System.out.println("4_Feed Back");
+            System.out.println("5_Give accses");
+            System.out.println("6_get back");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
                 addGame(games, store);
@@ -19,6 +22,11 @@ public class GameChanges {
                 change(games);
             } else if (input == 3) {
                 deletGame(games, store);
+            } else if (input == 4) {
+                feedBack(games);
+            } else if (input == 5) {
+                findADeveloperToGiveAccess(allEmployes,employe,store);
+
             } else {
                 break;
             }
@@ -132,7 +140,7 @@ public class GameChanges {
                 ArrayList<String> reviews = new ArrayList<>();
                 reviews.add(review);
                 newGame.setReviews(reviews);
-                newGame=versionAndLevel(newGame);
+                newGame = versionAndLevel(newGame);
                 System.out.println("The game edited succesfully!");
                 break;
             }
@@ -162,7 +170,7 @@ public class GameChanges {
             game.setPrice(price);
             game.setRating(rating);
             game.addReview(review);
-            game=versionAndLevel(game);
+            game = versionAndLevel(game);
             store.addGames(game);
             if (gameStuffs != store.getGames()) {
                 gameStuffs.add(game);
@@ -231,5 +239,94 @@ public class GameChanges {
             index = ScannerWrapper.getInt();
         }
     }
+
+    public static void feedBack(ArrayList<GameStuff> games) {
+        GameList gameList = new GameList();
+
+        ArrayList<Games> videoGames = gameList.listOfBeta(games);
+        if (videoGames.size() > 0) {
+            System.out.println("Enter the related number to see each game's feedBack ");
+            while (true) {
+                String input = ScannerWrapper.getString();
+                if (input.equalsIgnoreCase("exit")) {
+                    break;
+                }
+                if (Integer.parseInt(input) > 1 && Integer.parseInt(input) < videoGames.size()) {
+                    if (videoGames.get(Integer.parseInt(input) - 1).getFeedBack().size() > 0) {
+                        System.out.println(videoGames.get(Integer.parseInt(input) - 1).getFeedBack());
+                        break;
+                    } else {
+                        System.out.println("This game has no feedBack");
+                        break;
+                    }
+
+                } else {
+                    System.out.println("Wrong input!Try again.");
+                }
+            }
+        }else{
+            System.out.println("There is no Beta game.");
+        }
+
+
+    }
+
+    public static void findADeveloperToGiveAccess(AllEmployes allEmployes, Employes employe, Store store) {
+
+        System.out.println("Whom do you want to give accsess?");
+        System.out.println("You can get back by entering exit.");
+        while (true) {
+            System.out.println("Enter the userName: ");
+            String userName = ScannerWrapper.getString();
+            if (userName.equalsIgnoreCase("exit")) {
+                break;
+            }
+            System.out.println("Enter the passWord: ");
+            String passWord = ScannerWrapper.getString();
+            int index = allEmployes.doesExist(userName, passWord);
+            if (index != -1 && allEmployes.getAllEmployes().get(index).getClass().getSimpleName().equals("Developer")) {
+                Developer developer = (Developer) allEmployes.getAllEmployes().get(index);
+                findGameToGiveAccses(developer, employe, store);
+                break;
+            } else {
+                System.out.println("There is no username with this profile.");
+            }
+        }
+    }
+
+    public static void findGameToGiveAccses(Developer developer, Employes employe, Store store) {
+        GameList gameList = new GameList();
+        ArrayList<GameStuff> gameStuffs = new ArrayList<>();
+        if (employe.getClass().getSimpleName().equals("Admin")) {
+            gameStuffs = store.getGames();
+        } else {
+            Developer theDeveloper = (Developer) employe;
+            gameStuffs = theDeveloper.getExclusiveGames();
+        }
+        if (gameStuffs.size() > 0) {
+            System.out.println("Enter the related number of the videoGames that you created:");
+            System.out.println("You can get back by entering 'exit'. ");
+            gameList.showList(gameStuffs);
+            while (true) {
+                int input = ScannerWrapper.getInt();
+                if (input == -1) {
+                    System.out.println("*******************");
+                    break;
+                }
+                if (input > 0 && input <= gameStuffs.size()) {
+                    developer.addExclusiveGames(gameStuffs.get(input - 1));
+                    System.out.println("Accses of"+ gameStuffs.get(input - 1).getName()+ " has been given to");
+                    break;
+                } else {
+                    System.out.println("Wrong input!try again.");
+                }
+
+            }
+        } else {
+            System.out.println("You didnt have created any games.");
+        }
+
+    }
+
 
 }

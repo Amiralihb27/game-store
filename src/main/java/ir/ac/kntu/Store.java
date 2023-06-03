@@ -22,6 +22,10 @@ public class Store {
         this.gameStuffs.add(gameStuff);
     }
 
+    public void addDevice(GamingDevice gamingDevice){
+        this.gameStuffs.add(gamingDevice);
+    }
+
     public  void showList(User user) {
         GameList gameList = new GameList();
         ArrayList<GameStuff> newGameStuff = videoGameOrDevice();

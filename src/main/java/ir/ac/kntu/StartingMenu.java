@@ -83,7 +83,7 @@ public class StartingMenu {
             if (input == 1) {
                 admin.userChanges(users);
             } else if (input == 2) {
-                admin.gameChanges(store);
+                admin.gameChanges(store,allEmployes);
             } else if (input == 3) {
                 admin.crashReport(store, allEmployes);
             } else if (input == 4) {
@@ -112,7 +112,7 @@ public class StartingMenu {
                     //
                     break;
                 case 2:
-                    developer.gameChanges(store);
+                    developer.gameChanges(store,allEmployes);
                     break;
                 case 3:
                     developer.checkingInbox(allEmployes);

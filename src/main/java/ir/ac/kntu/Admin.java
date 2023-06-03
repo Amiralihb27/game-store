@@ -15,9 +15,9 @@ public class Admin extends Employes {
         super(profile);
     }
 
-    public void gameChanges(Store store) {
+    public void gameChanges(Store store,AllEmployes allEmployes) {
         ArrayList<GameStuff> games = store.getGames();
-        GameChanges.showOptions(games, store);
+        GameChanges.showOptions(games, store,this,allEmployes);
 
     }
 

@@ -21,6 +21,10 @@ public class Controler extends GamingDevice {
         //this.pariredDevice = pariredDevice;
     }
 
+    public Controler(){
+
+    }
+
     public Type getType() {
         return type;
     }

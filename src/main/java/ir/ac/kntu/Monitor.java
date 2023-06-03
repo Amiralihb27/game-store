@@ -13,6 +13,10 @@ public class Monitor extends GamingDevice {
         this.responseTime = responseTime;
     }
 
+    public Monitor(){
+
+    }
+
     public int getFPS() {
         return fPS;
     }

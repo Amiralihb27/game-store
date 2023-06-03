@@ -20,7 +20,7 @@ public class Developer extends Employes {
 
     }
 
-    public void addExclusiveGames(GameStuff  newGameStuff){
+    public void addExclusiveGames(GameStuff newGameStuff) {
         this.exclusiveGames.add(newGameStuff);
     }
 
@@ -64,10 +64,10 @@ public class Developer extends Employes {
         super(profile);
     }
 
-    public void gameChanges(Store store) {
+    public void gameChanges(Store store,AllEmployes allEmployes) {
         GameList gameList = new GameList();
         ArrayList<GameStuff> games = gameList.extractVideoGames(exclusiveGames);
-        GameChanges.showOptions(exclusiveGames, store);
+        GameChanges.showOptions(exclusiveGames, store,this, allEmployes);
     }
 
     public void checkingInbox(AllEmployes allEmployes) {
@@ -169,56 +169,6 @@ public class Developer extends Employes {
         }
 
     }
-
-    public void findADeveloperToGiveAccess(AllEmployes allEmployes) {
-        if (this.exclusiveGames.size() > 0) {
-            System.out.println("Whom do you want to give accsess?");
-            System.out.println("You can get back by entering exit.");
-            while (true){
-                System.out.println("Enter the userName: ");
-                String userName = ScannerWrapper.getString();
-                if(userName.equalsIgnoreCase("exit")){
-                    break;
-                }
-                System.out.println("Enter the passWord: ");
-                String passWord = ScannerWrapper.getString();
-                int index = allEmployes.doesExist(userName, passWord);
-                if (index != -1 && allEmployes.getAllEmployes().get(index).getClass().getSimpleName().equals("Developer")) {
-                    Developer developer = (Developer) allEmployes.getAllEmployes().get(index);
-                    findGameToGiveAccses(developer);
-                    break;
-                } else{
-                    System.out.println("There is no username with this profile.");
-                }
-            }
-
-
-        }
-    }
-
-    public void findGameToGiveAccses(Developer developer) {
-        System.out.println("Enter the related number of the videoGames that you created:");
-        System.out.println("You can get back by entering 'exit'. ");
-        System.out.println("video games you've created:");
-        GameList gameList=new GameList();
-        gameList.showList(this.exclusiveGames);
-        while (true) {
-            int input = ScannerWrapper.getInt();
-            if (input==-1) {
-                System.out.println("***************");
-                break;
-            }
-            if(input>0 && input<=this.exclusiveGames.size()){
-                developer.addExclusiveGames(this.exclusiveGames.get(input-1));
-                break;
-            }else{
-                System.out.println("Wrong input!try again.");
-            }
-
-        }
-    }
-
-
 
 
 }
