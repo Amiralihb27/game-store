@@ -15,8 +15,9 @@ public class StartingMenu {
             System.out.println("1_Admin");
             System.out.println("2_User");
             System.out.println("3_Developers");
-            System.out.println("4_get back");
-            System.out.println("4_Exit");
+            System.out.println("4_Seller");
+            System.out.println("5_get back");
+            System.out.println("6_Exit");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
                 adminMenu(users, store, allEmployes);
@@ -25,7 +26,7 @@ public class StartingMenu {
             } else if (input == 3) {
                 adminMenu(users, store, allEmployes);
             } else if (input == 4) {
-                break;
+                adminMenu(users, store, allEmployes);
             } else if (input == 5) {
                 System.exit(0);
             } else {
@@ -57,6 +58,9 @@ public class StartingMenu {
                         Developer developer = (Developer) allEmployes.getAllEmployes().get(index);
                         developerOptions(developer, store, allEmployes);
                         break;
+                    case "Seller":
+                        Seller seller = (Seller) allEmployes.getAllEmployes().get(index);
+
                     default:
                         break;
 
@@ -77,18 +81,22 @@ public class StartingMenu {
             System.out.println("1_Users");
             System.out.println("2_Games");
             System.out.println("3_Report Crashes");
+            System.out.println("4_Accessories)");
             System.out.println("4_get back");
-            System.out.println("5_Exit");
+            System.out.println("6_Exit");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
                 admin.userChanges(users);
             } else if (input == 2) {
-                admin.gameChanges(store,allEmployes);
+                admin.gameChanges(store, allEmployes);
             } else if (input == 3) {
                 admin.crashReport(store, allEmployes);
             } else if (input == 4) {
-                break;
+                DeviceChanges deviceChanges = new DeviceChanges();
+                deviceChanges.showOptions(store.getGames(), store, admin, allEmployes);
             } else if (input == 5) {
+                break;
+            } else if (input == 6) {
                 System.exit(0);
             } else {
                 System.out.println("Wrong input!Try agian.");
@@ -109,10 +117,9 @@ public class StartingMenu {
             int input = ScannerWrapper.getInt();
             switch (input) {
                 case 1:
-                    //
                     break;
                 case 2:
-                    developer.gameChanges(store,allEmployes);
+                    developer.gameChanges(store, allEmployes);
                     break;
                 case 3:
                     developer.checkingInbox(allEmployes);
@@ -123,6 +130,37 @@ public class StartingMenu {
                 case 5:
                     break;
                 case 6:
+                    System.exit(0);
+                default:
+                    System.out.println("Wrong input!Try agian.");
+                    break;
+            }
+            if (input == 5) {
+                break;
+            }
+        }
+    }
+
+    public void sellerOptions(Seller seller, Store store, AllEmployes allEmployes) {
+        while (true) {
+            System.out.println("welcomme " + seller.getProfile().getUserName() + " the developer!");
+            System.out.println("Which part do you wana go?");
+            System.out.println("1_Profile");
+            System.out.println("2_Games");
+            System.out.println("3_getBack");
+            System.out.println("4_Exit");
+            int input = ScannerWrapper.getInt();
+            switch (input) {
+                case 1:
+                    break;
+                case 2:
+                    //DeviceChanges deviceChanges=new DeviceChanges();
+
+                    seller.deviceChanges(store, allEmployes);
+                    break;
+                case 3:
+                    break;
+                case 4:
                     System.exit(0);
                 default:
                     System.out.println("Wrong input!Try agian.");
