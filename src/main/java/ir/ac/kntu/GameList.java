@@ -20,12 +20,15 @@ public class GameList {
     }
 
     public void gameList(GameStuff gameStuff) {
-        String[] temp = {"*", "*"};
+        String[] temp = new String[2];
         for (int i = 0; i < 3; i++) {
             if (i == 1) {
                 if (gameStuff.getClass().getSimpleName().equals("GamingDevice")) {
                     temp[0] = "-";
                     temp[1] = "|";
+                }else{
+                    temp[0] = "*";
+                    temp[1] = "*";
                 }
                 System.out.println(temp[1] + gameStuff.getName() + temp[1]);
             } else {

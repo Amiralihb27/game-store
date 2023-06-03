@@ -5,10 +5,9 @@ public class GamingDevice extends GameStuff {
     private int numberOfComponents;
 
 
-    public GamingDevice(int numberOfComponents, double price, String breifExplanation) {
+    public GamingDevice(int numberOfComponents, double price, String breifExplanation,String name) {
         this.numberOfComponents = numberOfComponents;
 
-        String name = this.getClass().toString();
         super.setName(name);
 
         super.setPrice(price);

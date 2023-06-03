@@ -6,6 +6,9 @@ public class Seller extends Employes {
     private ArrayList<GameStuff> gamingDevice;
 
 
+    public Seller(Profile profile){
+        super(profile);
+    }
     public Seller(ArrayList<GamingDevice> gamingDevice) {
         for (int i = 0; i < gamingDevice.size(); i++) {
             if (gamingDevice.get(i).getClass().getSimpleName().equals("Seller")) {

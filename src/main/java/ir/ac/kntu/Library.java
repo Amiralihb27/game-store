@@ -24,7 +24,7 @@ public class Library {
 
     public void showGames() {
         if (gameStuffs.size() > 0) {
-            GameList gameList=new GameList();
+            GameList gameList = new GameList();
             gameList.showList(gameStuffs);
             // listOfGames();
             gamesInformation(gameList);
@@ -70,7 +70,7 @@ public class Library {
             System.out.println("or you can just skip this by entering -1'.");
             int input = ScannerWrapper.getInt();
             if (input >= 1 && input <= gameStuffs.size()) {
-               // System.out.println(gameStuffs.get(input - 1).toString());
+                // System.out.println(gameStuffs.get(input - 1).toString());
                 gameList.printGameingStuffInformation(gameStuffs.get(input - 1));
                 System.out.println("***************************");
                 community();
@@ -159,15 +159,17 @@ public class Library {
 
 
     //    public void
-    /*public void chooseToAddFeedBack() {
+    public void chooseToAddFeedBack(AllEmployes allEmployes) {
+        GameList gameList = new GameList();
+        ArrayList<Games> games = gameList.listOfBeta(gameStuffs);
         if (games.size() > 0) {
-            GameList.showList();
+            gameList.showVideoGames(games);
             while (true) {
                 System.out.println("Enter the related number to send feedback");
                 System.out.println("or you can just skip this by entering -1'.");
                 int input = ScannerWrapper.getInt();
                 if (input >= 1 && input <= games.size()) {
-                    sendFeedBack(games.get(input - 1));
+                    sendFeedBack( games.get(input-1));
                     break;
                 } else if (input == -1) {
                     break;
@@ -179,11 +181,18 @@ public class Library {
             System.out.println("You dont have any games in your library");
             System.out.println("**************************************************");
         }
-    }*/
-
-    public void sendFeedBack(Games game) {
-//send to the owner
     }
 
-
+    public void sendFeedBack(Games game){
+        while(true){
+            System.out.println("Enter a message to be sent to this game's creator.");
+            System.out.println("You can getback by entering exit. ");
+            String input=ScannerWrapper.getString();
+            if(input.equalsIgnoreCase("exit")){
+                break;
+            }
+            game.addFeedBack(input);
+            break;
+        }
+    }
 }

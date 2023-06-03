@@ -15,8 +15,8 @@ public class Controler extends GamingDevice {
     }
 
     public Controler(int numberOfComponents, double price, Type type,
-                     String explenation) {
-        super(numberOfComponents, price, explenation);
+                     String explenation,String name) {
+        super(numberOfComponents, price, explenation,name);
         this.type = type;
         //this.pariredDevice = pariredDevice;
     }
@@ -51,6 +51,6 @@ public class Controler extends GamingDevice {
         return "Controler{" +
                 "type=" + type +
                 ", pariredDevice=" + pariredDevice +
-                '}';
+                '}'+super.toString();
     }
 }
