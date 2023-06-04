@@ -3,7 +3,7 @@ package ir.ac.kntu;
 public class FriendsMenu {
 
 
-    public static void showOptions(User user,Store store) {
+    public  void showOptions(User user,Store store,AllUsers allUsers) {
 
         Friends friends = new Friends();
         int input;
@@ -17,17 +17,17 @@ public class FriendsMenu {
             System.out.println("6_get back");
             input = ScannerWrapper.getInt();
             if (input == 1) {
-                friends.usersFriends(user);
+                friends.usersFriends(user,allUsers);
             } else if (input == 2) {
-                friends.findByName(user);
+                friends.findByName(user,allUsers);
             } else if (input == 3) {
-                friends.sendRequest(user);
+                friends.sendRequest(user,allUsers);
 
             } else if (input == 4) {
-                friends.gift(user,store);
+                friends.gift(user,store,allUsers);
             } else if (input == 5) {
                 if (user.getRequests() != null) {
-                    user.getRequests().showRequest(user);
+                    user.getRequests().showRequest(user,allUsers);
                 } else {
                     System.out.println("This user has no requests.");
                 }

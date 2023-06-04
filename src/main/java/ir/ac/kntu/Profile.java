@@ -27,7 +27,7 @@ public class Profile extends PII {
         System.out.println("wallet: " + walletCash);
     }
 
-    public void edit( User user) {
+    public void edit( User user,AllUsers allUsers) {
         String userInput;
         String passInput;
         //sc.nextLine();
@@ -39,15 +39,15 @@ public class Profile extends PII {
             System.out.println("Enter new password");
             passInput = ScannerWrapper.getString();
             // AllInformations tempInput = new AllInformations();
-            if (AllUsers.findByName(userInput) != -1 && !user.getProfile().getUserName().equals(userInput)) {
+            if (allUsers.findByName(userInput) != -1 && !user.getProfile().getUserName().equals(userInput)) {
                 System.out.println("This username has already been taken.Try again! ");
-            } else if (!AllUsers.qualified(passInput)) {
+            } else if (!allUsers.qualified(passInput)) {
                 System.out.print("not only your password must contain at least 1 capital and small letter. ");
                 System.out.println("but also it sould be more than 8 characters.Try again! ");
             } else {
                 super.setUserName(userInput);
                 super.setPassWord(passInput);
-                emailAndPhone( user);
+                emailAndPhone( user,allUsers);
                 PII newPII = new PII(super.getPassWord(), super.getUserName(),
                         super.getPhoneNumber(), super.getPhoneNumber());
                 //AllInformations.addPII(newPII);
@@ -58,15 +58,15 @@ public class Profile extends PII {
         }
     }
 
-    public void emailAndPhone( User user) {
+    public void emailAndPhone( User user,AllUsers allUsers) {
         while (true) {
             System.out.println("enter new email:");
             String email = ScannerWrapper.getString();
             System.out.println("enter new phon-number");
             String phoneNum = ScannerWrapper.getString();
-            if (AllUsers.findByEmail(email) != -1 && !user.getProfile().getEmail().equals(email)) {
+            if (allUsers.findByEmail(email) != -1 && !user.getProfile().getEmail().equals(email)) {
                 System.out.println("This email has been taken!Try again.");
-            } else if (AllUsers.findByPhone(phoneNum) != -1 && !user.getProfile().getPhoneNumber().equals(phoneNum)) {
+            } else if (allUsers.findByPhone(phoneNum) != -1 && !user.getProfile().getPhoneNumber().equals(phoneNum)) {
                 System.out.println("This phone number has been taken!Try again.");
             } else {
                 super.setEmail(email);

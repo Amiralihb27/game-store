@@ -6,13 +6,13 @@ import java.util.ArrayList;
 public class Friends {
 
 
-    public void usersFriends(User user) {
+    public void usersFriends(User user,AllUsers allUsers) {
 
         if (user.getFriendList().size() >= 1) {
             for (int i = 0; i < user.getFriendList().size(); i++) {
                 System.out.println((i + 1) + "_" + user.getFriendList().get(i));
             }
-            chooseToSee(user);
+            chooseToSee(user,allUsers);
 
         } else {
             System.out.println("You dont have any friends!");
@@ -20,7 +20,7 @@ public class Friends {
 
     }
 
-    public void chooseToSee(User user) {
+    public void chooseToSee(User user,AllUsers allUsers) {
         int status;
         while (true) {
             System.out.println("Do you wana see your frinds games?");
@@ -28,7 +28,7 @@ public class Friends {
             System.out.println("2_No");
             status = ScannerWrapper.getInt();
             if (status == 1) {
-                frindesGames(user);
+                frindesGames(user,allUsers);
             } else if (status == 2) {
                 break;
             } else {
@@ -39,7 +39,7 @@ public class Friends {
     }
 
 
-    public void frindesGames(User user) {
+    public void frindesGames(User user,AllUsers allUsers) {
         int input;
         if (user.getFriendList().size() >= 1) {
             while (true) {
@@ -51,8 +51,8 @@ public class Friends {
                     break;
                 } else if (input >= 1 && input <= user.getFriendList().size()) {
                     String userName = user.getFriendList().get(input - 1);
-                    int index = AllUsers.findByName(userName);
-                    User newUser = AllUsers.getUsers().get(index);
+                    int index = allUsers.findByName(userName);
+                    User newUser = allUsers.getUsers().get(index);
                     if (newUser.getLibrary() != null && newUser.getLibrary().getGames().size() > 0) {
                         newUser.getLibrary().listOfGames();
                         System.out.println("*********************");
@@ -73,7 +73,7 @@ public class Friends {
 
     }
 
-    public void findByName(User user) {
+    public void findByName(User user,AllUsers allUsers) {
         //sc.nextLine();
         if (user.getFriendList().size() >= 1) {
             while (true) {
@@ -95,7 +95,7 @@ public class Friends {
                     if (countOfFounded == 0) {
                         System.out.println("There is no user with this username in friendlist.");
                     }else{
-                        chooseToSee(user);
+                        chooseToSee(user,allUsers);
                         break;
                     }
                     System.out.println("******************************************************");
@@ -110,7 +110,7 @@ public class Friends {
 
     }
 
-    public void sendRequest(User user) {
+    public void sendRequest(User user,AllUsers allUsers) {
         String input;
         // sc.nextLine();
         //ScannerWrapper.getString();
@@ -121,15 +121,15 @@ public class Friends {
             if (input.equalsIgnoreCase("exit")) {
                 break;
             }
-            int index = AllUsers.findByName(input);
+            int index = allUsers.findByName(input);
             if (index >= 0 && !input.equals(user.getProfile().getUserName())) {
-                if (AllUsers.getUsers().get(index).getRequests() == null) {
+                if (allUsers.getUsers().get(index).getRequests() == null) {
                     Request request = new Request();
-                    AllUsers.getUsers().get(index).setRequests(request);
-                    AllUsers.getUsers().get(index).getRequests().addRequest(user.getProfile().getUserName());
-                } else if (!AllUsers.getUsers().get(index).getRequests().hadRequested(user.getProfile().getUserName())
+                    allUsers.getUsers().get(index).setRequests(request);
+                    allUsers.getUsers().get(index).getRequests().addRequest(user.getProfile().getUserName());
+                } else if (!allUsers.getUsers().get(index).getRequests().hadRequested(user.getProfile().getUserName())
                         && !user.isFriend(input)) {
-                    AllUsers.getUsers().get(index).getRequests().addRequest(user.getProfile().getUserName());
+                    allUsers.getUsers().get(index).getRequests().addRequest(user.getProfile().getUserName());
                 } else {
                     System.out.println("You had sent him request before or You are this user's friend.");
                     System.out.println("****************************************");
@@ -142,7 +142,7 @@ public class Friends {
         }
     }
 
-    public void gift(User user,Store store) {
+    public void gift(User user,Store store,AllUsers allUsers) {
         if (user.getFriendList().size() >= 1 && user.getFriendList() != null) {
             while (true) {
                 System.out.println("You can get back by entering exit.");
@@ -152,7 +152,7 @@ public class Friends {
                     break;
 
                 } else if (user.isFriend(input)) {
-                    chooseToGift(user, input,store);
+                    chooseToGift(user, input,store,allUsers);
                 } else {
                     System.out.println("There is no body with this username in your friendList.");
                 }
@@ -163,7 +163,7 @@ public class Friends {
         }
     }
 
-    public void chooseToGift(User user, String userName,Store store) {
+    public void chooseToGift(User user, String userName,Store store,AllUsers allUsers) {
         while (true) {
             System.out.println("You can get back by entering exit.");
             System.out.println("Enter the games name:");
@@ -180,8 +180,8 @@ public class Friends {
                     double gamesPrice = games.get(status).getPrice();
                     double currentAmount = cash - gamesPrice;
                     user.getProfile().setWalletCash(currentAmount);
-                    int index = AllUsers.findByName(userName);
-                    AllUsers.getUsers().get(index).getLibrary().addGame(games.get(status));
+                    int index = allUsers.findByName(userName);
+                    allUsers.getUsers().get(index).getLibrary().addGame(games.get(status));
                     System.out.println("The game has been gifted");
                     System.out.println("*****************");
                     break;

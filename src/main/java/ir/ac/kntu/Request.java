@@ -30,7 +30,7 @@ public class Request {
         return false;
     }
 
-    public void showRequest(User user) {
+    public void showRequest(User user,AllUsers allUsers) {
 
         //sc.nextLine();
         while (true) {
@@ -45,7 +45,7 @@ public class Request {
                 String input;
                 input = choose(indexes);
                 if (!input.equalsIgnoreCase("exit")) {
-                    acceptReq(user, Integer.parseInt(input));
+                    acceptReq(user, Integer.parseInt(input),allUsers);
                     break;
                 } else {
                     break;
@@ -82,7 +82,7 @@ public class Request {
         return false;
     }
 
-    public void acceptReq(User user, int index) {
+    public void acceptReq(User user, int index,AllUsers allUsers) {
         System.out.println("messege from " + requests.get(index - 1) + ":will you be my friend?");
         System.out.println("1_yes");
         System.out.println("2_no");
@@ -92,7 +92,7 @@ public class Request {
 
             input = ScannerWrapper.getInt();
             if (input == 1) {
-                if (AllUsers.findByName(requests.get(index - 1)) == -1) {
+                if (allUsers.findByName(requests.get(index - 1)) == -1) {
                     System.out.println("This user isnt available no longer");
                     requests.remove(index - 1);
                     break;
@@ -104,8 +104,8 @@ public class Request {
                     } else {
                         System.out.println(requests.get(index - 1) + " is your frined now.");
                         user.addFriend(requests.get(index - 1));
-                        int otherUser = AllUsers.findByName(requests.get(index - 1));
-                        AllUsers.getUsers().get(otherUser).addFriend(user.getProfile().getUserName());
+                        int otherUser = allUsers.findByName(requests.get(index - 1));
+                        allUsers.getUsers().get(otherUser).addFriend(user.getProfile().getUserName());
                         requests.remove(index - 1);
                         break;
                     }

@@ -5,28 +5,28 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Store {
-    private  ArrayList<GameStuff> gameStuffs = new ArrayList<>();
+    private ArrayList<GameStuff> gameStuffs = new ArrayList<>();
 
 
-    public  ArrayList<GameStuff> getGames() {
+    public ArrayList<GameStuff> getGames() {
         return gameStuffs;
     }
 
 
-    public  void setGames(ArrayList<GameStuff> games) {
+    public void setGames(ArrayList<GameStuff> games) {
         gameStuffs = games;
     }
 
 
-    public void addGames(GameStuff gameStuff){
+    public void addGames(GameStuff gameStuff) {
         this.gameStuffs.add(gameStuff);
     }
 
-    public void addDevice(GamingDevice gamingDevice){
+    public void addDevice(GamingDevice gamingDevice) {
         this.gameStuffs.add(gamingDevice);
     }
 
-    public  void showList(User user) {
+    public void showList(User user) {
         GameList gameList = new GameList();
         ArrayList<GameStuff> newGameStuff = videoGameOrDevice();
         if (newGameStuff.size() > 0) {
@@ -39,7 +39,7 @@ public class Store {
 
     }
 
-    public  void chooseGame(User user, ArrayList<GameStuff> newGameStuff) {
+    public void chooseGame(User user, ArrayList<GameStuff> newGameStuff) {
         // Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("Enter the related number to see each game's information");
@@ -62,7 +62,7 @@ public class Store {
 
     }
 
-    public  void chooseToBuy(User user, GameStuff game) {
+    public void chooseToBuy(User user, GameStuff game) {
         System.out.println("Do you want to buy a game?");
         System.out.println("1_Yes");
         System.out.println("2_No");
@@ -86,7 +86,7 @@ public class Store {
         }
     }
 
-    public  void buyVideoGameOrDevice(User user, GameStuff gameStuff, double amount) {
+    public void buyVideoGameOrDevice(User user, GameStuff gameStuff, double amount) {
         double price = discount(gameStuff, user);
         if (gameStuff.getClass().getSimpleName().equals("Games")) {
             if (!levelComparison(gameStuff, user)) {
@@ -102,7 +102,7 @@ public class Store {
         }
     }
 
-    public  void buy(User user, GameStuff gameStuff, double amount) {
+    public void buy(User user, GameStuff gameStuff, double amount) {
         if (user.getLibrary() == null) {
             Library library = new Library();
             library.addGame(gameStuff);
@@ -115,7 +115,7 @@ public class Store {
         System.out.println("you have bought it succesfully");
     }
 
-    public  boolean levelComparison(GameStuff gameStuff, User user) {
+    public boolean levelComparison(GameStuff gameStuff, User user) {
 
         Games newGame = (Games) gameStuff;
         if (user.getLevel() != newGame.getLevel()) {
@@ -126,7 +126,7 @@ public class Store {
         return false;
     }
 
-    public  double discount(GameStuff gamingStuff, User user) {
+    public double discount(GameStuff gamingStuff, User user) {
         if (gamingStuff.getClass().getSimpleName().equals("Games")) {
             return gamingStuff.getPrice() * (100 + user.getDiscount()) / 100;
         } else {
@@ -134,7 +134,7 @@ public class Store {
         }
     }
 
-    public  ArrayList<GameStuff> videoGameOrDevice() {
+    public ArrayList<GameStuff> videoGameOrDevice() {
         System.out.println("What do you expect from Store to show you?");
         System.out.println("1_Video Games");
         System.out.println("2_Devices");
@@ -157,7 +157,7 @@ public class Store {
         }
     }
 
-    public  ArrayList<GameStuff> chooseBetweenTypeOfDevices(ArrayList<GameStuff> gameStuff) {
+    public ArrayList<GameStuff> chooseBetweenTypeOfDevices(ArrayList<GameStuff> gameStuff) {
         System.out.println("What do you expect from Store to show you?");
         System.out.println("1_Controler");
         System.out.println("2_Monitor");
@@ -199,41 +199,46 @@ public class Store {
         }
     }*/
 
-    public  void searchByName( User user) {
+    public void searchByName(User user) {
         int index = 1;
         ArrayList<GameStuff> sortedGames = videoGameOrDevice();
-        System.out.println("enter the name");
-        // sc.nextLine();
+        ArrayList<GameStuff> filterdByPriceGames = new ArrayList<>();
+        System.out.println("enter the name:");
+        GameList gameList=new GameList();
         String name = ScannerWrapper.getString();
-        for (int i = 0; i < gameStuffs.size(); i++) {
-            if (gameStuffs.get(i).getName().startsWith(name)) {
-                System.out.println(index + ":" + gameStuffs.get(i).getName());
+        for (int i = 0; i < sortedGames.size(); i++) {
+            if (sortedGames.get(i).getName().startsWith(name)) {
+                System.out.println(index + ":");
+                gameList.gameList(sortedGames.get(i));
                 index++;
-                sortedGames.add(gameStuffs.get(i));
-            } else if (i == gameStuffs.size() - 1 && sortedGames.size() < 1) {
+                filterdByPriceGames.add(sortedGames.get(i));
+            } else if (i == sortedGames.size() - 1 && filterdByPriceGames.size() < 1) {
                 System.out.println("No games found with that name!");
             }
         }
-        if (sortedGames.size() >= 1) {
-            chooseGame(user, sortedGames);
+        if (filterdByPriceGames.size() >= 1) {
+            chooseGame(user, filterdByPriceGames);
         }
 
 
     }
 
-    public  void searchByPrice(double min, double max, User user) {
+    public void searchByPrice(double min, double max, User user) {
 
         ArrayList<GameStuff> sortedGames = videoGameOrDevice();
+        ArrayList<GameStuff> filterdByPriceGames = new ArrayList<>();
+        GameList gameList = new GameList();
         int foundedGames = 0;
-        for (int i = 0; i < gameStuffs.size(); i++) {
-            if (gameStuffs.get(i).getPrice() <= max && gameStuffs.get(i).getPrice() >= min) {
-                System.out.println((i + 1) + "_" + gameStuffs.get(i).getName());
+        for (int i = 0; i < sortedGames.size(); i++) {
+            if (sortedGames.get(i).getPrice() <= max && sortedGames.get(i).getPrice() >= min) {
+                System.out.println((foundedGames + 1) + ":");
+                gameList.gameList(sortedGames.get(i));
                 foundedGames++;
-                sortedGames.add(gameStuffs.get(i));
+                filterdByPriceGames.add(gameStuffs.get(i));
             }
         }
         if (foundedGames >= 1) {
-            chooseGame(user, sortedGames);
+            chooseGame(user, filterdByPriceGames);
         } else {
             System.out.println("No games found.");
         }

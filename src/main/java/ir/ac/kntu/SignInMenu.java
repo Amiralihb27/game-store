@@ -1,11 +1,10 @@
 package ir.ac.kntu;
 
 import java.time.Instant;
-import java.util.ArrayList;
 
 public class SignInMenu {
 
-    public static void signIn(ArrayList<User> users,Store store) {
+    public static void signIn(Store store,AllUsers allUsers) {
         while (true) {
             System.out.println("Sign in");
             System.out.println("You can get bac to previous action by entering exit.");
@@ -17,31 +16,32 @@ public class SignInMenu {
             System.out.println("Enter password:");
             String passInput;
             passInput = ScannerWrapper.getString();
-            int index = AllUsers.existance(input, passInput);
+            int index = allUsers.existence(input, passInput);
             if (index != -1) {
                 Instant start = Instant.now();
-                userInterface(input, users.get(index),store);
+                userInterface(input, allUsers.getUsers().get(index),store,allUsers);
                 Instant end = Instant.now();
                 int totalTime = TimeCalculator.timeDifference(start, end);
                 System.out.println(totalTime);
-                users.get(index).addTime(totalTime);
-                ScoreCalculator.usersScore(users.get(index));
-                System.out.println(users.get(index).getTimeSpent());
-                System.out.println(users.get(index).getScore());
+                allUsers.getUsers().get(index).addTime(totalTime);
+                ScoreCalculator scoreCalculator=new ScoreCalculator();
+                scoreCalculator.usersScore(allUsers.getUsers().get(index));
+                System.out.println(allUsers.getUsers().get(index).getTimeSpent());
+                System.out.println(allUsers.getUsers().get(index).getScore());
                 break;
             }
             System.out.println("there is no such username or password!Try again!");
         }
     }
 
-    public static void userInterface(String username, User user,Store store) {
+    public static void userInterface(String username, User user,Store store,AllUsers allUsers) {
         System.out.println("welcome " + username);
         while (true) {
             System.out.println("which part do you wana check? ");
             int input = printUI();
             switch (input) {
                 case 1:
-                    profile(user);
+                    profile(user,allUsers);
                     break;
                 case 2:
                     store(user,store);
@@ -50,7 +50,8 @@ public class SignInMenu {
                     library(user);
                     break;
                 case 4:
-                    FriendsMenu.showOptions(user,store);
+                    FriendsMenu friendsMenu=new FriendsMenu();
+                    friendsMenu.showOptions(user,store,allUsers);
                 case 5:
                     break;
                 default:
@@ -65,7 +66,7 @@ public class SignInMenu {
 
     }
 
-    public static void profile(User user) {
+    public static void profile(User user,AllUsers allUsers) {
         while (true) {
             System.out.println("which part do you wana go?");
             System.out.println("1_showing the Personal information");
@@ -78,7 +79,7 @@ public class SignInMenu {
                     user.getProfile().show();
                     break;
                 case 2:
-                    user.getProfile().edit(user);
+                    user.getProfile().edit(user,allUsers);
                     break;
                 case 3:
                     break;
@@ -102,7 +103,7 @@ public class SignInMenu {
             System.out.println("which part do you wana go?");
             System.out.println("1_showing the list of games");
             System.out.println("2_search by name");
-            System.out.println("3_search buy price");
+            System.out.println("3_search by price");
             System.out.println("4_get back");
             int input = ScannerWrapper.getInt();
             switch (input) {

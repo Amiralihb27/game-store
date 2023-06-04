@@ -9,7 +9,7 @@ public class StartingMenu {
 
     }
 
-    public void choose(ArrayList<User> users, Store store, AllEmployes allEmployes) {
+    public void choose(Store store, AllEmployes allEmployes, AllUsers allUsers) {
         while (true) {
             System.out.println("Choose your role:");
             System.out.println("1_Admin");
@@ -19,13 +19,13 @@ public class StartingMenu {
             System.out.println("5_Exit");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
-                adminMenu(users, store, allEmployes);
+                adminMenu(allUsers, store, allEmployes);
             } else if (input == 2) {
-                userMenu(users, store);
+                userMenu(store, allUsers);
             } else if (input == 3) {
-                adminMenu(users, store, allEmployes);
+                adminMenu(allUsers, store, allEmployes);
             } else if (input == 4) {
-                adminMenu(users, store, allEmployes);
+                adminMenu(allUsers, store, allEmployes);
             } else if (input == 5) {
                 System.exit(0);
             } else {
@@ -34,7 +34,7 @@ public class StartingMenu {
         }
     }
 
-    public void adminMenu(ArrayList<User> users, Store store, AllEmployes allEmployes) {
+    public void adminMenu(AllUsers allUsers, Store store, AllEmployes allEmployes) {
         while (true) {
             System.out.println("You can get back by entering exit.");
             System.out.println("enter username:");
@@ -51,7 +51,7 @@ public class StartingMenu {
                 switch (className) {
                     case "Admin":
                         Admin admin = (Admin) allEmployes.getAllEmployes().get(index);
-                        adminOptions(users, admin, store, allEmployes);
+                        adminOptions(allUsers, admin, store, allEmployes);
                         break;
                     case "Developer":
                         Developer developer = (Developer) allEmployes.getAllEmployes().get(index);
@@ -73,7 +73,7 @@ public class StartingMenu {
 
     }
 
-    public void adminOptions(ArrayList<User> users, Admin admin, Store store, AllEmployes allEmployes) {
+    public void adminOptions(AllUsers allUsers, Admin admin, Store store, AllEmployes allEmployes) {
 
         while (true) {
             System.out.println("welcomme dear admin!");
@@ -86,7 +86,7 @@ public class StartingMenu {
             System.out.println("6_Exit");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
-                admin.userChanges(users);
+                admin.userChanges(allUsers);
             } else if (input == 2) {
                 admin.gameChanges(store, allEmployes);
             } else if (input == 3) {
@@ -172,7 +172,7 @@ public class StartingMenu {
         }
     }
 
-    public void userMenu(ArrayList<User> users, Store store) {
+    public void userMenu(Store store, AllUsers allUsers) {
         while (true) {
             System.out.println("1_sign out");
             System.out.println("2_sign in");
@@ -180,9 +180,9 @@ public class StartingMenu {
             System.out.println("4_Exit");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
-                SignOutMenu.signOut(users);
+                SignOutMenu.signOut(allUsers);
             } else if (input == 2) {
-                SignInMenu.signIn(users, store);
+                SignInMenu.signIn(store, allUsers);
             } else if (input == 3) {
                 break;
             } else if (input == 4) {

@@ -15,9 +15,9 @@ public class Admin extends Employes {
         super(profile);
     }
 
-    public void gameChanges(Store store,AllEmployes allEmployes) {
+    public void gameChanges(Store store, AllEmployes allEmployes) {
         ArrayList<GameStuff> games = store.getGames();
-        GameChanges.showOptions(games, store,this,allEmployes);
+        GameChanges.showOptions(games, store, this, allEmployes);
 
     }
 
@@ -36,25 +36,25 @@ public class Admin extends Employes {
             if (index >= 0 && index < newGameStuff.size()) {
                 store.getGames().remove(newGameStuff.get(index));
                 ArrayList<Developer> developers = allEmployes.extractDeveloper();
-              //  Developer employe = allEmployes.findTheLessBusyDeveloper(developers);
-                GameStuff gameForGettingFixed=newGameStuff.get(index);
-                allEmployes.sendTheReportMessage(allEmployes,gameForGettingFixed);
+                //  Developer employe = allEmployes.findTheLessBusyDeveloper(developers);
+                GameStuff gameForGettingFixed = newGameStuff.get(index);
+                allEmployes.sendTheReportMessage(allEmployes, gameForGettingFixed);
                 break;
-            }else{
+            } else {
                 System.out.println("Wrong input.Try again.");
             }
         }
     }
 
 
-    public void usersInfo(ArrayList<User> users) {
-        int index = searchUser(users);
+    public void usersInfo( AllUsers allUsers) {
+        int index = searchUser(allUsers);
         if (index != -1) {
-            users.get(index).getProfile().show();
+            allUsers.getUsers().get(index).getProfile().show();
         }
     }
 
-    public void userChanges(ArrayList<User> users) {
+    public void userChanges(AllUsers allUsers) {
 
         while (true) {
             System.out.println("What do you wana do?");
@@ -65,14 +65,14 @@ public class Admin extends Employes {
             System.out.println("5_get back");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
-                deleteUser(users);
+                deleteUser(allUsers);
             } else if (input == 2) {
-                editUser(users);
+                editUser(allUsers);
 
             } else if (input == 3) {
-                usersInfo(users);
+                usersInfo(allUsers);
             } else if (input == 4) {
-                addUser(users);
+                addUser(allUsers);
             } else if (input == 5) {
                 break;
             } else {
@@ -82,7 +82,7 @@ public class Admin extends Employes {
         }
     }
 
-    public int searchUser(ArrayList<User> users) {
+    public int searchUser(AllUsers allUsers) {
         System.out.println("How do you wana find the user");
         System.out.println("1_by username");
         System.out.println("2_by email");
@@ -92,11 +92,11 @@ public class Admin extends Employes {
 
             int input = ScannerWrapper.getInt();
             if (input == 1) {
-                return findByName(users);
+                return findByName(allUsers);
             } else if (input == 2) {
-                return findByEmail(users);
+                return findByEmail(allUsers);
             } else if (input == 3) {
-                return findByNumber(users);
+                return findByNumber(allUsers);
             } else if (input == 4) {
                 break;
             } else {
@@ -107,7 +107,7 @@ public class Admin extends Employes {
         return -1;
     }
 
-    public int findByName(ArrayList<User> users) {
+    public int findByName(AllUsers allUsers) {
 
         // sc.nextLine();
         while (true) {
@@ -117,7 +117,7 @@ public class Admin extends Employes {
             if (name.equals("exit")) {
                 break;
             }
-            int index = AllUsers.findByName(name);
+            int index = allUsers.findByName(name);
             if (index != -1) {
                 return index;
             }
@@ -126,7 +126,7 @@ public class Admin extends Employes {
         return -1;
     }
 
-    public int findByNumber(ArrayList<User> users) {
+    public int findByNumber(AllUsers allUsers) {
         // sc.nextLine();
         while (true) {
             System.out.println("you can go back to previous action by entering exit.");
@@ -135,7 +135,7 @@ public class Admin extends Employes {
             if (number.equals("exit")) {
                 break;
             }
-            int index = AllUsers.findByPhone(number);
+            int index = allUsers.findByPhone(number);
             if (index != -1) {
                 return index;
             }
@@ -145,7 +145,7 @@ public class Admin extends Employes {
     }
 
 
-    public int findByEmail(ArrayList<User> users) {
+    public int findByEmail(AllUsers allUsers) {
 
         //sc.nextLine();
         while (true) {
@@ -155,7 +155,7 @@ public class Admin extends Employes {
             if (email.equals("exit")) {
                 break;
             }
-            int index = AllUsers.findByEmail(email);
+            int index = allUsers.findByEmail(email);
             if (index != -1) {
                 return index;
             }
@@ -166,15 +166,15 @@ public class Admin extends Employes {
     }
 
 
-    public void deleteUser(ArrayList<User> users) {
+    public void deleteUser(AllUsers allUsers) {
 
-        int index = searchUser(users);
+        int index = searchUser(allUsers);
         if (index != -1) {
 
-            if (users.get(index).getFriendList() != null) {
-                deletFriend(users, index);
+            if (allUsers.getUsers().get(index).getFriendList() != null) {
+                deletFriend( index, allUsers);
             }
-            AllUsers.removeUser(users.get(index));
+            allUsers.removeUser(allUsers.getUsers().get(index));
             //users.remove(index);
             System.out.println("User deleted!");
         } else {
@@ -183,17 +183,19 @@ public class Admin extends Employes {
 
     }
 
-    public void deletFriend(ArrayList<User> users, int index) {
-        for (int i = 0; i < users.get(index).getFriendList().size(); i++) {
-            String friendsName = users.get(index).getFriendList().get(i);
+    public void deletFriend(int index, AllUsers allUsers) {
+        for (int i = 0; i < allUsers.getUsers().get(index).getFriendList().size(); i++) {
+            String friendsName = allUsers.getUsers().get(index).getFriendList().get(i);
 
-            int wichFriend = AllUsers.findByName(friendsName);
-            int friendIndex = users.get(wichFriend).friendsIndex(users.get(index).getProfile().getUserName());
-            users.get(wichFriend).getFriendList().remove(friendIndex);
+            int wichFriend = allUsers.findByName(friendsName);
+            int friendIndex =
+                    allUsers.getUsers().get(wichFriend).friendsIndex(allUsers.
+                            getUsers().get(index).getProfile().getUserName());
+            allUsers.getUsers().get(wichFriend).getFriendList().remove(friendIndex);
         }
     }
 
-    public void addUser(ArrayList<User> users) {
+    public void addUser(AllUsers allUsers) {
         String userInput;
         String passInput;
         //sc.nextLine();
@@ -204,13 +206,13 @@ public class Admin extends Employes {
             if (userInput.equalsIgnoreCase("exit")) {
                 break;
             }
-            if (AllUsers.findByName(userInput) != -1) {
+            if (allUsers.findByName(userInput) != -1) {
                 System.out.println("This username has already been taken.Try again! ");
                 continue;
             }
             System.out.println("Enter new password:");
             passInput = ScannerWrapper.getString();
-            if (!AllUsers.qualified(passInput)) {
+            if (!allUsers.qualified(passInput)) {
                 System.out.print("not only your password must contain at least 1 capital and small letter. ");
                 System.out.println("but also it sould be more than 8 characters.Try again! ");
                 continue;
@@ -219,11 +221,11 @@ public class Admin extends Employes {
             String email = ScannerWrapper.getString();
             System.out.println("enter new phon-number");
             String phoneNum = ScannerWrapper.getString();
-            if (checkForAdd(email, phoneNum)) {
+            if (checkForAdd(email, phoneNum, allUsers)) {
                 Profile newProfile = new Profile(userInput, passInput, phoneNum, email);
                 User newUser = new User(newProfile);
                 //users.add(newUser);
-                AllUsers.addUser(newUser);
+                allUsers.addUser(newUser);
                 System.out.println("User added.");
                 System.out.println("*****************************");
                 break;
@@ -231,11 +233,11 @@ public class Admin extends Employes {
         }
     }
 
-    public boolean checkForAdd(String email, String phoneNum) {
-        if (AllUsers.findByEmail(email) != -1) {
+    public boolean checkForAdd(String email, String phoneNum, AllUsers allUsers) {
+        if (allUsers.findByEmail(email) != -1) {
             System.out.println("This email has been taken!Try again.");
             return false;
-        } else if (AllUsers.findByPhone(phoneNum) != -1) {
+        } else if (allUsers.findByPhone(phoneNum) != -1) {
             System.out.println("This phone number has been taken!Try again.");
             return false;
         }
@@ -243,9 +245,9 @@ public class Admin extends Employes {
     }
 
 
-    public void editUser(ArrayList<User> users) {
+    public void editUser( AllUsers allUsers) {
 
-        int index = searchUser(users);
+        int index = searchUser(allUsers);
         if (index != -1) {
             String userInput;
             String passInput;
@@ -259,31 +261,31 @@ public class Admin extends Employes {
                 System.out.println("Enter new password:");
                 passInput = ScannerWrapper.getString();
                 //AllInformations tempInput = new AllInformations();
-                if (AllUsers.findByName(userInput) != -1 &&
-                        !users.get(index).getProfile().getUserName().equals(userInput)) {
+                if (allUsers.findByName(userInput) != -1 &&
+                        !allUsers.getUsers().get(index).getProfile().getUserName().equals(userInput)) {
                     System.out.println("This username has already been taken.Try again! ");
-                } else if (!AllUsers.qualified(passInput)) {
+                } else if (!allUsers.qualified(passInput)) {
                     System.out.print("not only your password must contain at least 1 capital and small letter. ");
                     System.out.println("but also it sould be more than 8 characters.Try again! ");
                 } else {
-                    users.get(index).getProfile().setUserName(userInput);
-                    users.get(index).getProfile().setPassWord(passInput);
-                    emailAndPhone(users.get(index));
+                    allUsers.getUsers().get(index).getProfile().setUserName(userInput);
+                    allUsers.getUsers().get(index).getProfile().setPassWord(passInput);
+                    emailAndPhone(allUsers.getUsers().get(index), allUsers);
                     break;
                 }
             }
         }
     }
 
-    public void emailAndPhone(User user) {
+    public void emailAndPhone(User user, AllUsers allUsers) {
         while (true) {
             System.out.println("enter new email:");
             String email = ScannerWrapper.getString();
             System.out.println("enter new phon-number");
             String phoneNum = ScannerWrapper.getString();
-            if (AllUsers.findByEmail(email) != -1 && !user.getProfile().getEmail().equals(email)) {
+            if (allUsers.findByEmail(email) != -1 && !user.getProfile().getEmail().equals(email)) {
                 System.out.println("This email has been taken!Try again.");
-            } else if (AllUsers.findByPhone(phoneNum) != -1 && !user.getProfile().getPhoneNumber().equals(phoneNum)) {
+            } else if (allUsers.findByPhone(phoneNum) != -1 && !user.getProfile().getPhoneNumber().equals(phoneNum)) {
                 System.out.println("This phone number has been taken!Try again.");
             } else {
                 user.getProfile().setEmail(email);

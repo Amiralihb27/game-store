@@ -22,12 +22,13 @@ public class Main {
         users.add(new User(info2));
         users.add(new User(info3));
         users.add(new User(info4));
-        AllUsers.setUsers(users);
+        AllUsers allUsers = new AllUsers();
+        allUsers.setUsers(users);
         users.get(1).getProfile().setWalletCash(50);
-        storeCreation(users, a);
+        storeCreation( a, allUsers);
     }
 
-    public static void storeCreation(ArrayList<User> users, StartingMenu start) {
+    public static void storeCreation(StartingMenu start, AllUsers allUsers) {
         Games zed = new Games("zed", "its about zed", "action");
         zed.addReview("good game!");
         zed.addReview("good !");
@@ -60,18 +61,18 @@ public class Main {
         deviceCreation(games);
         Store store = new Store();
         store.setGames(games);
-        createEmployes(users, store, start);
+        createEmployes( store, start, allUsers);
     }
 
     public static void deviceCreation(ArrayList<GameStuff> gameStuffs) {
         GamingDevice controler = new Controler(5,
-                12.2, Type.REMOTE, "good for playing ps4","pa4 controler");
+                12.2, Type.REMOTE, "good for playing ps4", "pa4 controler");
         GamingDevice controler2 = new Controler(1,
-                10.3, Type.WIRED, "good for playing ","playing controllerx20");
+                10.3, Type.WIRED, "good for playing ", "playing controllerx20");
         GamingDevice controler3 = new Controler(2,
-                20, Type.WIRED, "good for playing pc","pc controler");
+                20, Type.WIRED, "good for playing pc", "pc controler");
         GamingDevice controler4 = new Controler(10,
-                10, Type.REMOTE, "good for Xbox","Xbox controller");
+                10, Type.REMOTE, "good for Xbox", "Xbox controller");
         gameStuffs.add(controler);
         gameStuffs.add(controler2);
         gameStuffs.add(controler3);
@@ -80,7 +81,7 @@ public class Main {
 
     }
 
-    public static void createEmployes(ArrayList<User> users, Store store, StartingMenu start) {
+    public static void createEmployes( Store store, StartingMenu start, AllUsers allUsers) {
         Profile info1 = new Profile("Amir", "Amir8227",
                 "0911112244", "amir82@gmail.com");
         Profile info2 = new Profile("aliB", "Aliali8227",
@@ -106,7 +107,7 @@ public class Main {
         allEmployes.addEmploye(admin2);
         allEmployes.addEmploye(seller1);
         allEmployes.addEmploye(seller2);
-        start.choose(users, store, allEmployes);
+        start.choose( store, allEmployes, allUsers);
 
     }
 }
