@@ -74,7 +74,6 @@ public class StartingMenu {
     }
 
     public void adminOptions(AllUsers allUsers, Admin admin, Store store, AllEmployes allEmployes) {
-
         while (true) {
             System.out.println("welcomme dear admin!");
             System.out.println("Which part do you wana go?");
@@ -82,8 +81,9 @@ public class StartingMenu {
             System.out.println("2_Games");
             System.out.println("3_Report Crashes");
             System.out.println("4_Accessories");
-            System.out.println("4_get back");
-            System.out.println("6_Exit");
+            System.out.println("5_Profile");
+            System.out.println("6_get Back");
+            System.out.println("7_Exit");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
                 admin.userChanges(allUsers);
@@ -95,8 +95,11 @@ public class StartingMenu {
                 DeviceChanges deviceChanges = new DeviceChanges();
                 deviceChanges.showOptions(store.getGames(), store, admin, allEmployes);
             } else if (input == 5) {
-                break;
+                ProfileChanges profileChanges = new ProfileChanges();
+                profileChanges.showOptions(allEmployes, admin);
             } else if (input == 6) {
+                break;
+            } else if (input == 7) {
                 System.exit(0);
             } else {
                 System.out.println("Wrong input!Try agian.");
@@ -117,6 +120,8 @@ public class StartingMenu {
             int input = ScannerWrapper.getInt();
             switch (input) {
                 case 1:
+                    ProfileChanges profileChanges = new ProfileChanges();
+                    profileChanges.showOptions(allEmployes, developer);
                     break;
                 case 2:
                     developer.gameChanges(store, allEmployes);
@@ -152,6 +157,8 @@ public class StartingMenu {
             int input = ScannerWrapper.getInt();
             switch (input) {
                 case 1:
+                    ProfileChanges profileChanges = new ProfileChanges();
+                    profileChanges.showOptions(allEmployes, seller);
                     break;
                 case 2:
                     //DeviceChanges deviceChanges=new DeviceChanges();
