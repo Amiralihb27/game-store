@@ -15,10 +15,9 @@ public class DeviceChanges {
             int input = ScannerWrapper.getInt();
             if (input == 1) {
                 addDevice(store, employe);
-            } else if (input == 2) {
+            } else if (input == 2 && hasDevice(games)) {
                 GameChanges.change(games);
-            } else if (input == 3) {
-
+            } else if (input == 3 && hasDevice(games)) {
                 GameChanges.deletGame(games, store);
             } else if (input == 4) {
                 break;
@@ -27,6 +26,15 @@ public class DeviceChanges {
             }
         }
 
+    }
+
+    public boolean hasDevice(ArrayList<GameStuff> gameStuffs){
+        if(gameStuffs.size()>0){
+            return true;
+        }else {
+            System.out.println("You didnt create any games");
+            return false;
+        }
     }
 
     public void addDevice(Store store, Employes employe) {

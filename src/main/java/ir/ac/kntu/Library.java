@@ -85,17 +85,18 @@ public class Library {
 
     public void community() {
         GameList gameList = new GameList();
-        ArrayList<Games> newGames = gameList.listOfOriginal(gameStuffs);
-        if (newGames.size() > 0) {
+        ArrayList<GameStuff> newStuffs = gameList.gamesWithCommunity(gameStuffs);
+
+        if (newStuffs.size() > 0) {
             // listOfGames();
             //gameList.showList((newGames);
             while (true) {
                 System.out.println("Enter the related number to see each game's review");
                 System.out.println("or you can just skip this by entering -1'.");
                 int input = ScannerWrapper.getInt();
-                if (input >= 1 && input <= newGames.size()) {
-                    newGames.get(input - 1).community();
-                    addReview(newGames.get(input - 1));
+                if (input >= 1 && input <= newStuffs.size()) {
+                    newStuffs.get(input - 1).community();
+                    addReview(newStuffs.get(input - 1));
                     break;
                 } else if (input == -1) {
                     break;
@@ -113,9 +114,10 @@ public class Library {
         System.out.println("would you like to add a review?");
         System.out.println("1_Yes");
         System.out.println("2_No");
-        int input = ScannerWrapper.getInt();
+
         // sc.nextLine();
         while (true) {
+            int input = ScannerWrapper.getInt();
             if (input == 1) {
                 String review = ScannerWrapper.getString();
                 gameStuff.addReview(review);
@@ -163,13 +165,13 @@ public class Library {
         GameList gameList = new GameList();
         ArrayList<Games> games = gameList.listOfBeta(gameStuffs);
         if (games.size() > 0) {
-           // gameList.showVideoGames(games);
+            // gameList.showVideoGames(games);
             while (true) {
                 System.out.println("Enter the related number to send feedback");
                 System.out.println("or you can just skip this by entering -1'.");
                 int input = ScannerWrapper.getInt();
                 if (input >= 1 && input <= games.size()) {
-                    sendFeedBack( games.get(input-1));
+                    sendFeedBack(games.get(input - 1));
                     break;
                 } else if (input == -1) {
                     break;
@@ -183,13 +185,13 @@ public class Library {
         }
     }
 
-    public void sendFeedBack(Games game){
-        while(true){
+    public void sendFeedBack(Games game) {
+        while (true) {
             System.out.println("Enter a message to be sent to this game's creator.");
             System.out.println("You can getback by entering exit. ");
-            String input=ScannerWrapper.getString();
+            String input = ScannerWrapper.getString();
             System.out.println("Feed back added.");
-            if(input.equalsIgnoreCase("exit")){
+            if (input.equalsIgnoreCase("exit")) {
                 break;
             }
             game.addFeedBack(input);

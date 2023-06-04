@@ -38,9 +38,8 @@ public class GameChanges {
     public static void change(ArrayList<GameStuff> games) {
         //sc.nextLine();
         while (true) {
-
             System.out.println("You can get back to previos action by entering exit.");
-            System.out.println("Enter the name of the Game:");
+            System.out.println("Enter the name of the stuff:");
             String name = ScannerWrapper.getString();
             if (name.equalsIgnoreCase("exit")) {
                 break;

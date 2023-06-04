@@ -52,6 +52,6 @@ public class Monitor extends GamingDevice {
                 "FPS=" + fPS +
                 ", size=" + size + " inches" +
                 ", responseTime=" + responseTime + " s" +
-                '}';
+                '}'+super.toString();
     }
 }

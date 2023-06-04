@@ -71,6 +71,21 @@ public class GameList {
         return originals;
     }
 
+    public ArrayList<GameStuff> gamesWithCommunity(ArrayList<GameStuff> gameStuffs){
+        ArrayList<GameStuff> sorted=new ArrayList<>();
+        for (int i = 0; i < gameStuffs.size(); i++) {
+            if(gameStuffs.get(i).getClass().getSimpleName().equals("Games")){
+                Games eachGame = (Games) gameStuffs.get(i);
+                if (eachGame.getVersion().equals(Version.BETA)) {
+                    continue;
+                }
+            }
+            sorted.add(gameStuffs.get(i));
+        }
+        showList(sorted);
+        return sorted;
+    }
+
     public ArrayList<Games> listOfBeta(ArrayList<GameStuff> gameStuffs) {
         ArrayList<Games> betas = new ArrayList<>();
         ArrayList<GameStuff> videoGame = extractVideoGames(gameStuffs);
