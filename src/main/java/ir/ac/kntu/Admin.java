@@ -36,9 +36,12 @@ public class Admin extends Employes {
             if (index >= 0 && index < newGameStuff.size()) {
                 store.getGames().remove(newGameStuff.get(index));
                 ArrayList<Developer> developers = allEmployes.extractDeveloper();
-                Developer employe = allEmployes.findTheLessBusyDeveloper(developers);
+              //  Developer employe = allEmployes.findTheLessBusyDeveloper(developers);
                 GameStuff gameForGettingFixed=newGameStuff.get(index);
                 allEmployes.sendTheReportMessage(allEmployes,gameForGettingFixed);
+                break;
+            }else{
+                System.out.println("Wrong input.Try again.");
             }
         }
     }

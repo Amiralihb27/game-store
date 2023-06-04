@@ -16,8 +16,7 @@ public class StartingMenu {
             System.out.println("2_User");
             System.out.println("3_Developers");
             System.out.println("4_Seller");
-            System.out.println("5_get back");
-            System.out.println("6_Exit");
+            System.out.println("5_Exit");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
                 adminMenu(users, store, allEmployes);
@@ -82,7 +81,7 @@ public class StartingMenu {
             System.out.println("1_Users");
             System.out.println("2_Games");
             System.out.println("3_Report Crashes");
-            System.out.println("4_Accessories)");
+            System.out.println("4_Accessories");
             System.out.println("4_get back");
             System.out.println("6_Exit");
             int input = ScannerWrapper.getInt();

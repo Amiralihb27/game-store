@@ -25,6 +25,7 @@ public class GameChanges {
             } else if (input == 4) {
                 feedBack(games);
             } else if (input == 5) {
+
                 findADeveloperToGiveAccess(allEmployes,employe,store);
 
             } else {
@@ -186,6 +187,7 @@ public class GameChanges {
         int input = ScannerWrapper.getInt();
         videoGame.setLevelPerNumber(input);
         System.out.println("Enter 1 for Beta and 2 for Original.(declaring game version)");
+         input = ScannerWrapper.getInt();
         videoGame.setVersionByNumber(input);
         return videoGame;
     }
@@ -251,7 +253,7 @@ public class GameChanges {
                 if (input.equalsIgnoreCase("exit")) {
                     break;
                 }
-                if (Integer.parseInt(input) > 1 && Integer.parseInt(input) < videoGames.size()) {
+                if (Integer.parseInt(input) >= 1 && Integer.parseInt(input) <= videoGames.size()) {
                     if (videoGames.get(Integer.parseInt(input) - 1).getFeedBack().size() > 0) {
                         System.out.println(videoGames.get(Integer.parseInt(input) - 1).getFeedBack());
                         break;
@@ -299,6 +301,7 @@ public class GameChanges {
         ArrayList<GameStuff> gameStuffs = new ArrayList<>();
         if (employe.getClass().getSimpleName().equals("Admin")) {
             gameStuffs = store.getGames();
+            gameStuffs=gameList.extractVideoGames(gameStuffs);
         } else {
             Developer theDeveloper = (Developer) employe;
             gameStuffs = theDeveloper.getExclusiveGames();

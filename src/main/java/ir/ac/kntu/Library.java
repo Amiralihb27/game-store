@@ -104,7 +104,7 @@ public class Library {
                 }
             }
         } else {
-            System.out.println("You dont have any original games in your library");
+            System.out.println("You dont have any original games in your library to see thier community.");
             System.out.println("**************************************************");
         }
     }
@@ -159,11 +159,11 @@ public class Library {
 
 
     //    public void
-    public void chooseToAddFeedBack(AllEmployes allEmployes) {
+    public void chooseToAddFeedBack() {
         GameList gameList = new GameList();
         ArrayList<Games> games = gameList.listOfBeta(gameStuffs);
         if (games.size() > 0) {
-            gameList.showVideoGames(games);
+           // gameList.showVideoGames(games);
             while (true) {
                 System.out.println("Enter the related number to send feedback");
                 System.out.println("or you can just skip this by entering -1'.");
@@ -188,6 +188,7 @@ public class Library {
             System.out.println("Enter a message to be sent to this game's creator.");
             System.out.println("You can getback by entering exit. ");
             String input=ScannerWrapper.getString();
+            System.out.println("Feed back added.");
             if(input.equalsIgnoreCase("exit")){
                 break;
             }

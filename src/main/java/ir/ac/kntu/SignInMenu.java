@@ -163,7 +163,7 @@ public class SignInMenu {
                 }*/
                 user.getLibrary().community();
             } else if (input==3) {
-                //user.getLibrary().chooseToAddFeedBack();
+                user.getLibrary().chooseToAddFeedBack();
                 break;
             } else if (input == 4) {
                 break;
