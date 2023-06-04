@@ -6,6 +6,8 @@ import java.util.ArrayList;
 public class Library {
     private ArrayList<GameStuff> gameStuffs = new ArrayList<>();
 
+
+
     public void setGames(ArrayList<GameStuff> games) {
         this.gameStuffs = games;
     }

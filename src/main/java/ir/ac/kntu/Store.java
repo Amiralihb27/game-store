@@ -48,7 +48,8 @@ public class Store {
             if (input >= 1 && input <= newGameStuff.size()) {
                 GameList gameList = new GameList();
                 gameList.printGameingStuffInformation(newGameStuff.get(input - 1));
-                if (GameChanges.isInLibrary(user.getLibrary().getGames(), newGameStuff.get(input - 1))) {
+                if (GameChanges.isInLibrary(user.getLibrary().getGames(), newGameStuff.get(input - 1)) &&
+                        newGameStuff.get(input - 1).getClass().getSimpleName().equals("Games")) {
                     break;
                 }
                 chooseToBuy(user, newGameStuff.get(input - 1));
@@ -63,7 +64,7 @@ public class Store {
     }
 
     public void chooseToBuy(User user, GameStuff game) {
-        System.out.println("Do you want to buy a game?");
+        System.out.println("Do you want to buy this?");
         System.out.println("1_Yes");
         System.out.println("2_No");
         while (true) {
@@ -97,22 +98,26 @@ public class Store {
             if (gamingDevice.getNumberOfComponents() > 0) {
                 gamingDevice.sell();
                 buy(user, gameStuff, amount);
+            } else {
+                System.out.println("We ran out of this product");
             }
 
         }
     }
 
     public void buy(User user, GameStuff gameStuff, double amount) {
-        if (user.getLibrary() == null) {
-            Library library = new Library();
-            library.addGame(gameStuff);
-            user.setLibrary(library);
-        } else {
-            user.getLibrary().addGame(gameStuff);
-            user.setLibrary(user.getLibrary());
-        }
+
+
+        user.getLibrary().addGame(gameStuff);
+        user.setLibrary(user.getLibrary());
         user.getProfile().setWalletCash(amount - gameStuff.getPrice());
         System.out.println("you have bought it succesfully");
+        if(!gameStuff.getClass().getSimpleName().equals("Games")){
+            GamingDevice device=(GamingDevice) gameStuff;
+            if(device.getNumberOfComponents()==0){
+                this.getGames().remove(gameStuff);
+            }
+        }
     }
 
     public boolean levelComparison(GameStuff gameStuff, User user) {
@@ -204,7 +209,7 @@ public class Store {
         ArrayList<GameStuff> sortedGames = videoGameOrDevice();
         ArrayList<GameStuff> filterdByPriceGames = new ArrayList<>();
         System.out.println("enter the name:");
-        GameList gameList=new GameList();
+        GameList gameList = new GameList();
         String name = ScannerWrapper.getString();
         for (int i = 0; i < sortedGames.size(); i++) {
             if (sortedGames.get(i).getName().startsWith(name)) {

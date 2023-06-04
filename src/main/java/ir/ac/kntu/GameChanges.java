@@ -26,7 +26,7 @@ public class GameChanges {
                 feedBack(games);
             } else if (input == 5) {
 
-                findADeveloperToGiveAccess(allEmployes,employe,store);
+                findADeveloperToGiveAccess(allEmployes, employe, store);
 
             } else {
                 break;
@@ -186,7 +186,7 @@ public class GameChanges {
         int input = ScannerWrapper.getInt();
         videoGame.setLevelPerNumber(input);
         System.out.println("Enter 1 for Beta and 2 for Original.(declaring game version)");
-         input = ScannerWrapper.getInt();
+        input = ScannerWrapper.getInt();
         videoGame.setVersionByNumber(input);
         return videoGame;
     }
@@ -265,7 +265,7 @@ public class GameChanges {
                     System.out.println("Wrong input!Try again.");
                 }
             }
-        }else{
+        } else {
             System.out.println("There is no Beta game.");
         }
 
@@ -300,7 +300,7 @@ public class GameChanges {
         ArrayList<GameStuff> gameStuffs = new ArrayList<>();
         if (employe.getClass().getSimpleName().equals("Admin")) {
             gameStuffs = store.getGames();
-            gameStuffs=gameList.extractVideoGames(gameStuffs);
+            gameStuffs = gameList.extractVideoGames(gameStuffs);
         } else {
             Developer theDeveloper = (Developer) employe;
             gameStuffs = theDeveloper.getExclusiveGames();
@@ -317,7 +317,7 @@ public class GameChanges {
                 }
                 if (input > 0 && input <= gameStuffs.size()) {
                     developer.addExclusiveGames(gameStuffs.get(input - 1));
-                    System.out.println("Accses of"+ gameStuffs.get(input - 1).getName()+ " has been given to");
+                    System.out.println("Accses of" + gameStuffs.get(input - 1).getName() + " has been given to");
                     break;
                 } else {
                     System.out.println("Wrong input!try again.");

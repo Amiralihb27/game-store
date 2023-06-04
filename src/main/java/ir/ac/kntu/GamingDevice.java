@@ -45,6 +45,6 @@ public class GamingDevice extends GameStuff {
     public String toString() {
         return "GamingDevice{" +super.toString()+
                 "numberOfComponents=" + numberOfComponents +
-                '}';
+                " in Store}";
     }
 }
