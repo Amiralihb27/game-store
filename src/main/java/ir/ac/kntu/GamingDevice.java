@@ -5,6 +5,7 @@ public class GamingDevice extends GameStuff {
     private int numberOfComponents;
 
 
+
     public GamingDevice(int numberOfComponents, double price, String breifExplanation,String name) {
         this.numberOfComponents = numberOfComponents;
 
@@ -40,6 +41,7 @@ public class GamingDevice extends GameStuff {
     public void sell() {
         this.numberOfComponents--;
     }
+
 
     @Override
     public String toString() {

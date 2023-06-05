@@ -28,7 +28,7 @@ public class Store {
 
     public void showList(User user) {
         GameList gameList = new GameList();
-        ArrayList<GameStuff> newGameStuff = videoGameOrDevice();
+        ArrayList<GameStuff> newGameStuff = videoGameOrDevice(this.gameStuffs);
         if (newGameStuff.size() > 0) {
             gameList.showList(newGameStuff);
             chooseGame(user, newGameStuff);
@@ -110,6 +110,7 @@ public class Store {
         user.getLibrary().addGame(gameStuff);
         user.setLibrary(user.getLibrary());
         user.getProfile().setWalletCash(user.getProfile().getWalletCash() - price);
+        gameStuff.addCountOfSold();
         System.out.println("you have bought it succesfully");
         if (!gameStuff.getClass().getSimpleName().equals("Games")) {
             GamingDevice device = (GamingDevice) gameStuff;
@@ -140,7 +141,7 @@ public class Store {
         }
     }
 
-    public ArrayList<GameStuff> videoGameOrDevice() {
+    public ArrayList<GameStuff> videoGameOrDevice(ArrayList<GameStuff> gameStuff) {
         System.out.println("What do you expect from Store to show you?");
         System.out.println("1_Video Games");
         System.out.println("2_Devices");
@@ -151,12 +152,12 @@ public class Store {
             index = ScannerWrapper.getInt();
             switch (index) {
                 case 1:
-                    return gameList.extractVideoGames(gameStuffs);
+                    return gameList.extractVideoGames(gameStuff);
 
                 case 2:
-                    return chooseBetweenTypeOfDevices(gameList.extractDevices(gameStuffs));
+                    return chooseBetweenTypeOfDevices(gameList.extractDevices(gameStuff));
                 case 3:
-                    return gameStuffs;
+                    return gameStuff;
                 default:
                     System.out.println("Wrong input!try again.");
             }
@@ -207,7 +208,7 @@ public class Store {
 
     public void searchByName(User user) {
         int index = 1;
-        ArrayList<GameStuff> sortedGames = videoGameOrDevice();
+        ArrayList<GameStuff> sortedGames = videoGameOrDevice(this.gameStuffs);
         ArrayList<GameStuff> filterdByPriceGames = new ArrayList<>();
         System.out.println("enter the name:");
         GameList gameList = new GameList();
@@ -231,7 +232,7 @@ public class Store {
 
     public void searchByPrice(double min, double max, User user) {
 
-        ArrayList<GameStuff> sortedGames = videoGameOrDevice();
+        ArrayList<GameStuff> sortedGames = videoGameOrDevice(this.gameStuffs);
         ArrayList<GameStuff> filterdByPriceGames = new ArrayList<>();
         GameList gameList = new GameList();
         int foundedGames = 0;

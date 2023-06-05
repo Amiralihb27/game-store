@@ -4,7 +4,7 @@ import java.time.Instant;
 
 public class SignInMenu {
 
-    public static void signIn(Store store,AllUsers allUsers,int base) {
+    public static void signIn(Store store, AllUsers allUsers, int base) {
         while (true) {
             System.out.println("Sign in");
             System.out.println("You can get bac to previous action by entering exit.");
@@ -19,13 +19,13 @@ public class SignInMenu {
             int index = allUsers.existence(input, passInput);
             if (index != -1) {
                 Instant start = Instant.now();
-                userInterface(input, allUsers.getUsers().get(index),store,allUsers);
+                userInterface(input, allUsers.getUsers().get(index), store, allUsers);
                 Instant end = Instant.now();
                 int totalTime = TimeCalculator.timeDifference(start, end);
                 System.out.println(totalTime);
                 allUsers.getUsers().get(index).addTime(totalTime);
-                ScoreCalculator scoreCalculator=new ScoreCalculator();
-                scoreCalculator.usersScore(allUsers.getUsers().get(index),base);
+                ScoreCalculator scoreCalculator = new ScoreCalculator();
+                scoreCalculator.usersScore(allUsers.getUsers().get(index), base);
                 System.out.println(allUsers.getUsers().get(index).getTimeSpent());
                 System.out.println(allUsers.getUsers().get(index).getScore());
                 break;
@@ -34,39 +34,42 @@ public class SignInMenu {
         }
     }
 
-    public static void userInterface(String username, User user,Store store,AllUsers allUsers) {
+    public static void userInterface(String username, User user, Store store, AllUsers allUsers) {
         System.out.println("welcome " + username);
         while (true) {
             System.out.println("which part do you wana check? ");
             int input = printUI();
             switch (input) {
                 case 1:
-                    profile(user,allUsers);
+                    profile(user, allUsers);
                     break;
                 case 2:
-                    store(user,store);
+                    store(user, store);
                     break;
                 case 3:
                     library(user);
                     break;
                 case 4:
-                    FriendsMenu friendsMenu=new FriendsMenu();
-                    friendsMenu.showOptions(user,store,allUsers);
+                    ShowTheMosts showTheMosts=new ShowTheMosts();
+                    showTheMosts.showOptions(store,user);
+                    break;
                 case 5:
+                    FriendsMenu friendsMenu = new FriendsMenu();
+                    friendsMenu.showOptions(user, store, allUsers);
+                    break;
+                case 6:
                     break;
                 default:
                     System.exit(0);
                     break;
             }
-            if (input == 5) {
+            if (input == 6) {
                 break;
             }
         }
-
-
     }
 
-    public static void profile(User user,AllUsers allUsers) {
+    public static void profile(User user, AllUsers allUsers) {
         while (true) {
             System.out.println("which part do you wana go?");
             System.out.println("1_showing the Personal information");
@@ -76,10 +79,10 @@ public class SignInMenu {
             int input = ScannerWrapper.getInt();
             switch (input) {
                 case 1:
-                   System.out.println(user.toString());
+                    System.out.println(user.toString());
                     break;
                 case 2:
-                    user.getProfile().edit(user,allUsers);
+                    user.getProfile().edit(user, allUsers);
                     break;
                 case 3:
                     break;
@@ -98,7 +101,7 @@ public class SignInMenu {
 
     }
 
-    public static void store(User user,Store store) {
+    public static void store(User user, Store store) {
         while (true) {
             System.out.println("which part do you wana go?");
             System.out.println("1_showing the list of games");
@@ -111,7 +114,7 @@ public class SignInMenu {
                     store.showList(user);
                     break;
                 case 2:
-                    store.searchByName( user);
+                    store.searchByName(user);
                     break;
                 case 3:
                     System.out.println("enter the min price");
@@ -136,8 +139,9 @@ public class SignInMenu {
         System.out.println("1_profile ");
         System.out.println("2_store ");
         System.out.println("3_library ");
-        System.out.println("4_friends ");
-        System.out.println("5_get back ");
+        System.out.println("4_See The Mosts");
+        System.out.println("5_friends ");
+        System.out.println("6_get back ");
         int input = ScannerWrapper.getInt();
         return input;
 
@@ -163,7 +167,7 @@ public class SignInMenu {
                     user.setLibrary(newLibrary)
                 }*/
                 user.getLibrary().community();
-            } else if (input==3) {
+            } else if (input == 3) {
                 user.getLibrary().chooseToAddFeedBack();
             } else if (input == 4) {
                 break;

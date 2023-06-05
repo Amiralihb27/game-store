@@ -11,6 +11,12 @@ public class GameStuff {
 
     private String explenation;
 
+    private int countOfSold = 0;
+
+    public int getCountOfSold() {
+        return this.countOfSold;
+    }
+
     public String getExplenation() {
         return explenation;
     }
@@ -69,6 +75,10 @@ public class GameStuff {
         } else {
             System.out.println(this.getReviews());
         }
+    }
+
+    public void addCountOfSold() {
+        countOfSold++;
     }
 
     public void feedBack() {

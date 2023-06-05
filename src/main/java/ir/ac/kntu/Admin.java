@@ -62,7 +62,8 @@ public class Admin extends Employes {
             System.out.println("2_change users informations");
             System.out.println("3_Show users information");
             System.out.println("4_Add user");
-            System.out.println("5_get back");
+            System.out.println("5_See the most online users");
+            System.out.println("6_get back");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
                 deleteUser(allUsers);
@@ -73,7 +74,12 @@ public class Admin extends Employes {
                 usersInfo(allUsers);
             } else if (input == 4) {
                 addUser(allUsers);
-            } else if (input == 5) {
+            }else if (input == 5) {
+                ShowTheMosts showTheMosts=new ShowTheMosts();
+                ArrayList<User> users;
+                users=new ArrayList<>(allUsers.getUsers());
+                showTheMosts.sortByScore(users);
+            } else if (input == 6) {
                 break;
             } else {
                 System.out.println("Wrong input!Try agian.");
