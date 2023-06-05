@@ -9,7 +9,7 @@ public class StartingMenu {
 
     }
 
-    public void choose(Store store, AllEmployes allEmployes, AllUsers allUsers) {
+    public void choose(Store store, AllEmployes allEmployes, AllUsers allUsers,int base) {
         while (true) {
             System.out.println("Choose your role:");
             System.out.println("1_Admin");
@@ -21,7 +21,7 @@ public class StartingMenu {
             if (input == 1) {
                 adminMenu(allUsers, store, allEmployes);
             } else if (input == 2) {
-                userMenu(store, allUsers);
+                userMenu(store, allUsers,base);
             } else if (input == 3) {
                 adminMenu(allUsers, store, allEmployes);
             } else if (input == 4) {
@@ -179,7 +179,7 @@ public class StartingMenu {
         }
     }
 
-    public void userMenu(Store store, AllUsers allUsers) {
+    public void userMenu(Store store, AllUsers allUsers,int base) {
         while (true) {
             System.out.println("1_sign out");
             System.out.println("2_sign in");
@@ -189,7 +189,7 @@ public class StartingMenu {
             if (input == 1) {
                 SignOutMenu.signOut(allUsers);
             } else if (input == 2) {
-                SignInMenu.signIn(store, allUsers);
+                SignInMenu.signIn(store, allUsers,base);
             } else if (input == 3) {
                 break;
             } else if (input == 4) {

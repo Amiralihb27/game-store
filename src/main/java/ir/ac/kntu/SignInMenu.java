@@ -4,7 +4,7 @@ import java.time.Instant;
 
 public class SignInMenu {
 
-    public static void signIn(Store store,AllUsers allUsers) {
+    public static void signIn(Store store,AllUsers allUsers,int base) {
         while (true) {
             System.out.println("Sign in");
             System.out.println("You can get bac to previous action by entering exit.");
@@ -25,7 +25,7 @@ public class SignInMenu {
                 System.out.println(totalTime);
                 allUsers.getUsers().get(index).addTime(totalTime);
                 ScoreCalculator scoreCalculator=new ScoreCalculator();
-                scoreCalculator.usersScore(allUsers.getUsers().get(index));
+                scoreCalculator.usersScore(allUsers.getUsers().get(index),base);
                 System.out.println(allUsers.getUsers().get(index).getTimeSpent());
                 System.out.println(allUsers.getUsers().get(index).getScore());
                 break;
@@ -76,7 +76,7 @@ public class SignInMenu {
             int input = ScannerWrapper.getInt();
             switch (input) {
                 case 1:
-                    user.getProfile().show();
+                   System.out.println(user.toString());
                     break;
                 case 2:
                     user.getProfile().edit(user,allUsers);
@@ -165,7 +165,6 @@ public class SignInMenu {
                 user.getLibrary().community();
             } else if (input==3) {
                 user.getLibrary().chooseToAddFeedBack();
-                break;
             } else if (input == 4) {
                 break;
             } else {

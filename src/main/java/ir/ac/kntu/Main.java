@@ -29,29 +29,37 @@ public class Main {
     }
 
     public static void storeCreation(StartingMenu start, AllUsers allUsers) {
+        System.out.println("Enter the base score for buying level2 games:");
+        int base=ScannerWrapper.getInt();
         Games zed = new Games("zed", "its about zed", "action");
         zed.addReview("good game!");
         zed.addReview("good !");
         zed.addReview("not bad!");
         zed.addReview("awfull");
+        zed.setLevel(Level.LEVEL_2);
         zed.setRating(10);
         zed.rate(10);
         zed.rate(9);
         zed.rate(7.25);
         zed.setPrice(10);
+        zed.setScore(base);
         Games witcher = new Games("witcher", "its about geralt of rivia", "RPG");
         witcher.setVersion(Version.BETA);
+        witcher.setLevel(Level.LEVEL_3);
         witcher.setRating(10);
         witcher.setPrice(12.2);
+        witcher.setScore(base);
         witcher.addReview("Awli");
         Games game3 = new Games("darkSouls", "its about a chosen guard", "Action");
         game3.setPrice(5);
         game3.setRating(9.8);
         game3.addReview("Binazir");
+        game3.setScore(base);
         Games game4 = new Games("dota2", "its about a heroes", "fantasy");
         game4.setVersion(Version.BETA);
         game4.setPrice(6.3);
         game4.setRating(10);
+        game4.setScore(base);
         game4.addReview("fogholade");
         ArrayList<GameStuff> games = new ArrayList<>();
         games.add(zed);
@@ -61,7 +69,7 @@ public class Main {
         deviceCreation(games);
         Store store = new Store();
         store.setGames(games);
-        createEmployes( store, start, allUsers);
+        createEmployes( store, start, allUsers,base);
     }
 
     public static void deviceCreation(ArrayList<GameStuff> gameStuffs) {
@@ -81,7 +89,7 @@ public class Main {
 
     }
 
-    public static void createEmployes( Store store, StartingMenu start, AllUsers allUsers) {
+    public static void createEmployes( Store store, StartingMenu start, AllUsers allUsers,int base) {
         Profile info1 = new Profile("Amir", "Amir8227",
                 "0911112244", "amir82@gmail.com");
         Profile info2 = new Profile("aliB", "Aliali8227",
@@ -107,7 +115,7 @@ public class Main {
         allEmployes.addEmploye(admin2);
         allEmployes.addEmploye(seller1);
         allEmployes.addEmploye(seller2);
-        start.choose( store, allEmployes, allUsers);
+        start.choose( store, allEmployes, allUsers,base);
 
     }
 }

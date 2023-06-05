@@ -7,6 +7,8 @@ public class Games extends GameStuff {
 
     private Level level = Level.LEVEL_1;
 
+    private int score;
+
     private Version version;
 
     private String genre;
@@ -17,6 +19,31 @@ public class Games extends GameStuff {
 
     private ArrayList<String> feedBack=new ArrayList<>();
 
+
+    public void setScore(int base){
+
+        switch (this.getLevel()) {
+            case LEVEL_1 -> this.score = 0;
+            case LEVEL_2 -> this.score = base;
+            case LEVEL_3 -> this.score = base + base + 10;
+            case LEVEL_4 -> this.score = base + base + 20;
+            default -> this.score = base;
+        }
+    }
+
+    public void setScore(){
+        switch (this.getLevel()) {
+            case LEVEL_1 -> this.score = 0;
+            case LEVEL_2 -> this.score = 20;
+            case LEVEL_3 -> this.score = 50;
+            case LEVEL_4 -> this.score = 100;
+            default -> this.score = 20;
+        }
+    }
+
+    public int getScore() {
+        return score;
+    }
 
     public Version getVersion() {
         return version;

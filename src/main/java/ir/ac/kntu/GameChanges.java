@@ -188,6 +188,9 @@ public class GameChanges {
         System.out.println("Enter 1 for Beta and 2 for Original.(declaring game version)");
         input = ScannerWrapper.getInt();
         videoGame.setVersionByNumber(input);
+        System.out.println("Enter a base score for this game's level 2.");
+        int base=ScannerWrapper.getInt();
+        videoGame.setScore(base);
         return videoGame;
     }
 

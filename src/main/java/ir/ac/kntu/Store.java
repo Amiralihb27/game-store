@@ -40,7 +40,6 @@ public class Store {
     }
 
     public void chooseGame(User user, ArrayList<GameStuff> newGameStuff) {
-        // Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("Enter the related number to see each game's information");
             System.out.println("or you can just skip this by entering -1'.");
@@ -72,8 +71,8 @@ public class Store {
             if (input == 1) {
                 double price = discount(game, user);
                 if (user.getProfile().getWalletCash() >= price) {
-                    double amount = user.getProfile().getWalletCash();
-                    buyVideoGameOrDevice(user, game, amount);
+                  //  double amount = user.getProfile().getWalletCash();
+                    buyVideoGameOrDevice(user, game);
                     break;
                 } else {
                     System.out.println("You dont have enough money");
@@ -87,17 +86,17 @@ public class Store {
         }
     }
 
-    public void buyVideoGameOrDevice(User user, GameStuff gameStuff, double amount) {
+    public void buyVideoGameOrDevice(User user, GameStuff gameStuff) {
         double price = discount(gameStuff, user);
         if (gameStuff.getClass().getSimpleName().equals("Games")) {
             if (!levelComparison(gameStuff, user)) {
-                buy(user, gameStuff, amount);
+                buy(user, gameStuff, price);
             }
         } else {
             GamingDevice gamingDevice = (GamingDevice) gameStuff;
             if (gamingDevice.getNumberOfComponents() > 0) {
                 gamingDevice.sell();
-                buy(user, gameStuff, amount);
+                buy(user, gameStuff, price);
             } else {
                 System.out.println("We ran out of this product");
             }
@@ -105,16 +104,16 @@ public class Store {
         }
     }
 
-    public void buy(User user, GameStuff gameStuff, double amount) {
+    public void buy(User user, GameStuff gameStuff, double price) {
 
 
         user.getLibrary().addGame(gameStuff);
         user.setLibrary(user.getLibrary());
-        user.getProfile().setWalletCash(amount - gameStuff.getPrice());
+        user.getProfile().setWalletCash(user.getProfile().getWalletCash() - price);
         System.out.println("you have bought it succesfully");
-        if(!gameStuff.getClass().getSimpleName().equals("Games")){
-            GamingDevice device=(GamingDevice) gameStuff;
-            if(device.getNumberOfComponents()==0){
+        if (!gameStuff.getClass().getSimpleName().equals("Games")) {
+            GamingDevice device = (GamingDevice) gameStuff;
+            if (device.getNumberOfComponents() == 0) {
                 this.getGames().remove(gameStuff);
             }
         }
@@ -123,9 +122,10 @@ public class Store {
     public boolean levelComparison(GameStuff gameStuff, User user) {
 
         Games newGame = (Games) gameStuff;
-        if (user.getLevel() != newGame.getLevel()) {
+        if (user.getScore() < newGame.getScore()) {
             System.out.println("You cant buy this game due to the level.");
-            System.out.println("Expected level: " + newGame.getLevel() + " your score: " + user.getScore());
+            System.out.println("Expected level: " + newGame.getLevel() + "( Expected Score: " + newGame.getScore() + ")"
+                    + " your score: " + user.getScore());
             return true;
         }
         return false;
@@ -133,7 +133,8 @@ public class Store {
 
     public double discount(GameStuff gamingStuff, User user) {
         if (gamingStuff.getClass().getSimpleName().equals("Games")) {
-            return gamingStuff.getPrice() * (100 + user.getDiscount()) / 100;
+            return gamingStuff.getPrice() * (100 - user.getDiscount()) / 100;
+
         } else {
             return gamingStuff.getPrice();
         }

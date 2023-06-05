@@ -100,4 +100,8 @@ public class Profile extends PII {
         double cash = ScannerWrapper.getDouble();
         this.walletCash += cash;
     }
+
+    public String toString(){
+        return super.toString()+" /Wallet cash: "+this.getWalletCash();
+    }
 }

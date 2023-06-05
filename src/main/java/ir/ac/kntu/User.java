@@ -41,17 +41,17 @@ public class User {
         return level;
     }
 
-    public void setLevel() {
-        if (this.score >= 0 && this.score < 20) {
+    public void setLevel(int base) {
+        if (this.score >= 0 && this.score < base) {
             this.level = Level.LEVEL_1;
             setDiscount(0);
-        } else if (this.score >= 20 && this.score < 50) {
+        } else if (this.score >= base && this.score < base*2+10) {
             this.level = Level.LEVEL_2;
             setDiscount(10);
-        } else if (this.score >= 50 && this.score < 100) {
+        } else if (this.score >= base*2+10 && this.score < (base*2+10)*2) {
             this.level = Level.LEVEL_3;
             setDiscount(20);
-        } else if (this.score >= 100) {
+        } else if (this.score >= (base*2+10)*2) {
             this.level = Level.LEVEL_4;
             setDiscount(30);
         }
@@ -61,14 +61,14 @@ public class User {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(int score,int base) {
         this.score = score;
-        setLevel();
+        setLevel(base);
     }
 
-    public void addScore() {
+    public void addScore(int base) {
         this.score += 1;
-        setLevel();
+        setLevel( base);
         //ezafe shodan emtiaz user be ezaie har 5 s.
     }
 
@@ -180,6 +180,10 @@ public class User {
         } else {
             return false;
         }
+    }
+
+    public String toString(){
+        return this.profile.toString()+" /Score:"+this.score;
     }
 
 
