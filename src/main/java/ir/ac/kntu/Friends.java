@@ -6,13 +6,13 @@ import java.util.ArrayList;
 public class Friends {
 
 
-    public void usersFriends(User user,AllUsers allUsers) {
+    public void usersFriends(User user,AllUsers allUsers,Store store) {
 
         if (user.getFriendList().size() >= 1) {
             for (int i = 0; i < user.getFriendList().size(); i++) {
                 System.out.println((i + 1) + "_" + user.getFriendList().get(i));
             }
-            chooseToSee(user,allUsers);
+            chooseToSee(user,allUsers,store);
 
         } else {
             System.out.println("You dont have any friends!");
@@ -20,7 +20,7 @@ public class Friends {
 
     }
 
-    public void chooseToSee(User user,AllUsers allUsers) {
+    public void chooseToSee(User user,AllUsers allUsers,Store store) {
         int status;
         while (true) {
             System.out.println("Do you wana see your frinds games?");
@@ -28,7 +28,7 @@ public class Friends {
             System.out.println("2_No");
             status = ScannerWrapper.getInt();
             if (status == 1) {
-                frindesGames(user,allUsers);
+                frindesGames(user,allUsers,store);
             } else if (status == 2) {
                 break;
             } else {
@@ -39,7 +39,7 @@ public class Friends {
     }
 
 
-    public void frindesGames(User user,AllUsers allUsers) {
+    public void frindesGames(User user,AllUsers allUsers,Store store) {
         int input;
         if (user.getFriendList().size() >= 1) {
             while (true) {
@@ -54,7 +54,7 @@ public class Friends {
                     int index = allUsers.findByName(userName);
                     User newUser = allUsers.getUsers().get(index);
                     if (newUser.getLibrary() != null && newUser.getLibrary().getGames().size() > 0) {
-                        newUser.getLibrary().listOfGames();
+                        newUser.getLibrary().listOfGames(store);
                         System.out.println("*********************");
                         break;
                     } else {
@@ -73,7 +73,7 @@ public class Friends {
 
     }
 
-    public void findByName(User user,AllUsers allUsers) {
+    public void findByName(User user,AllUsers allUsers,Store store) {
         //sc.nextLine();
         if (user.getFriendList().size() >= 1) {
             while (true) {
@@ -95,7 +95,7 @@ public class Friends {
                     if (countOfFounded == 0) {
                         System.out.println("There is no user with this username in friendlist.");
                     }else{
-                        chooseToSee(user,allUsers);
+                        chooseToSee(user,allUsers,store);
                         break;
                     }
                     System.out.println("******************************************************");

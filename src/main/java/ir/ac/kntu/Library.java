@@ -7,7 +7,6 @@ public class Library {
     private ArrayList<GameStuff> gameStuffs = new ArrayList<>();
 
 
-
     public void setGames(ArrayList<GameStuff> games) {
         this.gameStuffs = games;
     }
@@ -38,16 +37,13 @@ public class Library {
 
     }
 
-    public void listOfGames() {
+    public void listOfGames(Store store) {
 
-        for (int i = 0; i < gameStuffs.size(); i++) {
-            System.out.println((i + 1) + ":" + this.gameStuffs.get(i).getName() + "----");
-            if (this.gameStuffs.get(i).getClass().getSimpleName().equals("Games")) {
-                Games games = (Games) gameStuffs.get(i);
-                System.out.println((games.getVersion() + " version"));
-            }
+        ArrayList<GameStuff> gameStuffs1 = new ArrayList<>(gameStuffs);
+        gameStuffs1 = store.videoGameOrDevice(gameStuffs1);
+        GameList gameList = new GameList();
+        gameList.showList(gameStuffs1);
 
-        }
     }
 
 

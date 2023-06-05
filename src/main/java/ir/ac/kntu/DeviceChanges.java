@@ -22,7 +22,7 @@ public class DeviceChanges {
             } else if (input == 4) {
                 break;
             } else {
-                System.out.println("Wrong input!");
+                System.out.println("Try again!");
             }
         }
 
@@ -116,7 +116,7 @@ public class DeviceChanges {
         if (classNme.equals("Controler")) {
             gamingDevice.setName(name + " controller");
         } else if (classNme.equals("Monitor")) {
-            gamingDevice.setName( name+ " Monitor");
+            gamingDevice.setName( name+ " monitor");
         }
 
         System.out.println("Enter the count of this device:");

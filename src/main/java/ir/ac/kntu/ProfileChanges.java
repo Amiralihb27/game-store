@@ -5,7 +5,7 @@ public class ProfileChanges {
 
     public void showOptions(AllEmployes allEmployes, Employes employes) {
         while (true) {
-            System.out.println("1_Show the profile informations");
+            System.out.println("1_Show the personal informations");
             System.out.println("2_Edit informations");
             System.out.println("3_get back");
             int input = ScannerWrapper.getInt();

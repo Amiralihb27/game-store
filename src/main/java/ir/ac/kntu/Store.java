@@ -233,6 +233,7 @@ public class Store {
     public void searchByPrice(double min, double max, User user) {
 
         ArrayList<GameStuff> sortedGames = videoGameOrDevice(this.gameStuffs);
+       // System.out.println(sortedGames);
         ArrayList<GameStuff> filterdByPriceGames = new ArrayList<>();
         GameList gameList = new GameList();
         int foundedGames = 0;
@@ -241,7 +242,7 @@ public class Store {
                 System.out.println((foundedGames + 1) + ":");
                 gameList.gameList(sortedGames.get(i));
                 foundedGames++;
-                filterdByPriceGames.add(gameStuffs.get(i));
+                filterdByPriceGames.add(sortedGames.get(i));
             }
         }
         if (foundedGames >= 1) {

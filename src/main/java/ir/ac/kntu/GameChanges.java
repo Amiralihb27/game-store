@@ -45,7 +45,7 @@ public class GameChanges {
                 break;
             }
             if (doesExist(games, name) != -1) {
-                System.out.println("which game do you wana choose?");
+                System.out.println("which one do you wana choose?");
                 ArrayList<String> uniqueNum = new ArrayList<>();
                 for (int i = 0; i < games.size(); i++) {
                     if (games.get(i).getName().equals(name)) {
@@ -54,12 +54,12 @@ public class GameChanges {
                     }
 
                 }
-                System.out.println("Enter the related number of the game.");
+                System.out.println("Enter the related number of the stuff.");
                 toChange(games, uniqueNum);
                 break;
 
             } else {
-                System.out.println("There is no game like this!try again.");
+                System.out.println("There is no stuff like this!try again.");
             }
 
         }

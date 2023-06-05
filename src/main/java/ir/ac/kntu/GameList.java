@@ -128,7 +128,7 @@ public class GameList {
         Scanner enter = new Scanner(System.in);
         String input = gameStuff.toString();
         System.out.println("You can get back to menu by entering get back or" +
-                " buy emtering the Enter you can see the next line");
+                " by entering the Enter you can see the next line");
         while (input.length() > 40) {
             int index = index(input);
             consoleOutPut = input.substring(0, index + 1);

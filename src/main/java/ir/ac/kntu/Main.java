@@ -74,7 +74,7 @@ public class Main {
 
     public static void deviceCreation(ArrayList<GameStuff> gameStuffs) {
         GamingDevice controler = new Controler(5,
-                12.2, Type.REMOTE, "good for playing ps4", "pa4 controler");
+                12.2, Type.REMOTE, "good for playing ps4", "ps4 controler");
         GamingDevice controler2 = new Controler(1,
                 10.3, Type.WIRED, "good for playing ", "playing controllerx20");
         GamingDevice controler3 = new Controler(2,
@@ -99,7 +99,7 @@ public class Main {
         Profile info4 = new Profile("miaplays", "miaKimio827",
                 "0917712244", "kimia@gmail.com");
         Profile info5 = new Profile("mohammad", "mohammad8227",
-                "0915512244", "kimia@gmail.com");
+                "0915512244", "mohammad@gmail.com");
         Profile info6 = new Profile("akbar", "akbar27",
                 "0978712244", "akbar@gmail.com");
         Admin admin1 = new Admin(info1);

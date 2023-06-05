@@ -139,7 +139,7 @@ public class SignInMenu {
         System.out.println("1_profile ");
         System.out.println("2_store ");
         System.out.println("3_library ");
-        System.out.println("4_See The Mosts");
+        System.out.println("4_see The mosts");
         System.out.println("5_friends ");
         System.out.println("6_get back ");
         int input = ScannerWrapper.getInt();

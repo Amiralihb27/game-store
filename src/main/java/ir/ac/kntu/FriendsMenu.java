@@ -12,14 +12,14 @@ public class FriendsMenu {
             System.out.println("1_Show friend List");
             System.out.println("2_Search between friends");
             System.out.println("3_send request");
-            System.out.println("4_Gift");
+            System.out.println("4_gift");
             System.out.println("5_see request");
             System.out.println("6_get back");
             input = ScannerWrapper.getInt();
             if (input == 1) {
-                friends.usersFriends(user,allUsers);
+                friends.usersFriends(user,allUsers,store);
             } else if (input == 2) {
-                friends.findByName(user,allUsers);
+                friends.findByName(user,allUsers,store);
             } else if (input == 3) {
                 friends.sendRequest(user,allUsers);
 
