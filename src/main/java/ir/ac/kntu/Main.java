@@ -30,7 +30,7 @@ public class Main {
     }
 
     public static void storeCreation(StartingMenu start, AllUsers allUsers) {
-        System.out.println("Enter the base score for buying level2 games:");
+        System.out.println("Enter the base score for buying level 2 games:");
         int base=ScannerWrapper.getInt();
         Games zed = new Games("zed", "its about zed", "action");
         zed.addReview("good game!");

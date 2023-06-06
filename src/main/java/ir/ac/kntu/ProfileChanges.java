@@ -3,16 +3,21 @@ package ir.ac.kntu;
 public class ProfileChanges {
 
 
-    public void employees(AllEmployes allEmployes, Employes employes){
-        System.out.println("1_your profile");
-        System.out.println("2_other employees profile");
-        System.out.println("3_get back");
-        while (true){
+    public void employees(AllEmployes allEmployes, Employes employes) {
+
+        while (true) {
+            System.out.println("1_your profile");
+            System.out.println("2_other employees profile");
+            System.out.println("3_get back");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
-                showOptions(allEmployes,employes);
+                showOptions(allEmployes, employes);
             } else if (input == 2) {
-
+                int index=findEmployee(allEmployes);
+                if(index!=-1){
+                    Employes newEmployee = allEmployes.getAllEmployes().get(index);
+                    showOptions(allEmployes,newEmployee);
+                }
 
             } else if (input == 3) {
                 break;
@@ -22,11 +27,24 @@ public class ProfileChanges {
         }
     }
 
-    public int findEmployee(AllEmployes allEmployes){
-        while (true){
+    public int findEmployee(AllEmployes allEmployes) {
+        while (true) {
             System.out.println(" enter username:");
+            String username = ScannerWrapper.getString();
+            if (username.equals("exit")) {
+                return -1;
+            }
+            System.out.println(" enter password:");
+            String password = ScannerWrapper.getString();
+            int index = allEmployes.doesExist(username, password);
+            if (index != -1) {
+                return index;
+            } else {
+                System.out.println("There is no employee with this pofile.");
+            }
         }
     }
+
     public void showOptions(AllEmployes allEmployes, Employes employes) {
         while (true) {
             System.out.println("1_Show the personal informations");

@@ -12,9 +12,10 @@ public class Expiration extends Thread {
 
     private GameStuff gameStuff;
 
-    private int expirationTime=20;
+    private int expirationTime=2;
 
     private Developer employee;
+
 
     private boolean hadAnswer = false;
 
@@ -60,7 +61,7 @@ public class Expiration extends Thread {
             Instant end = Instant.now();
             Duration timeElapsed = Duration.between(start, end);
             if ((int) Integer.parseInt(String.valueOf(timeElapsed.toMillis())) / 1000 == expirationTime) {
-                setExpirationTime(expirationTime * 2);
+               // setExpirationTime(expirationTime * 2);
                 System.out.println("Joon");
                 AllEmployes temporary = new AllEmployes();
                 //temporary = newAllEmployees();
@@ -72,7 +73,7 @@ public class Expiration extends Thread {
                 employee.getInboxes().remove(size-1);
                 temporary.getAllEmployes().remove(this.employee);
 
-
+                System.out.println(expirationTime);
                 allEmployes.sendTheReportMessage(temporary, gameStuff);
                 temporary.getAllEmployes().add(this.employee);
                 break;

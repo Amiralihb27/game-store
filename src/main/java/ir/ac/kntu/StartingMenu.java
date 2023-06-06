@@ -96,7 +96,7 @@ public class StartingMenu {
                 deviceChanges.showOptions(store.getGames(), store, admin, allEmployes);
             } else if (input == 5) {
                 ProfileChanges profileChanges = new ProfileChanges();
-                profileChanges.showOptions(allEmployes, admin);
+                profileChanges.employees(allEmployes, admin);
             } else if (input == 6) {
                 break;
             } else if (input == 7) {
