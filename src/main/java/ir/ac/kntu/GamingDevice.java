@@ -1,9 +1,12 @@
 package ir.ac.kntu;
 
+import java.util.ArrayList;
+
 public class GamingDevice extends GameStuff {
 
     private int numberOfComponents;
 
+    private ArrayList<String>reportCrash=new ArrayList<>();
 
 
     public GamingDevice(int numberOfComponents, double price, String breifExplanation,String name) {
@@ -23,6 +26,14 @@ public class GamingDevice extends GameStuff {
 
     }
 
+
+    public void addReport(String report){
+        this.reportCrash.add(report);
+    }
+
+    public ArrayList<String> getReportCrash(){
+        return new ArrayList<>(reportCrash);
+    }
 
     public int getNumberOfComponents() {
         return numberOfComponents;

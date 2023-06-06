@@ -153,23 +153,18 @@ public class SignInMenu {
             System.out.println("1_Users Games");
             System.out.println("2_Community");
             System.out.println("3_FeedBack");
-            System.out.println("4_get back");
+            System.out.println("4_send report for device crashes.");
+            System.out.println("5_get back");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
-               /* Library newLibrary = new Library();
-                if (user.getLibrary() == null) {
-                    user.setLibrary(newLibrary);
-                }*/
                 user.getLibrary().showGames();
             } else if (input == 2) {
-               /* Library newLibrary = new Library();
-                if (user.getLibrary() == null) {
-                    user.setLibrary(newLibrary)
-                }*/
                 user.getLibrary().community();
             } else if (input == 3) {
                 user.getLibrary().chooseToAddFeedBack();
             } else if (input == 4) {
+                user.getLibrary().chooseToAddReport();
+            }  else if (input == 5) {
                 break;
             } else {
                 System.out.println("Wong input!try again");

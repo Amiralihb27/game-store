@@ -11,8 +11,9 @@ public class DeviceChanges {
             System.out.println("1_Add Device");
             System.out.println("2_Edit Device");
             System.out.println("3_Delet device");
-            System.out.println("4_get back");
-            GameChanges gameChanges=new GameChanges();
+            System.out.println("4_See Report Of DeviceCrasshes");
+            System.out.println("5_get back");
+            GameChanges gameChanges = new GameChanges();
             int input = ScannerWrapper.getInt();
             if (input == 1) {
                 addDevice(store, employe);
@@ -21,6 +22,8 @@ public class DeviceChanges {
             } else if (input == 3 && hasDevice(games)) {
                 gameChanges.deletGame(games, store);
             } else if (input == 4) {
+                seeTheReportOfDeviceCrashes(games);
+            } else if (input == 5) {
                 break;
             } else {
                 System.out.println("Try again!");
@@ -29,10 +32,10 @@ public class DeviceChanges {
 
     }
 
-    public boolean hasDevice(ArrayList<GameStuff> gameStuffs){
-        if(gameStuffs.size()>0){
+    public boolean hasDevice(ArrayList<GameStuff> gameStuffs) {
+        if (gameStuffs.size() > 0) {
             return true;
-        }else {
+        } else {
             System.out.println("You didnt create any games");
             return false;
         }
@@ -117,7 +120,7 @@ public class DeviceChanges {
         if (classNme.equals("Controler")) {
             gamingDevice.setName(name + " controller");
         } else if (classNme.equals("Monitor")) {
-            gamingDevice.setName( name+ " monitor");
+            gamingDevice.setName(name + " monitor");
         }
 
         System.out.println("Enter the count of this device:");
@@ -140,5 +143,23 @@ public class DeviceChanges {
         }
     }
 
-
+    public void seeTheReportOfDeviceCrashes(ArrayList<GameStuff> gameStuffs) {
+        GameList gameList = new GameList();
+        ArrayList<GameStuff> gamingDevices = gameList.extractDevices(gameStuffs);
+        gameList.showList(gamingDevices);
+        while (true) {
+            System.out.println("Enter the related number to see the report if it has report.you can get back" +
+                    " by entering '-1' .");
+            int input = ScannerWrapper.getInt();
+            if (input == -1) {
+                break;
+            }
+            if (input >= 1 && input <= gamingDevices.size()) {
+                GamingDevice device = (GamingDevice) gamingDevices.get(input - 1);
+                System.out.println(device.getReportCrash());
+                break;
+            }
+        }
+    }
+    
 }

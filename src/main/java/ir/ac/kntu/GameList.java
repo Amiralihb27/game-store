@@ -71,10 +71,10 @@ public class GameList {
         return originals;
     }
 
-    public ArrayList<GameStuff> gamesWithCommunity(ArrayList<GameStuff> gameStuffs){
-        ArrayList<GameStuff> sorted=new ArrayList<>();
+    public ArrayList<GameStuff> gamesWithCommunity(ArrayList<GameStuff> gameStuffs) {
+        ArrayList<GameStuff> sorted = new ArrayList<>();
         for (int i = 0; i < gameStuffs.size(); i++) {
-            if(gameStuffs.get(i).getClass().getSimpleName().equals("Games")){
+            if (gameStuffs.get(i).getClass().getSimpleName().equals("Games")) {
                 Games eachGame = (Games) gameStuffs.get(i);
                 if (eachGame.getVersion().equals(Version.BETA)) {
                     continue;
@@ -129,10 +129,11 @@ public class GameList {
         String input = gameStuff.toString();
         System.out.println("You can get back to menu by entering get back or" +
                 " by entering the Enter you can see the next line");
+        String output = "";
         while (input.length() > 40) {
             int index = index(input);
             consoleOutPut = input.substring(0, index + 1);
-            String output = enter.nextLine();
+            output = enter.nextLine();
             if (output.equalsIgnoreCase("exit")) {
                 System.exit(0);
             } else if (output.equalsIgnoreCase("get back")) {
@@ -142,8 +143,11 @@ public class GameList {
             input = input.substring(index + 1);
             //System.out.println(input);
         }
-        System.out.println("");
-        System.out.println(input);
+        if (!output.equals("get back")) {
+            System.out.println("");
+            System.out.println(input);
+        }
+
     }
 
     public int index(String input) {

@@ -196,4 +196,42 @@ public class Library {
             break;
         }
     }
+
+    public void chooseToAddReport() {
+        GameList gameList = new GameList();
+        ArrayList<GameStuff> games = gameList.extractDevices(gameStuffs);
+        if (games.size() > 0) {
+            gameList.showList(games);
+            while (true) {
+                System.out.println("Enter the related number to send report");
+                System.out.println("or you can just skip this by entering -1'.");
+                int input = ScannerWrapper.getInt();
+                if (input >= 1 && input <= games.size()) {
+                    GamingDevice gamingDevice=(GamingDevice)games.get(input-1);
+                    sendReport(gamingDevice);
+                    break;
+                } else if (input == -1) {
+                    break;
+                } else {
+                    System.out.println("wrong input!please try again");
+                }
+            }
+        } else {
+            System.out.println("You dont have any device in your library");
+        }
+    }
+
+    public void sendReport(GamingDevice gamingDevice) {
+        while (true) {
+            System.out.println("Enter a message to be sent to this device's seller.");
+            System.out.println("You can getback by entering exit. ");
+            String input = ScannerWrapper.getString();
+            System.out.println("Report had sent.");
+            if (input.equalsIgnoreCase("exit")) {
+                break;
+            }
+            gamingDevice.addReport(input);
+            break;
+        }
+    }
 }
