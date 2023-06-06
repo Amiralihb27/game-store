@@ -12,13 +12,14 @@ public class DeviceChanges {
             System.out.println("2_Edit Device");
             System.out.println("3_Delet device");
             System.out.println("4_get back");
+            GameChanges gameChanges=new GameChanges();
             int input = ScannerWrapper.getInt();
             if (input == 1) {
                 addDevice(store, employe);
             } else if (input == 2 && hasDevice(games)) {
-                GameChanges.change(games);
+                gameChanges.change(games);
             } else if (input == 3 && hasDevice(games)) {
-                GameChanges.deletGame(games, store);
+                gameChanges.deletGame(games, store);
             } else if (input == 4) {
                 break;
             } else {

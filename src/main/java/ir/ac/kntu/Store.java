@@ -47,7 +47,8 @@ public class Store {
             if (input >= 1 && input <= newGameStuff.size()) {
                 GameList gameList = new GameList();
                 gameList.printGameingStuffInformation(newGameStuff.get(input - 1));
-                if (GameChanges.isInLibrary(user.getLibrary().getGames(), newGameStuff.get(input - 1)) &&
+                GameChanges gameChanges=new GameChanges();
+                if (gameChanges.isInLibrary(user.getLibrary().getGames(), newGameStuff.get(input - 1)) &&
                         newGameStuff.get(input - 1).getClass().getSimpleName().equals("Games")) {
                     break;
                 }

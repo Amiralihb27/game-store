@@ -3,7 +3,7 @@ package ir.ac.kntu;
 public class Inbox {
     private GameStuff gameStuff;
 
-    private double duration;
+    private Expiration duration;
 
 
     public GameStuff getGameStuff() {
@@ -14,17 +14,22 @@ public class Inbox {
         this.gameStuff = gameStuff;
     }
 
-    public double getDuration() {
+    public Expiration getDuration() {
         return duration;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(Expiration duration) {
         this.duration = duration;
     }
 
-    public Inbox(GameStuff games, double duration) {
+    public Inbox(GameStuff games, Expiration expiration) {
         this.gameStuff = games;
-        this.duration = duration;
+
+        this.duration=expiration;
+    }
+
+    public Inbox(GameStuff gameStuff){
+        this.gameStuff = gameStuff;
     }
 
     public Inbox(){

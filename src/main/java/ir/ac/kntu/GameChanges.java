@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class GameChanges {
 
-    public static void showOptions(ArrayList<GameStuff> games, Store store, Employes employe, AllEmployes allEmployes) {
+    public  void showOptions(ArrayList<GameStuff> games, Store store, Employes employe, AllEmployes allEmployes) {
         while (true) {
             System.out.println("Which part do you wana go?");
             System.out.println("1_Add games");
@@ -35,7 +35,7 @@ public class GameChanges {
 
     }
 
-    public static void change(ArrayList<GameStuff> games) {
+    public  void change(ArrayList<GameStuff> games) {
         //sc.nextLine();
         while (true) {
             System.out.println("You can get back to previos action by entering exit.");
@@ -67,7 +67,7 @@ public class GameChanges {
 
     }
 
-    public static int doesExist(ArrayList<GameStuff> games, String name) {
+    public  int doesExist(ArrayList<GameStuff> games, String name) {
         for (int i = 0; i < games.size(); i++) {
             if (name.equals(games.get(i).getName())) {
                 return i;
@@ -76,7 +76,7 @@ public class GameChanges {
         return -1;
     }
 
-    public static boolean isInLibrary(ArrayList<GameStuff> games, GameStuff gameStuff) {
+    public  boolean isInLibrary(ArrayList<GameStuff> games, GameStuff gameStuff) {
         for (int i = 0; i < games.size(); i++) {
             if (gameStuff.equals(games.get(i))) {
                 return true;
@@ -85,7 +85,7 @@ public class GameChanges {
         return false;
     }
 
-    public static void toChange(ArrayList<GameStuff> games, ArrayList<String> uniqueNum) {
+    public  void toChange(ArrayList<GameStuff> games, ArrayList<String> uniqueNum) {
 
         String input;
         while (true) {
@@ -102,7 +102,7 @@ public class GameChanges {
         }
     }
 
-    public static boolean isEqual(String input, ArrayList<String> uniqueNum) {
+    public  boolean isEqual(String input, ArrayList<String> uniqueNum) {
         for (int i = 0; i < uniqueNum.size(); i++) {
             if (input.equalsIgnoreCase(uniqueNum.get(i))) {
                 return true;
@@ -111,7 +111,7 @@ public class GameChanges {
         return false;
     }
 
-    public static void edit(GameStuff game) {
+    public  void edit(GameStuff game) {
         while (true) {
             System.out.println("You can get back by entering exit.");
             System.out.println("Enter the new name of game:");
@@ -147,7 +147,7 @@ public class GameChanges {
         }
     }
 
-    public static void addGame(ArrayList<GameStuff> gameStuffs, Store store) {
+    public  void addGame(ArrayList<GameStuff> gameStuffs, Store store) {
         //ArrayList<GameStuff> games=store.getGames();
         while (true) {
             System.out.println("You can get back by entering exit.");
@@ -181,7 +181,7 @@ public class GameChanges {
 
     }
 
-    public static Games versionAndLevel(Games videoGame) {
+    public  Games versionAndLevel(Games videoGame) {
         System.out.println("Enter the number between 1_4 inorder to declare the game level");
         int input = ScannerWrapper.getInt();
         videoGame.setLevelPerNumber(input);
@@ -194,7 +194,7 @@ public class GameChanges {
         return videoGame;
     }
 
-    public static void deletGame(ArrayList<GameStuff> games, Store store) {
+    public  void deletGame(ArrayList<GameStuff> games, Store store) {
         //sc.nextLine();
         while (true) {
             System.out.println("You can get back to previous action by entering exit.");
@@ -224,7 +224,7 @@ public class GameChanges {
 
     }
 
-    public static void toDelete(int index, ArrayList<GameStuff> games, Store store) {
+    public  void toDelete(int index, ArrayList<GameStuff> games, Store store) {
 
         while (true) {
             if (index <= games.size() && index > 0) {
@@ -244,7 +244,7 @@ public class GameChanges {
         }
     }
 
-    public static void feedBack(ArrayList<GameStuff> games) {
+    public  void feedBack(ArrayList<GameStuff> games) {
         GameList gameList = new GameList();
 
         ArrayList<Games> videoGames = gameList.listOfBeta(games);
@@ -275,7 +275,7 @@ public class GameChanges {
 
     }
 
-    public static void findADeveloperToGiveAccess(AllEmployes allEmployes, Employes employe, Store store) {
+    public  void findADeveloperToGiveAccess(AllEmployes allEmployes, Employes employe, Store store) {
 
         System.out.println("Whom do you want to give accsess?");
         System.out.println("You can get back by entering exit.");
@@ -298,7 +298,7 @@ public class GameChanges {
         }
     }
 
-    public static void findGameToGiveAccses(Developer developer, Employes employe, Store store) {
+    public  void findGameToGiveAccses(Developer developer, Employes employe, Store store) {
         GameList gameList = new GameList();
         ArrayList<GameStuff> gameStuffs = new ArrayList<>();
         if (employe.getClass().getSimpleName().equals("Admin")) {

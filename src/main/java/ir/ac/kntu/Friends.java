@@ -172,7 +172,8 @@ public class Friends {
                 break;
             }
             ArrayList<GameStuff> games = store.getGames();
-            int status = GameChanges.doesExist(games, gamesName);
+            GameChanges gameChanges=new GameChanges();
+            int status = gameChanges.doesExist(games, gamesName);
             if (status != -1) {
                 if (user.getProfile().getWalletCash() >= games.get(status).getPrice()) {
                     double cash = user.getProfile().getWalletCash();

@@ -1,5 +1,6 @@
 package ir.ac.kntu;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
@@ -102,16 +103,24 @@ public class Main {
                 "0915512244", "mohammad@gmail.com");
         Profile info6 = new Profile("akbar", "akbar27",
                 "0978712244", "akbar@gmail.com");
+        Profile info7 = new Profile("erfan", "Erfan555",
+                "091112244", "erfan@gmail.com");
+        Profile info8 = new Profile("amin", "Amin272",
+                "09778881244", "amin@gmail.com");
         Admin admin1 = new Admin(info1);
         Admin admin2 = new Admin(info2);
         Developer developer1 = new Developer(info3);
         Developer developer2 = new Developer(info4);
+        Developer developer3=new Developer(info7);
+        Developer developer4=new Developer(info8);
         Seller seller1 = new Seller(info5);
         Seller seller2 = new Seller(info6);
         AllEmployes allEmployes = new AllEmployes();
         allEmployes.addEmploye(admin1);
         allEmployes.addEmploye(developer2);
         allEmployes.addEmploye(developer1);
+        allEmployes.addEmploye(developer3);
+        allEmployes.addEmploye(developer4);
         allEmployes.addEmploye(admin2);
         allEmployes.addEmploye(seller1);
         allEmployes.addEmploye(seller2);

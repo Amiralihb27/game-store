@@ -7,6 +7,11 @@ public class AllEmployes {
 
     private ArrayList<Employes> allEmployes;
 
+
+    public void setAllEmployes(ArrayList<Employes> allEmployes) {
+        this.allEmployes = allEmployes;
+    }
+
     public AllEmployes(ArrayList<Employes> employes) {
         this.allEmployes = employes;
     }
@@ -58,12 +63,25 @@ public class AllEmployes {
     }
 
     public void sendTheReportMessage(AllEmployes allEmployes, GameStuff gameForGettingFixed) {
-        Instant start = Instant.now();
         ArrayList<Developer> developers = allEmployes.extractDeveloper();
-        Developer employe = allEmployes.findTheLessBusyDeveloper(developers);
-        Inbox inbox = new Inbox(gameForGettingFixed, 20);
+        Developer employe;
+        if(gameForGettingFixed.getClass().getSimpleName().equals("Games")){
+            employe = allEmployes.findTheLessBusyDeveloper(developers);
+        }else{
+             employe = allEmployes.findTheLessBusyDeveloper(developers);
+        }
+
+
+
+     //   int duration=ScannerWrapper.getInt();
+        Expiration expiration=new Expiration(allEmployes,gameForGettingFixed,employe);
+        Inbox inbox = new Inbox(gameForGettingFixed,expiration);
+        //expiration.setExpirationTime(5);
         employe.addInbox(inbox);
         System.out.println("The message has been sent to " + employe.getProfile().getUserName());
         System.out.println("*************************************");
+        expiration.start();
+
+
     }
 }

@@ -67,7 +67,8 @@ public class Developer extends Employes {
     public void gameChanges(Store store,AllEmployes allEmployes) {
         GameList gameList = new GameList();
         ArrayList<GameStuff> games = gameList.extractVideoGames(exclusiveGames);
-        GameChanges.showOptions(exclusiveGames, store,this, allEmployes);
+        GameChanges gameChanges=new GameChanges();
+        gameChanges.showOptions(exclusiveGames, store,this, allEmployes);
     }
 
     public void checkingInbox(AllEmployes allEmployes) {
@@ -108,16 +109,20 @@ public class Developer extends Employes {
             switch (input) {
                 case 1:
                     setWillingToRepairt(true, message.getGameStuff());
+                    message.getDuration().setHadAnswer(true);
                     this.inboxes.remove(message);
                     break;
                 case 2:
                     setWillingToRepairt(false, message.getGameStuff());
+                    message.getDuration().setHadAnswer(true);
                     AllEmployes temporary = new AllEmployes();
                     Collections.copy(temporary.getAllEmployes(), allEmployes.getAllEmployes());
-                    if (temporary.getAllEmployes().size() > 0) {
+                    if (temporary.getAllEmployes().size()-1 > 0) {
+                        temporary.getAllEmployes().remove(this);
                         temporary.sendTheReportMessage(temporary, message.getGameStuff());
                     } else {
-                        message.setDuration(message.getDuration() * 2);
+                        int duration=message.getDuration().getExpirationTime();
+                        message.getDuration().setExpirationTime(duration*2);
                         temporary.sendTheReportMessage(temporary, message.getGameStuff());
                     }
 

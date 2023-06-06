@@ -3,6 +3,30 @@ package ir.ac.kntu;
 public class ProfileChanges {
 
 
+    public void employees(AllEmployes allEmployes, Employes employes){
+        System.out.println("1_your profile");
+        System.out.println("2_other employees profile");
+        System.out.println("3_get back");
+        while (true){
+            int input = ScannerWrapper.getInt();
+            if (input == 1) {
+                showOptions(allEmployes,employes);
+            } else if (input == 2) {
+
+
+            } else if (input == 3) {
+                break;
+            } else {
+                System.out.println("Wrong input!try again.");
+            }
+        }
+    }
+
+    public int findEmployee(AllEmployes allEmployes){
+        while (true){
+            System.out.println(" enter username:");
+        }
+    }
     public void showOptions(AllEmployes allEmployes, Employes employes) {
         while (true) {
             System.out.println("1_Show the personal informations");

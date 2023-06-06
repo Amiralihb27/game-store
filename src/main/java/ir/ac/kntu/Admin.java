@@ -17,7 +17,8 @@ public class Admin extends Employes {
 
     public void gameChanges(Store store, AllEmployes allEmployes) {
         ArrayList<GameStuff> games = store.getGames();
-        GameChanges.showOptions(games, store, this, allEmployes);
+        GameChanges gameChanges=new GameChanges();
+        gameChanges.showOptions(games, store, this, allEmployes);
 
     }
 
@@ -36,6 +37,8 @@ public class Admin extends Employes {
             if (index >= 0 && index < newGameStuff.size()) {
                 store.getGames().remove(newGameStuff.get(index));
                 ArrayList<Developer> developers = allEmployes.extractDeveloper();
+                System.out.println("Enter the expiration time for the message:");
+                int expirationtime=ScannerWrapper.getInt();
                 //  Developer employe = allEmployes.findTheLessBusyDeveloper(developers);
                 GameStuff gameForGettingFixed = newGameStuff.get(index);
                 allEmployes.sendTheReportMessage(allEmployes, gameForGettingFixed);
