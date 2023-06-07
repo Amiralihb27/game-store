@@ -69,15 +69,23 @@ public class AllEmployes {
 
         //   int duration=ScannerWrapper.getInt();
         System.out.println("Enter the expiration time for the message:");
-        int time= ScannerWrapper.getInt();
+        int time = ScannerWrapper.getInt();
         Expiration expiration = new Expiration();
         expiration.setExpirationTime(time);
         hasStarted = true;
         switchBetweenDevelopers(expiration, gameForGettingFixed, allEmployes);
     }
 
+    public void sendReportByDeveloper(AllEmployes allEmployes,Expiration expiration,GameStuff gameStuff){
+        switchBetweenDevelopers(expiration,gameStuff,allEmployes);
+    }
+
     public void switchBetweenDevelopers(Expiration expiration, GameStuff gameForGettingFixed, AllEmployes allEmployes) {
+
         ArrayList<Developer> developers = allEmployes.extractDeveloper();
+        /*if (expiration.getNumberOfReportSending() % developers.size() == 0) {
+            developers = extractDeveloper();
+        }*/
         Developer employe;
         expiration.setAllEmployes(allEmployes);
         expiration.setGameStuff(gameForGettingFixed);
@@ -86,11 +94,11 @@ public class AllEmployes {
         //expiration.setExpirationTime(5);
         System.out.println("The message has been sent to " + employe.getProfile().getUserName());
         System.out.println("*************************************");
-        Expiration newExpirtion = new Expiration(allEmployes,gameForGettingFixed,employe);
+        Expiration newExpirtion = new Expiration(allEmployes, gameForGettingFixed, employe);
         newExpirtion.setExpirationTime(expiration.getExpirationTime());
         newExpirtion.setNumberOfReportSending(expiration.getNumberOfReportSending());
         Inbox inbox = new Inbox(gameForGettingFixed, newExpirtion);
-       // inbox.getDuration().setHadAnswer(true);
+        // inbox.getDuration().setHadAnswer(true);
         employe.addInbox(inbox);
         newExpirtion.start();
 

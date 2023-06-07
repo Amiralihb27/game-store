@@ -64,11 +64,11 @@ public class Developer extends Employes {
         super(profile);
     }
 
-    public void gameChanges(Store store,AllEmployes allEmployes) {
+    public void gameChanges(Store store, AllEmployes allEmployes) {
         GameList gameList = new GameList();
         ArrayList<GameStuff> games = gameList.extractVideoGames(exclusiveGames);
-        GameChanges gameChanges=new GameChanges();
-        gameChanges.showOptions(exclusiveGames, store,this, allEmployes);
+        GameChanges gameChanges = new GameChanges();
+        gameChanges.showOptions(exclusiveGames, store, this, allEmployes);
     }
 
     public void checkingInbox(AllEmployes allEmployes) {
@@ -115,18 +115,21 @@ public class Developer extends Employes {
                 case 2:
                     setWillingToRepairt(false, message.getGameStuff());
                     message.getDuration().setHadAnswer(true);
+                    this.inboxes.remove(message);
                     AllEmployes temporary = new AllEmployes();
                     ArrayList<Employes> employes = new ArrayList<>(allEmployes.getAllEmployes());
+                    Expiration expiration = new Expiration();
+                    int duration = message.getDuration().getExpirationTime();
+                    expiration.setExpirationTime(duration);
                     temporary.setAllEmployes(employes);
-                    if (temporary.getAllEmployes().size()-1 > 0) {
+                    if (temporary.getAllEmployes().size() - 1 > 0) {
                         temporary.getAllEmployes().remove(this);
-                        temporary.sendTheReportMessage(temporary, message.getGameStuff());
+                        temporary.sendReportByDeveloper(temporary, expiration, message.getGameStuff());
                     } else {
-                        int duration=message.getDuration().getExpirationTime();
-                        message.getDuration().setExpirationTime(duration*2);
-                        temporary.sendTheReportMessage(temporary, message.getGameStuff());
+                        expiration.setExpirationTime(duration * 2);
+                        message.getDuration().setExpirationTime(duration * 2);
+                        temporary.sendReportByDeveloper(temporary, expiration, message.getGameStuff());
                     }
-
                     break;
                 case 3:
                     break;

@@ -33,7 +33,7 @@ public class Main {
         base[1] = ScannerWrapper.getInt();
         System.out.println("Enter the time for reaching score");
         base[2] = ScannerWrapper.getInt();
-        storeCreation(menu, allUsers,base);
+        storeCreation(menu, allUsers, base);
     }
 
     public static void storeCreation(StartingMenu start, AllUsers allUsers, int[] base) {
@@ -87,8 +87,12 @@ public class Main {
                 10.3, Type.WIRED, "good for playing ", "playing controllerx20");
         GamingDevice controler3 = new Controler(2,
                 20, Type.WIRED, "good for playing pc", "pc controler");
-        GamingDevice controler4 = new Controler(10,
-                10, Type.REMOTE, "good for Xbox", "Xbox controller");
+        GamingDevice controler4 = new Monitor(60,
+                32, 50);
+        controler4.setPrice(10);
+        controler4.setExplenation("it was used only once");
+        controler4.addReview("its greate for gaming.");
+        controler4.setName("Razor Monitor");
         gameStuffs.add(controler);
         gameStuffs.add(controler2);
         gameStuffs.add(controler3);

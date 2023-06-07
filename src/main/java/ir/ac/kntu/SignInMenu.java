@@ -24,7 +24,7 @@ public class SignInMenu {
                 Instant end = Instant.now();
                 TimeCalculator timeCalculator=new TimeCalculator();
                 int totalTime = timeCalculator.timeDifference(start, end);
-                System.out.println(totalTime);
+               // System.out.println(totalTime);
                // allUsers.getUsers().get(index).addTime(totalTime);
                 ScoreCalculator scoreCalculator = new ScoreCalculator();
                 scoreCalculator.usersScore(allUsers.getUsers().get(index), base);

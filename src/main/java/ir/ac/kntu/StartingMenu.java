@@ -180,7 +180,7 @@ public class StartingMenu {
 
     public void userMenu(Store store, AllUsers allUsers,int[] base) {
         while (true) {
-            System.out.println("1_sign out");
+            System.out.println("1_sign Up");
             System.out.println("2_sign in");
             System.out.println("3_get back");
             System.out.println("4_Exit");
