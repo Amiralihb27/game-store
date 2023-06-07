@@ -37,9 +37,6 @@ public class Admin extends Employes {
             if (index >= 0 && index < newGameStuff.size()) {
                 store.getGames().remove(newGameStuff.get(index));
                 ArrayList<Developer> developers = allEmployes.extractDeveloper();
-                System.out.println("Enter the expiration time for the message:");
-                int expirationtime=ScannerWrapper.getInt();
-                //  Developer employe = allEmployes.findTheLessBusyDeveloper(developers);
                 GameStuff gameForGettingFixed = newGameStuff.get(index);
                 allEmployes.sendTheReportMessage(allEmployes, gameForGettingFixed);
                 break;
@@ -118,7 +115,6 @@ public class Admin extends Employes {
 
     public int findByName(AllUsers allUsers) {
 
-        // sc.nextLine();
         while (true) {
             System.out.println("you can go back to previous action by entering exit.");
             System.out.println("Enter the username:");

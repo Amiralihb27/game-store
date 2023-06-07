@@ -7,7 +7,7 @@ import java.time.Instant;
 public class TimeCalculator {
 
 
-    public static int timeDifference(Instant start, Instant end) {
+    public  int timeDifference(Instant start, Instant end) {
         Duration timeElapsed = Duration.between(start, end);
         /*long totalTime = endTime - startTime;
         int difference=(int)(Math.pow(10,-9)*totalTime*100);

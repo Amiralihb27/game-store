@@ -124,6 +124,7 @@ public class Main {
         allEmployes.addEmploye(admin2);
         allEmployes.addEmploye(seller1);
         allEmployes.addEmploye(seller2);
+        ArrayList<String> b=new ArrayList<>();
         start.choose( store, allEmployes, allUsers,base);
 
     }

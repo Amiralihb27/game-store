@@ -1,9 +1,7 @@
 package ir.ac.kntu;
 
-import java.util.ArrayList;
-
-public class SignOutMenu {
-    public static void signOut(AllUsers allUsers) {
+public class SignUp {
+    public  void signUp(AllUsers allUsers) {
         boolean status = true;
         while (status) {
             System.out.println("You can get back by entering exit.");

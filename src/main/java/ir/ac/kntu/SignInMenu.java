@@ -1,10 +1,11 @@
 package ir.ac.kntu;
 
+import java.sql.Time;
 import java.time.Instant;
 
 public class SignInMenu {
 
-    public static void signIn(Store store, AllUsers allUsers, int base) {
+    public  void signIn(Store store, AllUsers allUsers, int base) {
         while (true) {
             System.out.println("Sign in");
             System.out.println("You can get bac to previous action by entering exit.");
@@ -21,7 +22,8 @@ public class SignInMenu {
                 Instant start = Instant.now();
                 userInterface(input, allUsers.getUsers().get(index), store, allUsers);
                 Instant end = Instant.now();
-                int totalTime = TimeCalculator.timeDifference(start, end);
+                TimeCalculator timeCalculator=new TimeCalculator();
+                int totalTime = timeCalculator.timeDifference(start, end);
                 System.out.println(totalTime);
                 allUsers.getUsers().get(index).addTime(totalTime);
                 ScoreCalculator scoreCalculator = new ScoreCalculator();
@@ -34,7 +36,7 @@ public class SignInMenu {
         }
     }
 
-    public static void userInterface(String username, User user, Store store, AllUsers allUsers) {
+    public  void userInterface(String username, User user, Store store, AllUsers allUsers) {
         System.out.println("welcome " + username);
         while (true) {
             System.out.println("which part do you wana check? ");
@@ -69,7 +71,7 @@ public class SignInMenu {
         }
     }
 
-    public static void profile(User user, AllUsers allUsers) {
+    public  void profile(User user, AllUsers allUsers) {
         while (true) {
             System.out.println("which part do you wana go?");
             System.out.println("1_showing the Personal information");
@@ -101,7 +103,7 @@ public class SignInMenu {
 
     }
 
-    public static void store(User user, Store store) {
+    public  void store(User user, Store store) {
         while (true) {
             System.out.println("which part do you wana go?");
             System.out.println("1_showing the list of games");
@@ -135,7 +137,7 @@ public class SignInMenu {
         }
     }
 
-    public static int printUI() {
+    public  int printUI() {
         System.out.println("1_profile ");
         System.out.println("2_store ");
         System.out.println("3_library ");
@@ -147,7 +149,7 @@ public class SignInMenu {
 
     }
 
-    public static void library(User user) {
+    public  void library(User user) {
         while (true) {
             System.out.println("which part do you wana see?");
             System.out.println("1_Users Games");

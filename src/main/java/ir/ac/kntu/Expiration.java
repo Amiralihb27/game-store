@@ -12,12 +12,38 @@ public class Expiration extends Thread {
 
     private GameStuff gameStuff;
 
-    private int expirationTime=2;
+    private int expirationTime = 2;
 
     private Developer employee;
 
+    private int numberOfReportSending = 1;
 
     private boolean hadAnswer = false;
+
+
+    public Developer getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Developer employee) {
+        this.employee = employee;
+    }
+
+    public int getNumberOfReportSending() {
+        return numberOfReportSending;
+    }
+
+    public void setNumberOfReportSending(int numberOfReportSending) {
+        this.numberOfReportSending = numberOfReportSending;
+    }
+
+    public boolean isHadAnswer() {
+        return hadAnswer;
+    }
+
+    public Expiration() {
+
+    }
 
     public Expiration(AllEmployes allEmployes, GameStuff gameStuff, Developer employee) {
         this.allEmployes = allEmployes;
@@ -54,40 +80,36 @@ public class Expiration extends Thread {
     }
 
     public void run() {
-
-        //setExpirationTime(duration);
         Instant start = Instant.now();
         while (!hadAnswer) {
             Instant end = Instant.now();
             Duration timeElapsed = Duration.between(start, end);
             if ((int) Integer.parseInt(String.valueOf(timeElapsed.toMillis())) / 1000 == expirationTime) {
-               // setExpirationTime(expirationTime * 2);
-                System.out.println("Joon");
                 AllEmployes temporary = new AllEmployes();
-                //temporary = newAllEmployees();
+
+                numberOfReportSending++;
                 ArrayList<Employes> employes = new ArrayList<>(allEmployes.getAllEmployes());
                 temporary.setAllEmployes(employes);
-                //Collections.copy(temporary.getAllEmployes(), allEmployes.getAllEmployes());
-                // System.out.println(allEmployes.getAllEmployes().toString());
-                int size=employee.getInboxes().size();
-                employee.getInboxes().remove(size-1);
+                int countOfDevelopers=allEmployes.extractDeveloper().size();
+                if (numberOfReportSending % countOfDevelopers==0) {
+                    setExpirationTime(expirationTime * 2);
+                   // System.out.println("Time "+expirationTime);
+                }
+                int size = employee.getInboxes().size();
+                employee.getInboxes().remove(size - 1);
                 temporary.getAllEmployes().remove(this.employee);
-
-                System.out.println(expirationTime);
-                allEmployes.sendTheReportMessage(temporary, gameStuff);
                 temporary.getAllEmployes().add(this.employee);
+                if(!hadAnswer){
+                    allEmployes.switchBetweenDevelopers(this, gameStuff, temporary);
+                }
+
+               /* temporary.getAllEmployes().add(this.employee);
+                System.out.println("Test: "+this.employee.getProfile().getUserName());*/
                 break;
             }
         }
 
     }
 
-    public AllEmployes newAllEmployees() {
-        AllEmployes temp = new AllEmployes();
-        for (int i = 0; i < allEmployes.getAllEmployes().size(); i++) {
-            temp.getAllEmployes().add((allEmployes.getAllEmployes().get(i)));
-        }
-        return temp;
-    }
 
 }

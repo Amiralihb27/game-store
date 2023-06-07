@@ -1,6 +1,5 @@
 package ir.ac.kntu;
 
-import java.util.ArrayList;
 //import java.util.Scanner;
 
 public class StartingMenu {
@@ -187,9 +186,11 @@ public class StartingMenu {
             System.out.println("4_Exit");
             int input = ScannerWrapper.getInt();
             if (input == 1) {
-                SignOutMenu.signOut(allUsers);
+                SignUp signUp=new SignUp();
+                signUp.signUp(allUsers);
             } else if (input == 2) {
-                SignInMenu.signIn(store, allUsers,base);
+                SignInMenu signInMenu=new SignInMenu();
+                signInMenu.signIn(store, allUsers,base);
             } else if (input == 3) {
                 break;
             } else if (input == 4) {
