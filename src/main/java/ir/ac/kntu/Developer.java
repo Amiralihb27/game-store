@@ -116,7 +116,8 @@ public class Developer extends Employes {
                     setWillingToRepairt(false, message.getGameStuff());
                     message.getDuration().setHadAnswer(true);
                     AllEmployes temporary = new AllEmployes();
-                    Collections.copy(temporary.getAllEmployes(), allEmployes.getAllEmployes());
+                    ArrayList<Employes> employes = new ArrayList<>(allEmployes.getAllEmployes());
+                    temporary.setAllEmployes(employes);
                     if (temporary.getAllEmployes().size()-1 > 0) {
                         temporary.getAllEmployes().remove(this);
                         temporary.sendTheReportMessage(temporary, message.getGameStuff());

@@ -41,19 +41,19 @@ public class User {
         return level;
     }
 
-    public void setLevel(int base) {
-        if (this.score >= 0 && this.score < base) {
+    public void setLevel(int[] base) {
+        if (this.score >= 0 && this.score < base[0]) {
             this.level = Level.LEVEL_1;
             setDiscount(0);
-        } else if (this.score >= base && this.score < base*2+10) {
+        } else if (this.score >= base[0] && this.score < base[0]*2+10) {
             this.level = Level.LEVEL_2;
-            setDiscount(10);
-        } else if (this.score >= base*2+10 && this.score < (base*2+10)*2) {
+            setDiscount(base[1]);
+        } else if (this.score >= base[0]*2+10 && this.score < (base[0]*2+10)*2) {
             this.level = Level.LEVEL_3;
-            setDiscount(20);
-        } else if (this.score >= (base*2+10)*2) {
+            setDiscount(2*base[1]);
+        } else if (this.score >= (base[0]*2+10)*2) {
             this.level = Level.LEVEL_4;
-            setDiscount(30);
+            setDiscount(3*base[1]);
         }
     }
 
@@ -61,12 +61,12 @@ public class User {
         return score;
     }
 
-    public void setScore(int score,int base) {
+    public void setScore(int score,int[] base) {
         this.score = score;
         setLevel(base);
     }
 
-    public void addScore(int base) {
+    public void addScore(int[] base) {
         this.score += 1;
         setLevel( base);
         //ezafe shodan emtiaz user be ezaie har 5 s.

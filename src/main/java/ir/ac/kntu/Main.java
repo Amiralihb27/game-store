@@ -7,7 +7,7 @@ import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
-        StartingMenu a = new StartingMenu();
+        StartingMenu menu = new StartingMenu();
         ScannerWrapper scanner = new ScannerWrapper();
         Profile info1 = new Profile("amirali", "Amirali8227",
                 "09112222222", "amir@gmail.com");
@@ -26,12 +26,19 @@ public class Main {
         AllUsers allUsers = new AllUsers();
         allUsers.setUsers(users);
         users.get(1).getProfile().setWalletCash(50);
-        storeCreation( a, allUsers);
+        System.out.println("Enter the base score for buying level 2 games:");
+        int[] base = new int[3];
+        base[0] = ScannerWrapper.getInt();
+        System.out.println("Enter the base discount for buying level 2 games:");
+        base[1] = ScannerWrapper.getInt();
+        System.out.println("Enter the time for reaching score");
+        base[2] = ScannerWrapper.getInt();
+        storeCreation(menu, allUsers,base);
     }
 
-    public static void storeCreation(StartingMenu start, AllUsers allUsers) {
-        System.out.println("Enter the base score for buying level 2 games:");
-        int base=ScannerWrapper.getInt();
+    public static void storeCreation(StartingMenu start, AllUsers allUsers, int[] base) {
+
+
         Games zed = new Games("zed", "its about zed", "action");
         zed.addReview("good game!");
         zed.addReview("good !");
@@ -43,24 +50,24 @@ public class Main {
         zed.rate(9);
         zed.rate(7.25);
         zed.setPrice(10);
-        zed.setScore(base);
+        zed.setScore(base[0]);
         Games witcher = new Games("witcher", "its about geralt of rivia", "RPG");
         witcher.setVersion(Version.BETA);
         witcher.setLevel(Level.LEVEL_3);
         witcher.setRating(10);
         witcher.setPrice(12.2);
-        witcher.setScore(base);
+        witcher.setScore(base[0]);
         witcher.addReview("Awli");
         Games game3 = new Games("darkSouls", "its about a chosen guard", "Action");
         game3.setPrice(5);
         game3.setRating(9.8);
         game3.addReview("Binazir");
-        game3.setScore(base);
+        game3.setScore(base[0]);
         Games game4 = new Games("dota2", "its about a heroes", "fantasy");
         game4.setVersion(Version.BETA);
         game4.setPrice(6.3);
         game4.setRating(10);
-        game4.setScore(base);
+        game4.setScore(base[0]);
         game4.addReview("fogholade");
         ArrayList<GameStuff> games = new ArrayList<>();
         games.add(zed);
@@ -70,7 +77,7 @@ public class Main {
         deviceCreation(games);
         Store store = new Store();
         store.setGames(games);
-        createEmployes( store, start, allUsers,base);
+        createEmployes(store, start, allUsers, base);
     }
 
     public static void deviceCreation(ArrayList<GameStuff> gameStuffs) {
@@ -90,7 +97,7 @@ public class Main {
 
     }
 
-    public static void createEmployes( Store store, StartingMenu start, AllUsers allUsers,int base) {
+    public static void createEmployes(Store store, StartingMenu start, AllUsers allUsers, int[] base) {
         Profile info1 = new Profile("Amir", "Amir8227",
                 "0911112244", "amir82@gmail.com");
         Profile info2 = new Profile("aliB", "Aliali8227",
@@ -111,8 +118,8 @@ public class Main {
         Admin admin2 = new Admin(info2);
         Developer developer1 = new Developer(info3);
         Developer developer2 = new Developer(info4);
-        Developer developer3=new Developer(info7);
-        Developer developer4=new Developer(info8);
+        Developer developer3 = new Developer(info7);
+        Developer developer4 = new Developer(info8);
         Seller seller1 = new Seller(info5);
         Seller seller2 = new Seller(info6);
         AllEmployes allEmployes = new AllEmployes();
@@ -124,8 +131,7 @@ public class Main {
         allEmployes.addEmploye(admin2);
         allEmployes.addEmploye(seller1);
         allEmployes.addEmploye(seller2);
-        ArrayList<String> b=new ArrayList<>();
-        start.choose( store, allEmployes, allUsers,base);
+        start.choose(store, allEmployes, allUsers, base);
 
     }
 }

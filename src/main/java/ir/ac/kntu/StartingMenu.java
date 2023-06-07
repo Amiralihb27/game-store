@@ -8,7 +8,7 @@ public class StartingMenu {
 
     }
 
-    public void choose(Store store, AllEmployes allEmployes, AllUsers allUsers,int base) {
+    public void choose(Store store, AllEmployes allEmployes, AllUsers allUsers,int[] base) {
         while (true) {
             System.out.println("Choose your role:");
             System.out.println("1_Admin");
@@ -178,7 +178,7 @@ public class StartingMenu {
         }
     }
 
-    public void userMenu(Store store, AllUsers allUsers,int base) {
+    public void userMenu(Store store, AllUsers allUsers,int[] base) {
         while (true) {
             System.out.println("1_sign out");
             System.out.println("2_sign in");

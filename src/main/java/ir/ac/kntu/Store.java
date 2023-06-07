@@ -71,6 +71,7 @@ public class Store {
             int input = ScannerWrapper.getInt();
             if (input == 1) {
                 double price = discount(game, user);
+                System.out.println(price);
                 if (user.getProfile().getWalletCash() >= price) {
                   //  double amount = user.getProfile().getWalletCash();
                     buyVideoGameOrDevice(user, game);
@@ -135,6 +136,7 @@ public class Store {
 
     public double discount(GameStuff gamingStuff, User user) {
         if (gamingStuff.getClass().getSimpleName().equals("Games")) {
+           // System.out.println("discount:"+user.getDiscount());
             return gamingStuff.getPrice() * (100 - user.getDiscount()) / 100;
 
         } else {

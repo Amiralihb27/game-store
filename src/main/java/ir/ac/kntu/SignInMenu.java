@@ -5,7 +5,7 @@ import java.time.Instant;
 
 public class SignInMenu {
 
-    public  void signIn(Store store, AllUsers allUsers, int base) {
+    public  void signIn(Store store, AllUsers allUsers, int[] base) {
         while (true) {
             System.out.println("Sign in");
             System.out.println("You can get bac to previous action by entering exit.");
@@ -25,11 +25,11 @@ public class SignInMenu {
                 TimeCalculator timeCalculator=new TimeCalculator();
                 int totalTime = timeCalculator.timeDifference(start, end);
                 System.out.println(totalTime);
-                allUsers.getUsers().get(index).addTime(totalTime);
+               // allUsers.getUsers().get(index).addTime(totalTime);
                 ScoreCalculator scoreCalculator = new ScoreCalculator();
                 scoreCalculator.usersScore(allUsers.getUsers().get(index), base);
-                System.out.println(allUsers.getUsers().get(index).getTimeSpent());
-                System.out.println(allUsers.getUsers().get(index).getScore());
+                /*System.out.println(allUsers.getUsers().get(index).getTimeSpent());
+                System.out.println(allUsers.getUsers().get(index).getScore());*/
                 break;
             }
             System.out.println("there is no such username or password!Try again!");
